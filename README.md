@@ -4,4 +4,4 @@
 
 - tool setting: 2021.11.22
 
-- test
+- ignore 추가
