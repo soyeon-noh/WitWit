@@ -6,11 +6,11 @@
     "start": "node ./bin/www.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.5",
-    "debug": "~4.3.1",
-    "express": "~4.17.1",
-    "http-errors": "~1.8.0",
-    "morgan": "~1.10.0",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "http-errors": "*",
+    "morgan": "*",
     "pug": "~3.0.2"
   }
 }
