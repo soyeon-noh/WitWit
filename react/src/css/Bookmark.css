@@ -1,0 +1,43 @@
+
+
+div.btn_bookmark_box {
+    position: absolute;
+    top: 8%;
+    left: 3.75%;
+    width: 6%;
+    
+  }
+  
+  a.btn_bookmark {
+    background-color: #ffb200;
+    border-radius: 10px 0 0 10px;
+    border: 3px solid black;
+    width: 100%;
+    font-family: "DungGeunMo";
+    font-size: 2.5vh;
+    margin-bottom: 10%;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+
+    position: relative;
+    z-index: 5;
+  }
+
+
+  a.active {
+    background-color: white;
+    border-right: 3px solid transparent;
+    z-index: 20;
+  }
+
+  
+
+  
+  
+  
+  
+  
