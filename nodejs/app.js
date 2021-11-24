@@ -12,7 +12,8 @@ import logger from "morgan";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
-
+import myroom from "./routes/myroom.js";
+import cors from "cors";
 const app = express();
 
 // Disable the fingerprinting of this web technology. 경고
@@ -24,13 +25,15 @@ app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-
+app.use("/myroom", myroom.js);
+app.use("/myroom/folder", myroomfolder.js);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
