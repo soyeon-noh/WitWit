@@ -8,9 +8,17 @@
   "dependencies": {
     "cookie-parser": "*",
     "debug": "*",
-    "express": "*",
     "http-errors": "*",
     "morgan": "*",
-    "pug": "~3.0.2"
+    "pug": "*",
+    "dotenv": "*",
+    "express": "*",
+    "express-session": "*",
+    "method-override": "*",
+    "mongodb": "*",
+    "multer": "*",
+    "nodemon": "*",
+    "passport": "*",
+    "passport-local": "*"
   }
 }
