@@ -9,7 +9,6 @@ import Join from './Join'
 import MyRoom from './MyRoom'
 
 
-
 function BoardBox() {
     return (
     <section className="board_box">
