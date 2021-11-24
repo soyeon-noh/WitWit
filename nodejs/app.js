@@ -10,7 +10,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 
-import indexRouter from "./routes/index.js";
+import witRouter from "./routes/witRouter.js";
 import usersRouter from "./routes/users.js";
 import myroom from "./routes/myroom.js";
 import cors from "cors";
@@ -30,10 +30,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 
-app.use("/", indexRouter);
+app.use("/", witRouter);
 app.use("/users", usersRouter);
 app.use("/myroom", myroom.js);
 app.use("/myroom/folder", myroomfolder.js);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
