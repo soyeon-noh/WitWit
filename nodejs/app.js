@@ -14,8 +14,7 @@ import methodOverride from "method-override";
 import passport from "passport";
 import MongoClient from "mongodb";
 
-
-import indexRouter from "./routes/index.js";
+import witRouter from "./routes/witRouter.js";
 import usersRouter from "./routes/users.js";
 import myroom from "./routes/myroom.js";
 import cors from "cors";
@@ -45,7 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 
-app.use("/", indexRouter);
+app.use("/", witRouter);
 app.use("/users", usersRouter);
 app.use("/myroom", myroom.js);
 app.use("/myroom/folder", myroomfolder.js);
