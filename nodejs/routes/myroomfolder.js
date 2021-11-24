@@ -24,4 +24,5 @@ router.post("/:user_id/add/:folder_id", (req, res) => {
 });
 // user_id의 folder_id 삭제
 router.post("/:user_id/delete/:folder_id", (req, res) => {});
+
 export default router;
