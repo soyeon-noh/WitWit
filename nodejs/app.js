@@ -12,26 +12,14 @@ import logger from "morgan";
 
 import methodOverride from "method-override";
 import passport from "passport";
-import MongoClient from "mongodb";
 
 import witRouter from "./routes/witRouter.js";
 import usersRouter from "./routes/users.js";
 import myroom from "./routes/myroom.js";
+import myroomfolder from "./routes/myroomfolder.js";
 import cors from "cors";
-// Connection url
-const url = "mongodb://localhost:27017";
-// Database Name
-const dbName = "test";
-// Connect using MongoClient
-MongoClient.connect(url, function (err, client) {
-  // Select the database by name
-  const testDb = client.db(dbName);
-  client.close();
-});
-const app = express();
 
-// Disable the fingerprinting of this web technology. 경고
-app.disable("x-powered-by");
+const app = express();
 
 // view engine setup
 app.set("views", path.join("./views"));
@@ -46,8 +34,9 @@ app.use(express.static(path.join("./public")));
 
 app.use("/", witRouter);
 app.use("/users", usersRouter);
-app.use("/myroom", myroom.js);
-app.use("/myroom/folder", myroomfolder.js);
+app.use("/myroom", myroom);
+app.use("/myroom/folder", myroomfolder);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
