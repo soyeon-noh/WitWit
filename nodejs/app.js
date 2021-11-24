@@ -9,8 +9,6 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import methodOverride from "method-override";
-import passport from "passport";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
@@ -29,16 +27,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
-
-// 아래 미들웨어방식
-// get과 post방식을 이용한 서버요청방식을 , put, delete가 되도록확장시킨다
-app.use(methodOverride("_method"));
-// 로그인 세션관리기능
-// app.use(
-//   session({ secret: "비밀코드", resave: true, saveUninitialized: false })
-// );
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
