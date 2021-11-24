@@ -11,22 +11,11 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import methodOverride from "method-override";
 import passport from "passport";
-import MongoClient from "mongodb";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
 import myroom from "./routes/myroom.js";
 import cors from "cors";
-// Connection url
-const url = "mongodb://localhost:27017";
-// Database Name
-const dbName = "test";
-// Connect using MongoClient
-MongoClient.connect(url, function (err, client) {
-  // Select the database by name
-  const testDb = client.db(dbName);
-  client.close();
-});
 const app = express();
 
 // Disable the fingerprinting of this web technology. 경고
