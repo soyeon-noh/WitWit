@@ -14,7 +14,8 @@ import passport from "passport";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
-import myroom from "./routes/myroom.js";
+import myroomRouter from "./routes/myroom.js";
+import myroomfolderRouter from "./routes/myroomfolder.js";
 import cors from "cors";
 const app = express();
 
@@ -44,8 +45,8 @@ app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/myroom", myroom.js);
-app.use("/myroom/folder", myroomfolder.js);
+app.use("/myroom", myroomRouter);
+app.use("/myroom/folder", myroomfolderRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
