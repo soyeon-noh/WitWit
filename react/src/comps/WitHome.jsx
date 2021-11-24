@@ -1,15 +1,17 @@
 import React from 'react'
+import WitContextProvider from '../context/WitContextProvider'
+import WitItem from './WitItem'
+
 
 function WitHome() {
-    return (
-        <div>
-            <div className="wit">WIt</div>
-            <div className="wit">WIt</div>
-            <div className="wit">WIt</div>
-            <div className="wit">WIt</div>
 
-            
-        </div>
+
+    return (
+        <>
+            <WitContextProvider>
+                <WitItem/>
+            </WitContextProvider>
+        </>
     )
 }
 
