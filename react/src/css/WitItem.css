@@ -1,11 +1,12 @@
 div.wits {
     width: 70%;
     background-color: white;
-    border : 2px solid #005e88;
+    border : 2px solid black;
     border-radius: 10px;
-    margin: 13px auto;
+    margin: 20px auto;
     padding: 10px;
     text-align: left;
+    box-shadow: 3px 3px 0px  rgba(0,0,255,0.3) ;
 }
 
 img.wit_profile {
@@ -28,14 +29,14 @@ span.wit_userid {
 div.wit_text {
     text-align: left;
     margin: 10px auto;
-    width: 90%;
+    width: 80%;
     background-color: #ccc;
     padding: 10px;
     border-radius: 5px;
 }
 
 div.icon_box {
-    width: 90%;
+    width: 80%;
     text-align: right;
     margin: 5px auto;
     padding-right: 10px;

@@ -1,0 +1,34 @@
+div.wit_input_box {
+    width: 90%;
+    border-bottom: 2px double #ad9fb6;
+    margin: 10px auto;
+    height: 150px;
+}
+
+div.wit_input_box input {
+    outline: none;
+    border:none;
+    padding: 10px;
+    width: 85%;
+    height: 60%;
+    text-align: left;
+    margin-top: 10px;
+
+}
+
+div.wit_input_box input:focus {
+    background-color: rgba(173, 159, 182, 0.2);
+}
+
+div.wit_input_box button {
+    display:block;
+    outline: none;
+    border: none;
+    background-color: #de724b;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin: 10px 0 10px auto;
+    cursor: pointer;
+}
