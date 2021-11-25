@@ -76,18 +76,28 @@ const wit_test = [
 
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
-  //   const result = await WIT.find({});
+  /** db연동 기본코드 */
+  // const result = await WIT.find({});
   //   res.json(result);
 
-  res.json(wit_test); // test code
+  /** test + db연동 코드 */
+  const testResult = wit_test;
+  const dbResult = await WIT.find({});
+
+  const result = arr.concat(testResult, dbResult);
+
+  res.json(result);
+
+  /** test 코드 */
+  //   res.json(wit_test); // test code
 
   console.log("witRouter(get /) : 데이터 넘기기 성공");
 });
 
 // wit 추가
 router.post("/", async (req, res) => {
-  //   WIT.create(req.body);
-  WIT.create(wit_test); // test code : 6개 wit 추가
+  WIT.create(req.body);
+  //   WIT.create(wit_test); // test code : 6개 wit 추가
   res.json("INSERT SUCCESS");
   console.log("witRouter(post /) : insert 성공");
 });
@@ -112,6 +122,12 @@ router.get("/search", async (req, res) => {
   }
 });
 
-router.get("/:user_id");
+// 여기가 myroom인건 어떨까?
+router.get("/:userId", (req, res) => {
+  //내용
+});
+
+router.get("/:userId/:id");
+router.post("/:userId/:id");
 
 export default router;
