@@ -19,6 +19,30 @@ import myroom from "./routes/myroom.js";
 import myroomfolder from "./routes/myroomfolder.js";
 import cors from "cors";
 
+// mongoose : DB관련
+import mongoose from "mongoose";
+
+const dbConn = mongoose.connection;
+dbConn.once("open", () => {
+  console.log("˚✧₊⁎( ˘ω˘ )⁎⁺˳✧༚ \n MongoDB Open !! \n ˚✧₊⁎⁺˳✧༚˚✧₊⁎⁺✧˳");
+});
+dbConn.on("error", () => {
+  console.error;
+});
+
+mongoose.connect("mongodb://localhost:27017/witwit");
+
+// cors : 교차 출처 리소스 공유, 보안 관련
+const whiteURL = ["http://localhost:3000"];
+const corsOption = {
+  origin: (origin, callback) => {
+    const isWhiteURL = whiteURL.indexOf(origin) !== -1;
+    callback(null, isWhiteURL);
+  },
+  // 로그인 후 세션정보를 클라이언트에게 전달 허용
+  credentials: true,
+};
+
 const app = express();
 
 // view engine setup
@@ -31,6 +55,13 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
+
+// cors : 외부 도메인 요청을 선별적으로 허용
+app.use((req, res, next) => {
+  // cors로 허용해준 protocol + host + port번호 넣어주기
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  next();
+});
 
 app.use("/", witRouter);
 app.use("/users", usersRouter);
