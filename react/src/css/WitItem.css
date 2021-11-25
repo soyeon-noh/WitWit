@@ -1,0 +1,45 @@
+div.wits {
+    width: 70%;
+    background-color: white;
+    border : 2px solid #005e88;
+    border-radius: 10px;
+    margin: 13px auto;
+    padding: 10px;
+    text-align: left;
+}
+
+img.wit_profile {
+    width: 20px;
+    transform: translateY(5px);
+    margin-right:5px ;
+}
+
+span.wit_userNick {
+    font-family: "DungGeunMo";
+    margin-right:5px ;
+}
+
+span.wit_userid {
+    font-size: small;
+    color: #333;
+}
+
+
+div.wit_text {
+    text-align: left;
+    margin: 10px auto;
+    width: 90%;
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+div.icon_box {
+    width: 90%;
+    text-align: right;
+    margin: 5px auto;
+    padding-right: 10px;
+}
+div.icon_box span {
+    margin-left:50px;
+}
