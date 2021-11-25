@@ -16,9 +16,11 @@ const WitItem = () => {
     return  witList.map((wit)=>{
         return (
             <div className="wits">
+
                 <span className="wit_profile">
                     <img src={profile} className="wit_profile"/>
                 </span>
+
                 <span className="wit_userNick">{wit.userName}</span>
                 <span className="wit_userid">{wit.userId}</span>
                 <div className="wit_text">{wit.text}</div>
