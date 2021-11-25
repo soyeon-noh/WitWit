@@ -36,13 +36,13 @@ function WitContextProvider({children}) {
 
     const [witList, setWitList] = useState([wit, wit, wit, wit]);
 
-    // const witFetch = useCallback(async()=>{
-    //     const res = await fetch("http://localhost:5050/");
-    //     const list = await res.json();
+    const witFetch = useCallback(async()=>{
+        const res = await fetch("http://localhost:5050/");
+        const list = await res.json();
 
-    //     await setWitList(list);
-    // },[]);
-    // useEffect(witFetch, [witFetch]);
+        await setWitList(list);
+    },[]);
+    useEffect(witFetch, [witFetch]);
 
     // wit 내용 입력했을 때
     const onChaneHandler =(e) =>{
