@@ -1,8 +1,8 @@
 import express from "express";
-const router = express.Router();
+const myroom = express.Router();
 
 /** Myroom Routher */
-router.get("/", (req, res) => {
+myroom.get("/", (req, res) => {
   res.send("hi");
 });
-export default router;
+export default myroom;
