@@ -13,7 +13,7 @@ import logger from "morgan";
 import methodOverride from "method-override";
 import passport from "passport";
 
-import witRouter from "./routes/witRouter.js";
+import witRouter from "./routes/wit.js";
 import usersRouter from "./routes/users.js";
 import myroom from "./routes/myroom.js";
 import myroomfolder from "./routes/myroomfolder.js";

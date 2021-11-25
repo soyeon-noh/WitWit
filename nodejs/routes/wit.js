@@ -6,10 +6,10 @@ import USER from "../models/user.js";
 const wit_test = [
   {
     id: "1",
-    text: "텍스트1",
+    text: "",
     createdAt: "2021-11-22",
-    userId: "유저아이디1",
-    userName: "유저이름1",
+    userId: "@__witwit1",
+    userName: "위트위트",
     profileUrl: "프로필 url",
 
     folder_id: "폴더 시퀀스",
@@ -17,10 +17,10 @@ const wit_test = [
   },
   {
     id: "2",
-    text: "텍스트2",
+    text: "",
     createdAt: "2021-11-23",
-    userId: "유저아이디2",
-    userName: "유저이름2",
+    userId: "@jackpot_2",
+    userName: "로또당첨될때까지숨참음",
     profileUrl: "프로필 url",
 
     folder_id: "폴더 시퀀스",
@@ -28,10 +28,10 @@ const wit_test = [
   },
   {
     id: "3",
-    text: "텍스트3",
+    text: "",
     createdAt: "2021-11-24",
-    userId: "유저아이디3",
-    userName: "유저이름3",
+    userId: "@oOoOoO3",
+    userName: "강낭콩",
     profileUrl: "프로필 url",
 
     folder_id: "폴더 시퀀스",
@@ -53,26 +53,40 @@ const wit_insert = {
 
 /* GET home page. */
 
-// selete
+// wit 전체 불러오기
 router.get("/", (req, res, next) => {
   // const result = await WIT.find({});
 
   // await res.json(result);
 
   res.json(wit_test);
+
+  console.log("witRouter(get /) : 데이터 넘기기 성공");
 });
 
-// insert
+// wit 추가
 router.post("/", async (req, res) => {
   // WIT.create(req.body);
   WIT.create(wit_insert);
   res.json("INSERT SUCCESS");
+  console.log("witRouter(post /) : insert 성공");
 });
 
-router.get("/search", (req, res) => {
-  if (!req.query.q) {
+// wit 검색
+router.get("/search", async (req, res) => {
+  const query = req.query.q;
+
+  if (!query) {
     return res.json("NOT QUERY");
+  } else if (query.slice(0, 1) === "@") {
+    const result = await WIT.findOne({ userId: query });
+    res.json(result);
+  } else {
+    const result = await WIT.find({ text: query });
+    res.json(result);
   }
 });
+
+router.get("/:user_id");
 
 export default router;
