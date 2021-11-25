@@ -1,17 +1,16 @@
 import React from 'react'
 import "../css/BoardBox.css"
-import { Bookmark } from '.'
 
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import WitHome from './WitHome'
 import Login from './Login'
 import Join from './Join'
 import MyRoom from './MyRoom'
 
-
 function BoardBox() {
     return (
     <section className="board_box">
+        
         
         <section className="board">
             <Routes>
