@@ -34,7 +34,7 @@ function WitContextProvider({children}) {
         image_id: "none" // 이미지 seq (외래키)
     })
 
-    const [witList, setWitList] = useState([wit, wit, wit, wit]);
+    const [witList, setWitList] = useState([]);
 
     const witFetch = useCallback(async()=>{
         const res = await fetch("http://localhost:5050/");
@@ -44,14 +44,7 @@ function WitContextProvider({children}) {
     },[]);
     useEffect(witFetch, [witFetch]);
 
-    // wit 내용 입력했을 때
-    const onChaneHandler =(e) =>{
-        const wit_text = e.target.value;
-        setWit({...wit, text:wit_text})
-    }
-
-
-    const providerData = {wit, setWit, witList, setWitList, onChaneHandler}
+    const providerData = {wit, setWit, witList, setWitList}
     
     return (
         <AppContext.Provider value = {providerData}>
