@@ -2,21 +2,23 @@ div.wit_input_box {
     width: 90%;
     border-bottom: 2px double #ad9fb6;
     margin: 10px auto;
-    height: 150px;
+    height: 170px;
 }
 
-div.wit_input_box input {
+div.wit_input_box textarea {
     outline: none;
     border:none;
     padding: 10px;
     width: 85%;
-    height: 60%;
+    height: 65%;
     text-align: left;
+    vertical-align: top;
     margin-top: 10px;
-
+    resize: none;
+    font-size: 18px;
 }
 
-div.wit_input_box input:focus {
+div.wit_input_box textarea:focus {
     background-color: rgba(173, 159, 182, 0.2);
 }
 
