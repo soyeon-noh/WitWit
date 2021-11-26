@@ -109,9 +109,14 @@ router.post("/", async (req, res) => {
   req.body.createdDate = moment().format("YYYY[-]MM[-]DD");
   req.body.createdTime = moment().format("HH:mm:ss");
   WIT.create(req.body);
-  res.json("INSERT SUCCESS");
-  console.log("witRouter(post /) : insert 성공");
+  //   res.json("INSERT SUCCESS");
+
   console.log("wit insert: ", req.body);
+
+  // 갱신문제
+  const result = await WIT.find({});
+  result.reverse();
+  res.json(result);
 });
 
 // wit 검색
