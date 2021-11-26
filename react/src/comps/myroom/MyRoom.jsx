@@ -1,10 +1,9 @@
 import React from 'react'
+import { Outlet } from 'react-router'
 
 function MyRoom() {
     return (
-        <div>
-            여기는 마이Room
-        </div>
+        <Outlet/>
     )
 }
 

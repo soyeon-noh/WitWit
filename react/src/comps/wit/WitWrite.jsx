@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useRef } from 'react'
-import { useWitContext } from '../context/WitContextProvider'
-import "../css/WitWrite.css"
+import { useWitContext } from '../../context/WitContextProvider'
+import "../../css/WitWrite.css"
 
 const WitWrite= () =>{
 
@@ -40,7 +40,7 @@ const WitWrite= () =>{
         <div>
             
             <div className="wit_input_box">
-                <input type="text" maxLength="512"
+                <textarea type="text" maxLength="150"
                     value={wit.text}
                     onChange={onChangeHandler}
                     className="write" placeholder="당신의 생각을 wit하세요"/>

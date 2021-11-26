@@ -1,10 +1,10 @@
 
 section.board_box {
     width: 90%;
-    height: 90%;
+    height: 85%;
     
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-45%, -50%);
     overflow: initial;

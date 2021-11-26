@@ -20,12 +20,12 @@ span.wit_userNick {
     margin-right:5px ;
 }
 
-span.wit_userid,span.wit_createdAt {
+span.wit_userid,span.wit_fromNow {
     font-size: small;
     color: #333;
 }
 
-span.wit_createdAt {
+span.wit_fromNow {
     margin-left: 10px;
     font-weight: bold;
 }
@@ -34,14 +34,14 @@ span.wit_createdAt {
 div.wit_text {
     text-align: left;
     margin: 10px auto;
-    width: 80%;
+    width: 90%;
     background-color: #ccc;
     padding: 10px;
     border-radius: 5px;
 }
 
 div.icon_box {
-    width: 80%;
+    width: 90%;
     text-align: right;
     margin: 5px auto;
     padding-right: 10px;
