@@ -8,6 +8,7 @@ const wit_test = [
     id: "1",
     text: "곰세마리가 한집에 있어",
     createdAt: "2021-11-22",
+    fromNow: "4일 전",
     userId: "@__witwit1",
     userName: "위트위트",
     profileUrl: "프로필 url",
@@ -19,6 +20,7 @@ const wit_test = [
     id: "2",
     text: "아빠곰 엄마곰 애기곰",
     createdAt: "2021-11-23",
+    fromNow: "3일 전",
     userId: "@jackpot_2",
     userName: "로또당첨될때까지숨참음",
     profileUrl: "프로필 url",
@@ -30,6 +32,7 @@ const wit_test = [
     id: "3",
     text: "아빠곰은 멋쟁이 토마토",
     createdAt: "2021-11-24",
+    fromNow: "2일 전",
     userId: "@oOoOoO3",
     userName: "강낭콩",
     profileUrl: "프로필 url",
@@ -41,6 +44,7 @@ const wit_test = [
     id: "4",
     text: "엄마곰은 케찹될거야",
     createdAt: "2021-11-24",
+    fromNow: "2일 전",
     userId: "@game_over4",
     userName: "게임을하면이겨야지",
     profileUrl: "프로필 url",
@@ -52,6 +56,7 @@ const wit_test = [
     id: "5",
     text: "아기곰은 춤을 출거야",
     createdAt: "2021-11-25",
+    fromNow: "1일 전",
     userId: "@dancing_5ear",
     userName: "dancedance",
     profileUrl: "프로필 url",
@@ -63,6 +68,7 @@ const wit_test = [
     id: "6",
     text: "토마토는 과일인가요 채소인가요?",
     createdAt: "2021-11-26",
+    fromNow: "4시간 전",
     userId: "@t6ma_t6ma",
     userName: "토마토감별사",
     profileUrl: "프로필 url",
@@ -107,18 +113,18 @@ router.get("/search", async (req, res) => {
   const query = req.query.q;
 
   if (!query) {
-    console.log("wit.js 쿼리값이 없음");
+    console.log("wit.js : 쿼리값이 없음");
     return res.json("NOT QUERY");
   } else if (query.slice(0, 1) === "@") {
     const result = await WIT.find({
       $or: [{ userId: query }, { text: query }],
     });
     res.json(result);
-    console.log("wit.js 쿼리값이 아이디임", query);
+    console.log("wit.js : 쿼리값이 아이디임", query);
   } else {
     const result = await WIT.find({ text: query });
     res.json(result);
-    console.log("wit.js 쿼리값 기본검색");
+    console.log("wit.js : 쿼리값 기본검색");
   }
 });
 
