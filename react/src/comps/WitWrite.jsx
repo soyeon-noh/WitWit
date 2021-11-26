@@ -13,14 +13,14 @@ const WitWrite= () =>{
         setWit({...wit, text: wit_text});
     }
 
+    // wit 입력 후 inputbox 클리어 함수
     const textReset =() =>{
         setWit({...wit, text:""});
     }
 
+    // insert 함수
     const witInsert = async() =>{
         
-        await setWitList([...witList, wit]);
-
         const fetch_option = {
             method:"POST",
             headers : {
@@ -29,6 +29,7 @@ const WitWrite= () =>{
             body : JSON.stringify(wit),
         }
 
+        // 입력시 화면에 바로 출력가능하도록
         await setWitList([...witList, wit]);
         await fetch("http://localhost:5050/", fetch_option)
         textReset();
