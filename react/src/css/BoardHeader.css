@@ -1,5 +1,13 @@
-div.boardheader {
+section.boardheader {
     width: 90%;
     height: 10%;
-    background-color: white;
+ 
+    position: absolute;
+    left: 50%;
+    top : 10px;
+    transform: translateX(-50%);
+}
+
+section.boardheader img{
+    height: 90%;
 }

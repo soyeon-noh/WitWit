@@ -48,4 +48,6 @@ div.icon_box {
 }
 div.icon_box span {
     margin-left:50px;
+    color: #005e88;
+    cursor: pointer;
 }
