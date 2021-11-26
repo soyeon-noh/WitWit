@@ -85,6 +85,7 @@ const wit_test = [
 router.get("/", async (req, res, next) => {
   /** db연동 기본코드 */
   const result = await WIT.find({});
+  result.reverse();
   res.json(result);
 
   /** test + db연동 코드 */
