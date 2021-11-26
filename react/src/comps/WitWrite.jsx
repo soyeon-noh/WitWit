@@ -1,16 +1,20 @@
 import moment from 'moment';
-import React from 'react'
+import React, { useRef } from 'react'
 import { useWitContext } from '../context/WitContextProvider'
 import "../css/WitWrite.css"
 
 const WitWrite= () =>{
 
-    const { wit, setWit, witList, setWitList } = useWitContext;
+    const { wit, setWit, witList, setWitList } = useWitContext();
 
     // wit 내용 입력했을 때
     const onChangeHandler =(e) =>{
         const wit_text = e.target.value;
-        setWit({...wit, text:wit_text})
+        setWit({...wit, text: wit_text});
+    }
+
+    const textReset =() =>{
+        setWit({...wit, text:""});
     }
 
     const witInsert = async() =>{
@@ -25,7 +29,9 @@ const WitWrite= () =>{
             body : JSON.stringify(wit),
         }
 
+        await setWitList([...witList, wit]);
         await fetch("http://localhost:5050/", fetch_option)
+        textReset();
     }
 
 
@@ -33,7 +39,8 @@ const WitWrite= () =>{
         <div>
             
             <div className="wit_input_box">
-                <input type="text" maxLength="512" 
+                <input type="text" maxLength="512"
+                    value={wit.text}
                     onChange={onChangeHandler}
                     className="write" placeholder="당신의 생각을 wit하세요"/>
                 <button onClick={witInsert}>위트하기</button>

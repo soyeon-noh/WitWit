@@ -24,8 +24,8 @@ function WitContextProvider({children}) {
 
     const [wit, setWit] = useState({
         id: "witID",  // 위트 아이디
-        text: "WitWit", // 위트 텍스트 (512자 제한)
-        createdAt: "2021-11-22 00:22:44",// 위트 생성 날짜
+        text: "", // 위트 텍스트 (512자 제한)
+        createdAt: moment().format("YYYY-MM-DD, hh:mm:ss"),// 위트 생성 날짜
         userId: "userID", // 작성자 ID
         userName: "userNick", // 작성자 이름
         profileUrl: "none", // 작성자 프로필 이미지링크
@@ -45,7 +45,9 @@ function WitContextProvider({children}) {
     useEffect(witFetch, [witFetch]);
 
     const providerData = {wit, setWit, witList, setWitList}
+   
     
+
     return (
         <AppContext.Provider value = {providerData}>
             {children}

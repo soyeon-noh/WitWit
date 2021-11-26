@@ -18,11 +18,9 @@ function WitHome() {
             {/* <img src={logo2} className="home_logo" /> */}
 
             {/* 로그인 한 경우에는 인풋박스 노출 */}
+                
             <WitContextProvider>
                 <WitWrite/>
-            </WitContextProvider>
-
-            <WitContextProvider>
                 <WitItem/>
             </WitContextProvider>
         </>
