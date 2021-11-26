@@ -6,6 +6,7 @@ const wit = Schema({
   id: String, // 위트 아이디
   text: String, // 위트 텍스트 (512자 제한)
   createdAt: Date, // 위트 생성 날짜
+  fromNow: String,
   userId: String, // 작성자 ID
   userName: String, // 작성자 이름
   profileUrl: String, // 작성자 프로필 이미지링크
