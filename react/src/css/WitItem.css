@@ -20,9 +20,14 @@ span.wit_userNick {
     margin-right:5px ;
 }
 
-span.wit_userid {
+span.wit_userid,span.wit_createdAt {
     font-size: small;
     color: #333;
+}
+
+span.wit_createdAt {
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 

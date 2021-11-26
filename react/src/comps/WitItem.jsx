@@ -23,6 +23,7 @@ const WitItem = () => {
 
                 <span className="wit_userNick">{wit.userName}</span>
                 <span className="wit_userid">{wit.userId}</span>
+                <span className="wit_createdAt">{wit.createdAt}</span>
                 <div className="wit_text">{wit.text}</div>
                 <div className="icon_box">
                     <span><BookmarkBorderRoundedIcon/></span>
