@@ -77,16 +77,16 @@ const wit_test = [
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
   /** db연동 기본코드 */
-  // const result = await WIT.find({});
-  //   res.json(result);
+  const result = await WIT.find({});
+  res.json(result);
 
   /** test + db연동 코드 */
-  const testResult = wit_test;
-  const dbResult = await WIT.find({});
+  //   const testResult = wit_test;
+  //   const dbResult = await WIT.find({});
 
-  const result = arr.concat(testResult, dbResult);
+  //   const result = arr.concat(testResult, dbResult);
 
-  res.json(result);
+  //   res.json(result);
 
   /** test 코드 */
   //   res.json(wit_test); // test code
