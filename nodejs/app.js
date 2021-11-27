@@ -15,7 +15,6 @@ import passport from "passport";
 
 import witRouter from "./routes/wit.js";
 import usersRouter from "./routes/users.js";
-import myroom from "./routes/myroom/myroom.js";
 import myroomfolder from "./routes/myroom/folder/folder.js";
 import cors from "cors";
 
