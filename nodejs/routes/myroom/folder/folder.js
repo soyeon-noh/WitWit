@@ -1,4 +1,4 @@
-/* myroomfolder.js */
+/* folder.js */
 
 import Folder from "../../../models/myroom/folder.js";
 import express from "express";
@@ -7,7 +7,8 @@ import * as folderCtrl from "./folder.ctrl.js";
 const folder = express.Router();
 
 //Myroom folder 관리
-folder.get("/", folderCtrl.getFolderById);
+folder.get("/", folderCtrl.folderMain);
+folder.post("/", folderCtrl.getFolderById);
 folder.get(
   "/:user_id/insert",
   folderCtrl.ctrlFolder
