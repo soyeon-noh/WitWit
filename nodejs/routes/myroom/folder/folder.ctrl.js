@@ -11,7 +11,6 @@ export const ctrlFolder = (req, res) => {
 };
 export const folderAdd = (req, res) => {
   // user_id 의 folder_id 추가
-
   const { user_id, folder_id } = req.param;
 };
 export const folderDelete = (req, res) => {
