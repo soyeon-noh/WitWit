@@ -65,8 +65,7 @@ app.use((req, res, next) => {
 
 app.use("/", witRouter);
 app.use("/users", usersRouter);
-app.use("/myroom", myroom);
-app.use("/myroom/folder", myroomfolder);
+app.use("/folder", myroomfolder);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
