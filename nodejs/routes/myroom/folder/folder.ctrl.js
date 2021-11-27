@@ -1,9 +1,27 @@
 import mongoose from "mongoose";
 import Folder from "../../../models/myroom/folder.js";
+import USER from "../../../models/user.js";
 
-export const getFolderById = (req, res) => {
+const user = {
+  user_id: "test",
+};
+
+export const folderMain = async (req, res) => {
+  await res.send("hi");
+  // res.json(user);
+};
+export const getFolderById = async (req, res, next) => {
   //user_id의  폴더가져오기 findAll
-  const { user_id } = req.params;
+  try {
+    const users = await USER.find({
+      user_id: req.params.user_id,
+    }).populate("user_id");
+    console.log(users);
+    res.json(users);
+  } catch (error) {
+    console.error(err);
+    next(err);
+  }
 };
 export const ctrlFolder = (req, res) => {
   //user_id 의 folder 수정삭제 컨트롤러창
