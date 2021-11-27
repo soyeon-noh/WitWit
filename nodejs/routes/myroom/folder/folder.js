@@ -1,11 +1,16 @@
 /* folder.js */
 
-import Folder from "../../../models/myroom/folder.js";
+import FolderSchema from "../../../models/myroom/folder.js";
 import express from "express";
 import * as folderCtrl from "./folder.ctrl.js";
 
 const folder = express.Router();
-
+/**
+ *
+ * 자기만의 확고한 신념 , 사상이있다
+ * 어느정도 수용적인 울타리가 있다
+ *
+ */
 //Myroom folder 관리
 folder.get("/", folderCtrl.folderMain);
 folder.post("/", folderCtrl.getFolderById);

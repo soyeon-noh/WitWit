@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Folder from "../../../models/myroom/folder.js";
+import FolderSchema from "../../../models/myroom/folder.js";
 import USER from "../../../models/user.js";
 
 const user = {
@@ -7,6 +7,7 @@ const user = {
 };
 
 export const folderMain = async (req, res) => {
+  await console.log(req.body);
   await res.send("hi");
   // res.json(user);
 };
