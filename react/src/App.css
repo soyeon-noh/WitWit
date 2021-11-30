@@ -23,7 +23,7 @@ section.bg {
 
 section.bg .bg_img {
   background:url("./static/img/bg3.png") no-repeat ;
-  background-size: 100%;
+  background-size: cover;
   background-position-y: 100%;
   width: 100vw;
   height: 100vh;

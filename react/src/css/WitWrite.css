@@ -1,36 +1,39 @@
 div.wit_input_box {
-    width: 90%;
+    width: 60%;
+    height: fit-content;
     border-bottom: 2px double #ad9fb6;
     margin: 10px auto;
-    height: 170px;
+    text-align: left;
+
+    display: flex;
 }
 
 div.wit_input_box textarea {
+    background-color: #eee;
     outline: none;
     border:none;
-    padding: 10px;
-    width: 85%;
-    height: 65%;
+    padding: 2%;
+    width: 78%;
+    min-height: 10px;
     text-align: left;
     vertical-align: top;
-    margin-top: 10px;
+    margin: 3%;
     resize: none;
-    font-size: 18px;
+    font-size: 1rem;
+    overflow: hidden;
+
+    flex:1;
 }
 
-div.wit_input_box textarea:focus {
-    background-color: rgba(173, 159, 182, 0.2);
-}
 
 div.wit_input_box button {
-    display:block;
-    outline: none;
     border: none;
-    background-color: #de724b;
+    background-color: #ad9fb6;
+    /* background-color: #de724b; */
     color: white;
     padding: 5px 15px;
     border-radius: 20px;
     font-weight: bold;
-    margin: 10px 0 10px auto;
     cursor: pointer;
+    margin: auto 1%;
 }
