@@ -1,12 +1,12 @@
 div.wits {
-    width: 70%;
+    width: 60%;
     background-color: white;
-    border : 2px solid black;
+    border : 1px solid #ccc;
     border-radius: 10px;
     margin: 20px auto;
     padding: 10px;
     text-align: left;
-    box-shadow: 3px 3px 0px  rgba(0,0,255,0.3) ;
+    /* box-shadow: 3px 3px 0px  rgba(0,0,255,0.3) ; */
 }
 
 img.wit_profile {
@@ -17,11 +17,12 @@ img.wit_profile {
 
 span.wit_userNick {
     font-family: "DungGeunMo";
+    font-size: 1rem;
     margin-right:5px ;
 }
 
 span.wit_userid,span.wit_fromNow {
-    font-size: small;
+    font-size: 0.8rem;
     color: #333;
 }
 
@@ -33,9 +34,10 @@ span.wit_fromNow {
 
 div.wit_text {
     text-align: left;
+    font-size: 0.8rem;
     margin: 10px auto;
-    width: 90%;
-    background-color: #ccc;
+    width: 85%;
+    background-color: #eee;
     padding: 10px;
     border-radius: 5px;
 }
@@ -44,10 +46,12 @@ div.icon_box {
     width: 90%;
     text-align: right;
     margin: 5px auto;
-    padding-right: 10px;
+    padding-right: 5%;
 }
+
 div.icon_box span {
-    margin-left:50px;
-    color: #005e88;
+    margin-left:10%;
+    color: #07364d;
     cursor: pointer;
+    font-size: 1.1rem;
 }

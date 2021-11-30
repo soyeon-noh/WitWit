@@ -34,9 +34,9 @@ const WitItem = () => {
                 {/* <span className="wit_fromNow">{moment(Date.parse(wit.createdDate,wit.createdTime)).fromNow()}, {wit.createdDate}, {wit.createdTime}</span> */}
                 <div className="wit_text">{wit.text}</div>
                 <div className="icon_box">
-                    <span><BookmarkBorderRoundedIcon/></span>
-                    <span><BorderColorRoundedIcon/></span>
-                    <span><FavoriteBorderRoundedIcon/></span>
+                    <span><BookmarkBorderRoundedIcon fontSize=""/></span>
+                    <span><BorderColorRoundedIcon fontSize=""/></span>
+                    <span><FavoriteBorderRoundedIcon fontSize=""/></span>
                 </div>
             </div>
         )

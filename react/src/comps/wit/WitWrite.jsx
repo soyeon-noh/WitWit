@@ -5,7 +5,7 @@ import "../../css/WitWrite.css"
 
 const WitWrite= () =>{
 
-    const { wit, setWit, witList, setWitList } = useWitContext();
+    const { wit, setWit, witList, setWitList, witFetch } = useWitContext();
 
     // wit 내용 입력했을 때
     const onChangeHandler =(e) =>{
@@ -30,9 +30,19 @@ const WitWrite= () =>{
         }
 
         // 입력시 화면에 바로 출력가능하도록
-        await setWitList([...witList, wit]);
+        // await setWitList([...witList, wit]);
         await fetch("http://localhost:5050/", fetch_option)
+        witFetch();
         textReset();
+    }
+
+    const textRef = React.createRef();
+    const resize = () => {
+        
+        const obj = textRef.current;
+
+        obj.style.height = "auto"
+        obj.style.height = (obj.scrollHeight)+"px"
     }
 
 
@@ -43,6 +53,7 @@ const WitWrite= () =>{
                 <textarea type="text" maxLength="150"
                     value={wit.text}
                     onChange={onChangeHandler}
+                    ref={textRef} onKeyDown={resize} onKeyUp={resize}
                     className="write" placeholder="당신의 생각을 wit하세요"/>
                 <button onClick={witInsert}>위트하기</button>
             </div>

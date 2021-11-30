@@ -34,7 +34,7 @@ function WitContextProvider({children}) {
     },[]);
     useEffect(witFetch, [witFetch]);
 
-    const providerData = {wit, setWit, witList, setWitList}
+    const providerData = {wit, setWit, witList, setWitList, witFetch}
    
     
     return (
