@@ -113,7 +113,7 @@ router.post("/", async (req, res) => {
 
   console.log("wit insert: ", req.body);
 
-  // 갱신문제
+  // wit 추가와 함께 리스트 갱신
   const result = await WIT.find({});
   result.reverse();
   res.json(result);
@@ -125,7 +125,7 @@ router.get("/search", async (req, res) => {
 
   if (!query) {
     console.log("wit.js : 쿼리값이 없음");
-    return res.json("NOT QUERY");
+    res.json("NOT QUERY");
   } else if (query.slice(0, 1) === "@") {
     const result = await WIT.find({
       $or: [{ userId: query }, { text: query }],
