@@ -54,6 +54,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
+app.use(methodOverride("_method"));
 
 // cors : 외부 도메인 요청을 선별적으로 허용
 app.use((req, res, next) => {
