@@ -3,6 +3,7 @@ import moment from "moment";
 const router = express.Router();
 import WIT from "../models/wit.js";
 import USER from "../models/user.js";
+import { v4 } from "uuid";
 
 const wit_test = [
   {
@@ -106,6 +107,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res) => {
   //   WIT.create(wit_test); // test code : 6개 wit 추가
 
+  req.body.id = v4();
   req.body.createdDate = moment().format("YYYY[-]MM[-]DD");
   req.body.createdTime = moment().format("HH:mm:ss");
   WIT.create(req.body);
