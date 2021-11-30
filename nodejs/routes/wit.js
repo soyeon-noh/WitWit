@@ -131,20 +131,37 @@ router.get("/search", async (req, res) => {
       $or: [{ userId: query }, { text: query }],
     });
     res.json(result);
-    console.log("wit.js : 쿼리값이 아이디임", query);
+    console.log("wit.js : 아이디검색", query);
   } else {
-    const result = await WIT.find({ text: query });
+    const result = await WIT.find({ text: { $regex: query } });
     res.json(result);
-    console.log("wit.js : 쿼리값 기본검색");
+    console.log("wit.js : 기본검색");
   }
 });
 
 // 여기가 myroom인건 어떨까?
-router.get("/:userId", (req, res) => {
-  //내용
+router.get("/:userId", async (req, res) => {
+  const paramsUserID = req.params.userId;
+  const result = await WIT.find({ userId: paramsUserID });
+  res.json(result);
 });
 
-router.get("/:userId/:id");
-router.post("/:userId/:id");
+// wit 디테일
+router.get("/:userId/:id", async (req, res) => {
+  const paramsId = req.params.id;
+  const result = await WIT.findOne({ id: paramsId });
+  res.json(result);
+});
+
+// wit 삭제
+router.delete("/:userId/:id", async (req, res) => {
+  const paramsId = req.params.id;
+  await WIT.deleteOne({ id: paramsId });
+
+  // myroom으로 돌아가기
+  const paramsUserID = req.params.userId;
+  const result = await WIT.find({ userId: paramsUserID });
+  res.json(result);
+});
 
 export default router;
