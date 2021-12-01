@@ -1,19 +1,25 @@
 img.home_logo {
-    width: 100px;
-    margin: 20px auto;
+  width: 100px;
+  margin: 20px auto;
 }
 
+.searchBox {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+
+  width: 13%;
+  height: fit-content;
+
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
 .searchBar {
-    position: absolute;
-    top: 3%;
-    left: 3%;
-
-    width: 12%;
-
-    background-color: #fff;
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    padding: 3px;
-    
+  width: 80%;
+  border: none;
+  outline: none;
+  text-align: left;
+  padding-left: 3%;
+  vertical-align: top;
 }
