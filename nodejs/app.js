@@ -16,6 +16,7 @@ import session from "express-session";
 import LocalStrategy from "passport-local";
 
 import witRouter from "./routes/wit.js";
+import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
 import folder from "./routes/myroom/folder/folder.js";
 import cors from "cors";
@@ -57,7 +58,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 app.use(methodOverride("_method"));
-
+//session 방식 로그인 구현
 app.use(
   session({ secret: "비밀코드 ", resave: true, saveUninitialized: false })
 );
@@ -72,6 +73,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", witRouter);
+app.use("/", myroomRouter);
 app.use("/users", usersRouter);
 app.use("/folder", folder);
 
