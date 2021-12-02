@@ -141,12 +141,12 @@ router.get("/search", async (req, res) => {
   }
 });
 
-// 여기가 myroom인건 어떨까?
-router.get("/:userId", async (req, res) => {
-  const paramsUserID = req.params.userId;
-  const result = await WIT.find({ userId: paramsUserID });
-  res.json(result);
-});
+// // 여기가 myroom인건 어떨까?
+// router.get("/:userId", async (req, res) => {
+//   const paramsUserID = req.params.userId;
+//   const result = await WIT.find({ userId: paramsUserID });
+//   res.json(result);
+// });
 
 // wit 디테일
 router.get("/:userId/:id", async (req, res) => {
