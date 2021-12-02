@@ -1,6 +1,14 @@
 import express from "express";
-const router = express.Router();
+import passport from "passport";
+import session from "express-session";
+import mongoose from "mongoose";
+import LocalStrategy from "passport-local";
 
+const router = express.Router();
+/**
+ * 회원인증방법 : session - based
+ *
+ */
 const user_test = [
   {
     id: "1", // 사용자의 고유한 아이디 번호..?
