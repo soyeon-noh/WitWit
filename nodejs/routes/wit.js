@@ -89,14 +89,6 @@ router.get("/", async (req, res, next) => {
   result.reverse();
   res.json(result);
 
-  /** test + db연동 코드 */
-  //   const testResult = wit_test;
-  //   const dbResult = await WIT.find({});
-
-  //   const result = arr.concat(testResult, dbResult);
-
-  //   res.json(result);
-
   /** test 코드 */
   //   res.json(wit_test); // test code
 
@@ -123,22 +115,27 @@ router.post("/", async (req, res) => {
 
 // wit 검색
 router.get("/search", async (req, res) => {
-  const query = req.query.q;
+  const query = req.query.q.toString();
+  const splitQuery = query.split(",");
+  console.log("split한 query: ", splitQuery);
+
+  let result;
 
   if (!query) {
     console.log("wit.js : 쿼리값이 없음");
-    res.json("NOT QUERY");
+    result = json("NOT QUERY"); // reverse 를 사용하기 위해서
   } else if (query.slice(0, 1) === "@") {
-    const result = await WIT.find({
+    result = await WIT.find({
       $or: [{ userId: query }, { text: query }],
     });
-    res.json(result);
     console.log("wit.js : 아이디검색", query);
   } else {
-    const result = await WIT.find({ text: { $regex: query } });
-    res.json(result);
+    result = await WIT.find({ text: { $regex: query } });
     console.log("wit.js : 기본검색");
   }
+
+  result.reverse();
+  res.json(result);
 });
 
 // // 여기가 myroom인건 어떨까?
