@@ -135,6 +135,7 @@ router.get("/search", async (req, res) => {
       console.log("wit.js : 기본검색 ", splitQuery[num]);
       console.log("wit.js : 기본검색 결과 ", result);
     }
+    resultList;
     // resultList = await resultList.push(result);
   }
 
