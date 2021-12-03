@@ -10,18 +10,25 @@ function WitSearch() {
     color: "#ccc",
   });
 
+  // 검색어 setting
   const [keyword, setKeyword] = useState([]);
   const searchBar = useRef();
 
+  // search 입력값 받아오기
   const onSearchChange = (e) => {
     const insertKeyword = e.target.value;
     setKeyword(insertKeyword);
   };
 
+  // 검색어 입력 후 searchBar 클리어
+  const searchReset = () => {
+    setKeyword("");
+  };
+
+  // 검색어 서버에 보내고 받기
   const witSearch = async () => {
     console.log(keyword);
     if (keyword == "") {
-      window.alert("검색어를 입력하세요");
       searchBar.current.focus();
       return;
     } else {
@@ -29,9 +36,11 @@ function WitSearch() {
       const json = await result.json();
       console.table(json);
       setWitList(json);
+      searchReset();
     }
   };
 
+  // Enter Press했을 때 나타나는 event
   const onKeyPressHandler = (e) => {
     if (e.key === "Enter") {
       witSearch();
@@ -44,6 +53,7 @@ function WitSearch() {
         <MyIcon fontSize="1rem" />
         <input
           ref={searchBar}
+          value={keyword}
           className="searchBar"
           placeholder="wit를 검색하세요"
           onChange={onSearchChange}
