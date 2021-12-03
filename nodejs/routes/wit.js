@@ -120,18 +120,22 @@ router.get("/search", async (req, res) => {
   console.log("split한 query: ", splitQuery);
 
   let result;
+  let resultList;
 
-  if (!query) {
-    console.log("wit.js : 쿼리값이 없음");
-    result = json("NOT QUERY"); // reverse 를 사용하기 위해서
-  } else if (query.slice(0, 1) === "@") {
-    result = await WIT.find({
-      $or: [{ userId: query }, { text: query }],
-    });
-    console.log("wit.js : 아이디검색", query);
-  } else {
-    result = await WIT.find({ text: { $regex: query } });
-    console.log("wit.js : 기본검색");
+  for (const num in splitQuery) {
+    console.log("splitQuery[num]: ", splitQuery[num]);
+
+    if (splitQuery[num].slice(0, 1) === "@") {
+      result = await WIT.find({
+        $or: [{ userId: splitQuery[num] }, { text: splitQuery[num] }],
+      });
+      console.log("wit.js : 아이디검색 결과 ", result);
+    } else {
+      result = await WIT.find({ text: { $regex: splitQuery[num] } });
+      console.log("wit.js : 기본검색 ", splitQuery[num]);
+      console.log("wit.js : 기본검색 결과 ", result);
+    }
+    // resultList = await resultList.push(result);
   }
 
   result.reverse();
