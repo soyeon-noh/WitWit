@@ -6,10 +6,10 @@
  */
 import createError from "http-errors";
 import express from "express";
-import path from "path";
+import path, { dirname } from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-
+import dotenv from "dotenv";
 import methodOverride from "method-override";
 import passport from "passport";
 import session from "express-session";
@@ -32,7 +32,8 @@ dbConn.on("error", () => {
   console.error;
 });
 
-mongoose.connect("mongodb://localhost:27017/witwit");
+dotenv.config(path.join("./.env"));
+mongoose.connect(process.env.NODEJS_APP_MONGOURL);
 
 // cors : 교차 출처 리소스 공유, 보안 관련
 const whiteURL = ["http://localhost:3000"];

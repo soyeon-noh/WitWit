@@ -9,7 +9,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "debug": "^4.3.2",
-    "dotenv": "*",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "http-errors": "^1.8.1",
@@ -22,6 +22,7 @@
     "nodemon": "*",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "pug": "^3.0.2",
     "uuid": "^8.3.2"
   }
