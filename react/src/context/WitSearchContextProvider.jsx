@@ -6,18 +6,17 @@ export const useWitSearchContext = () => {
 };
 
 function WitSearchContextProvider({ children }) {
-  const [searchInsert, setSearchInsert] = useState([]);
+  const [keyword, setKeyword] = useState([]);
+
   const onSearchChange = (e) => {
-    const keyword = e.target.value;
-    setSearchInsert(keyword);
+    const insertKeyword = e.target.value;
+    setKeyword(insertKeyword);
   };
 
-  const witSearch = async () => {};
-
-  const searchData = [searchInsert, setSearchInsert, onSearchChange];
+  const searchData = [keyword, setKeyword, onSearchChange];
 
   return (
-    <AppContext.Provider value={searchInsert}>{children}</AppContext.Provider>
+    <AppContext.Provider value={searchData}>{children}</AppContext.Provider>
   );
 }
 

@@ -6,10 +6,17 @@ import FolderIcon from "../../static/img/folder-icon.png";
 
 const FolderBox = () => {
   const { folderList } = useRoomContext();
-  const gridColumnStart = "1";
-  const gridColumnEnd = "2";
-  const gridRowStart = "1";
-  const gridRowEnd = "2";
+  // const gridColumnStart = "1";
+  // const gridColumnEnd = "2";
+  // const gridRowStart = "1";
+  // const gridRowEnd = "2";
+
+  // const gridStyles = {
+  //   gridColumnStart: { gridColumnStart },
+  //   gridColumnEnd: { gridColumnEnd },
+  //   gridRowStart: { gridRowStart },
+  //   gridRowEnd: { gridRowEnd },
+  // };
 
   return folderList.map((folder) => {
     return (
@@ -17,7 +24,7 @@ const FolderBox = () => {
         <div className="folder-icon">
           <img src={FolderIcon} />
         </div>
-        <span>{folderList.name}</span>
+        <span>{folder.name}</span>
       </div>
     );
   });
