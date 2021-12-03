@@ -30,3 +30,8 @@
 
 - Home Search UI 추가
 - Homw Search 기능 구상중
+
+### 2021.12.03
+
+- Home에서 Search 기능 추가
+- 간단한 유효성 검사(null값 입력시 무반응)추가

@@ -20,7 +20,15 @@ function MyRoom() {
       <RoomContextProvider>
         <div className="folderBox">
           <FolderBox />
-          <div className="windowUnder"></div>
+          <div className="windowUnder">
+            <div className="folderInsert">
+              <span>+ 폴더추가하기</span>
+            </div>
+          </div>
+          <div className="folderInsertMenu">
+            <input placeholder="폴더명 입력하기" />
+            <button>추가하기</button>
+          </div>
         </div>
       </RoomContextProvider>
     </div>

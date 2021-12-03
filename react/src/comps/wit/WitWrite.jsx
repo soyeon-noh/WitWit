@@ -3,7 +3,7 @@ import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/WitWrite.css";
 
 const WitWrite = () => {
-  const { wit, setWit, witList, setWitList } = useWitContext();
+  const { wit, setWit } = useWitContext();
 
   // wit 내용 입력했을 때
   const onChangeHandler = (e) => {
