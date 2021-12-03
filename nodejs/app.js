@@ -6,16 +6,17 @@
  */
 import createError from "http-errors";
 import express from "express";
-import path from "path";
+import path, { dirname } from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-
+import dotenv from "dotenv";
 import methodOverride from "method-override";
 import passport from "passport";
 import session from "express-session";
 import LocalStrategy from "passport-local";
 
 import witRouter from "./routes/wit.js";
+import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
 import folder from "./routes/myroom/folder/folder.js";
 import cors from "cors";
@@ -31,7 +32,8 @@ dbConn.on("error", () => {
   console.error;
 });
 
-mongoose.connect("mongodb://localhost:27017/witwit");
+dotenv.config(path.join("./.env"));
+mongoose.connect(process.env.NODEJS_APP_MONGOURL);
 
 // cors : 교차 출처 리소스 공유, 보안 관련
 const whiteURL = ["http://localhost:3000"];
@@ -57,7 +59,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 app.use(methodOverride("_method"));
-
+//session 방식 로그인 구현
 app.use(
   session({ secret: "비밀코드 ", resave: true, saveUninitialized: false })
 );
@@ -72,6 +74,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", witRouter);
+app.use("/", myroomRouter);
 app.use("/users", usersRouter);
 app.use("/folder", folder);
 
