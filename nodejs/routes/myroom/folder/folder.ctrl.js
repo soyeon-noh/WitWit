@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
-import FolderSchema from "../../../models/myroom/folder.js";
+import folders from "../../../models/myroom/folder.js";
 import wits from "../../../models/wit.js";
-import USER from "../../../models/user.js";
 
 const folder_test = [
   {
@@ -26,18 +24,24 @@ const folder_test = [
     secret: true,
   },
 ];
-
+// const sample = new folders(folder_test[1]);
+// sample.save();
 export const folderMain = async (req, res) => {
   const user_id = req.params.user_id;
   console.log(user_id);
-  await FolderSchema.find({}, (err, result) => {
-    if (err) {
-      res.send(err);
-    }
-    result.reverse();
-    // res.json(folder_test);
-    res.json(result);
-  });
+  //   await folders //folders document 생성
+  //     .save()
+  //     .then(() => {
+  //       console.log("성공");
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  await folders
+    .find({ user_id: user_id }, function (err, data) {
+      res.json(data);
+    })
+    .clone(); //일반적으로 쿼리문이 두번실행될수없기때문이 clone()처리를 해준다
 };
 //CREATE
 export const folderAdd = async (req, res) => {
@@ -47,7 +51,7 @@ export const folderAdd = async (req, res) => {
 
   const folderName = req.body.folder_name;
   const secret = req.body.secret;
-  const folder = new FolderSchema({
+  const folder = new folders({
     user_id: userId,
     folder_name: folderName,
     secret: secret,
@@ -58,9 +62,17 @@ export const folderAdd = async (req, res) => {
   //   });
 };
 //Update
-export const updateFolder = async (req, res, next) => {};
-
+//test_wit_id :  499c24d4-c909-439d-b018-a5a09cd400f2
+export const updateFolder = async (req, res) => {
+  const { wit_id, user_id, folder_id } = req.params;
+  await wits
+    .find({ id: wit_id, user_id: user_id }, function (err, data) {
+      console.log(wit_id);
+      res.json(data);
+    })
+    .clone();
+};
 export const folderDelete = (req, res) => {
   //user_id 의 folder_id 삭제
-  const { user_id, folder_id } = req.param;
+  const { user_id, folder_id } = req.params;
 };

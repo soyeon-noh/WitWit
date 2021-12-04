@@ -3,6 +3,7 @@ import express from "express";
 import * as folderCtrl from "../myroom/folder/folder.ctrl.js";
 
 const myroom = express.Router();
+const folder = express.Router();
 
 const user_test = [
   {
@@ -29,5 +30,17 @@ const user_test = [
 ];
 
 myroom.get("/:user_id", folderCtrl.folderMain);
+
+//Myroom folder 관리
+//추후 로그인정보로 확인하도록 한다:user_id 빼고
+myroom.get("/:user_id/:wit_id/update", folderCtrl.updateFolder);
+// folder.post("/", folderCtrl.getFolderById);
+// folder.get(
+//   "/:user_id/insert",
+//   folderCtrl.ctrlFolder
+//   //내용물 추가삭제, 정렬을 진행할수 있다.(예정)
+// );
+myroom.post("/:user_id/add", folderCtrl.folderAdd);
+myroom.post("/:user_id/delete/:folder_id", folderCtrl.folderDelete);
 
 export default myroom;
