@@ -33,7 +33,10 @@ dbConn.on("error", () => {
 });
 
 dotenv.config(path.join("./.env"));
-mongoose.connect(process.env.NODEJS_APP_MONGOURL);
+mongoose.connect(process.env.NODEJS_APP_MONGOURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // cors : 교차 출처 리소스 공유, 보안 관련
 const whiteURL = ["http://localhost:3000"];
