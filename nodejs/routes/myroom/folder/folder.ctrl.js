@@ -83,5 +83,8 @@ export const updateFolder = async (req, res) => {
 };
 export const folderDelete = (req, res) => {
   //user_id 의 folder_id 삭제
-  const { user_id, folder_id } = req.params;
+  folders.deleteOne(req.body, function (req, res) {
+    console.log("삭제완료");
+  });
+  res.send("삭제완료");
 };
