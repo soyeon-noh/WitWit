@@ -1,8 +1,4 @@
 import express from "express";
-import passport from "passport";
-import session from "express-session";
-import mongoose from "mongoose";
-import LocalStrategy from "passport-local";
 
 const router = express.Router();
 /**

@@ -1,66 +1,58 @@
-import mongoose from "mongoose";
-import FolderSchema from "../../../models/myroom/folder.js";
+import folders from "../../../models/myroom/folder.js";
 import wits from "../../../models/wit.js";
-import USER from "../../../models/user.js";
-
-const folder_test = [
-  {
-    user_id: "test",
-    folder_id: "test",
-    folder_name: "test",
-    wit_id: [1, 2, 3, 4],
-    secret: true,
-  },
-  {
-    user_id: "test2",
-    folder_id: "test2",
-    folder_name: "test2",
-    wit_id: [1, 2, 3, 4],
-    secret: true,
-  },
-  {
-    user_id: "test3",
-    folder_id: "test3",
-    folder_name: "test3",
-    wit_id: [1, 2, 3, 4],
-    secret: true,
-  },
-];
 
 export const folderMain = async (req, res) => {
-  const user_id = req.params.user_id;
-  console.log(user_id);
-  await FolderSchema.find({}, (err, result) => {
+  //   await folders //folders document 생성
+  //     .save()
+  //     .then(() => {
+  //       console.log("성공");
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  await folders
+    .find({ user_id: req.params.user_id }, function (err, data) {
+      res.json(data);
+    })
+    .clone();
+};
+
+export const folderAdd = async (req, res) => {
+  const folder = new folders({
+    user_id: req.body.user_id,
+    folder_name: req.body.folder_name,
+    secret: req.body.secret,
+  });
+
+  await folder.create(req.body);
+};
+
+export const updateFolder = async (req, res) => {
+  await wits
+    .updateOne(
+      { _id: req.body.witId },
+      { $set: { folder_id: req.body.folderId } },
+      function (err, result) {
+        if (err) {
+          return res.status(500).json(err);
+        }
+        return res.status(200).json(wits);
+      }
+    )
+    .clone();
+};
+
+export const folderDelete = async (req, res) => {
+  await folders.deleteOne(req.body, function (req, res) {
+    console.log("삭제완료");
+  });
+  await res.send("삭제완료");
+};
+
+export const folderInfo = async (req, res) => {
+  await wits.find({ folder_id: req.body.folderId }, function (err, result) {
     if (err) {
       res.send(err);
     }
-    result.reverse();
-    // res.json(folder_test);
-    res.json(result);
   });
-};
-//CREATE
-export const folderAdd = async (req, res) => {
-  // user_id 의 folder_id 추가
-
-  const userId = req.params.user_id;
-
-  const folderName = req.body.folder_name;
-  const secret = req.body.secret;
-  const folder = new FolderSchema({
-    user_id: userId,
-    folder_name: folderName,
-    secret: secret,
-  });
-  await folder.create(req.body);
-  //   await folder.insertOne(folder, function (err, result) {
-  //     res.result("sucess");
-  //   });
-};
-//Update
-export const updateFolder = async (req, res, next) => {};
-
-export const folderDelete = (req, res) => {
-  //user_id 의 folder_id 삭제
-  const { user_id, folder_id } = req.param;
 };

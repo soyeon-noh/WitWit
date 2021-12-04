@@ -3,6 +3,7 @@ import express from "express";
 import * as folderCtrl from "../myroom/folder/folder.ctrl.js";
 
 const myroom = express.Router();
+const folder = express.Router();
 
 const user_test = [
   {
@@ -29,5 +30,9 @@ const user_test = [
 ];
 
 myroom.get("/:user_id", folderCtrl.folderMain);
+myroom.put("/folderUpdate", folderCtrl.updateFolder);
+myroom.post("/folderInfo", folderCtrl.folderInfo);
+myroom.post("/folderAdd", folderCtrl.folderAdd);
+myroom.post("/folderDelete", folderCtrl.folderDelete);
 
 export default myroom;
