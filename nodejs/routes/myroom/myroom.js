@@ -33,7 +33,7 @@ myroom.get("/:user_id", folderCtrl.folderMain);
 
 //Myroom folder 관리
 //추후 로그인정보로 확인하도록 한다:user_id 빼고
-myroom.get("/:user_id/:wit_id/update", folderCtrl.updateFolder);
+myroom.put("/update", folderCtrl.updateFolder);
 // folder.post("/", folderCtrl.getFolderById);
 // folder.get(
 //   "/:user_id/insert",

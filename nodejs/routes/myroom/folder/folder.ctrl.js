@@ -64,12 +64,21 @@ export const folderAdd = async (req, res) => {
 //Update
 //test_wit_id :  499c24d4-c909-439d-b018-a5a09cd400f2
 export const updateFolder = async (req, res) => {
-  const { wit_id, user_id, folder_id } = req.params;
+  //   const { wit_id, user_id, folder_id } = req.params;
+  console.log(req.body);
+
   await wits
-    .find({ id: wit_id, user_id: user_id }, function (err, data) {
-      console.log(wit_id);
-      res.json(data);
-    })
+    .updateOne(
+      { _id: req.body.witId },
+      { $set: { folder_id: req.body.folderId } },
+
+      function (err, result) {
+        if (err) {
+          return res.status(500).json(err);
+        }
+        return res.status(200).json(wits);
+      }
+    )
     .clone();
 };
 export const folderDelete = (req, res) => {
