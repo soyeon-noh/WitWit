@@ -1,15 +1,16 @@
 import folders from "../../../models/myroom/folder.js";
 import wits from "../../../models/wit.js";
+import { v4 } from "uuid";
 
-export const folderMain = async (req, res) => {
-  //   await folders //folders document 생성
-  //     .save()
-  //     .then(() => {
-  //       console.log("성공");
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
+export const fMain = async (req, res) => {
+  await folders //folders document 생성
+    .save()
+    .then(() => {
+      console.log("성공");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   await folders
     .find({ user_id: req.params.user_id }, function (err, data) {
       res.json(data);
@@ -17,21 +18,24 @@ export const folderMain = async (req, res) => {
     .clone();
 };
 
-export const folderAdd = async (req, res) => {
+export const fAdd = async (req, res) => {
   const folder = new folders({
+    id: v4,
     user_id: req.body.user_id,
-    folder_name: req.body.folder_name,
+    name: req.body.name,
     secret: req.body.secret,
   });
 
   await folder.create(req.body);
 };
 
-export const updateFolder = async (req, res) => {
-  await wits
+export const fUpdate = async (req, res) => {
+  await folders
     .updateOne(
-      { _id: req.body.witId },
-      { $set: { folder_id: req.body.folderId } },
+      { id: req.body.id },
+      {
+        $set: { name: req.body.name, secret: req.body.secret },
+      },
       function (err, result) {
         if (err) {
           return res.status(500).json(err);
@@ -42,15 +46,16 @@ export const updateFolder = async (req, res) => {
     .clone();
 };
 
-export const folderDelete = async (req, res) => {
-  await folders.deleteOne(req.body, function (req, res) {
+export const fDelete = async (req, res) => {
+  const id = req.parmas.id;
+  await folders.deleteOne({ id: id }, function (req, res) {
     console.log("삭제완료");
   });
   await res.send("삭제완료");
 };
 
-export const folderInfo = async (req, res) => {
-  await wits.find({ folder_id: req.body.folderId }, function (err, result) {
+export const fInfo = async (req, res) => {
+  await wits.find({ id: req.params.id }, function (err, result) {
     if (err) {
       res.send(err);
     }

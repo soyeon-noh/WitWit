@@ -29,10 +29,10 @@ const user_test = [
   },
 ];
 
-myroom.get("/:user_id", folderCtrl.folderMain);
-myroom.put("/folderUpdate", folderCtrl.updateFolder);
-myroom.post("/folderInfo", folderCtrl.folderInfo);
-myroom.post("/folderAdd", folderCtrl.folderAdd);
-myroom.post("/folderDelete", folderCtrl.folderDelete);
+myroom.get("/:user_id", folderCtrl.fMain);
+myroom.put("/:user_id/folder", folderCtrl.fUpdate);
+myroom.post("/:user_id/folder", folderCtrl.fAdd);
+myroom.delete("/:user_id/folder/:id", folderCtrl.fDelete);
+myroom.get("/:user_id/folder/:id", folderCtrl.fInfo);
 
 export default myroom;
