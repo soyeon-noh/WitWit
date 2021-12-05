@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+import { v4 } from "uuid";
 
 const folderSchema = new Schema({
+  id: { type: String, required: true },
   user_id: { type: String, required: true },
   wit_id: [{ type: String, trim: true }],
-  folder_name: { type: String, required: true },
+  name: { type: String, required: true },
   secret: { type: Boolean, required: true },
 });
 
