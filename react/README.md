@@ -40,3 +40,6 @@
 * Wit 메뉴 추가
 * Folder Insert 서버와 연결중 
   * 오류 해결중
+
+### 2021. 12. 05
+* Folder Insert/list 출력 완료

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router';
 import { useRoomContext } from '../../context/RoomContextProvider';
 
 const FolderInsertModal=({modalClose})=> {
@@ -10,13 +11,22 @@ const FolderInsertModal=({modalClose})=> {
         }
     }
 
-    //
+    const userid = useParams();
+
     const { folder, setFolder } = useRoomContext();
+    const [checked, setChecked] = useState(false);
+
     // folder 내용 입력했을 때
     const onChangeHandler = (e) => {
         const folder_name = e.target.value;
         setFolder({ ...folder, name: folder_name });
     };
+
+    const onChecked =(e) =>{
+        setChecked(!checked)
+        setFolder({...folder, secret:checked})
+        console.log(checked)
+    }
 
     // folder insert 함수
     const folderInsert = async () => {
@@ -28,13 +38,15 @@ const FolderInsertModal=({modalClose})=> {
         body: JSON.stringify(folder),
         };
 
-        // await fetch("http://localhost:5050/folderAdd", fetch_option);
+        await fetch(`http://localhost:5050/:userid/folder`, fetch_option);
+        modalClose();
     };
 
     return (
         
     <div className="folderInsertMenu" onClick={onModalClose}>
         <input placeholder="폴더명 입력하기" maxLength="10" onChange={onChangeHandler}/>
+        <div className="secretBox"><label>비공개폴더</label><input type="checkbox" onChange={onChecked}/></div>
         <div onClick={folderInsert}>+ 추가하기</div>
     </div>
     )
