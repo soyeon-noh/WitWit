@@ -40,6 +40,7 @@ function WitSearch() {
     }
   };
 
+  
   // Enter Press했을 때 나타나는 event
   const onKeyPressHandler = (e) => {
     if (e.key === "Enter") {

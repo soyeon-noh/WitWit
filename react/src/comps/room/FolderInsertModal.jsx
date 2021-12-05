@@ -1,0 +1,43 @@
+import React from 'react'
+import { useRoomContext } from '../../context/RoomContextProvider';
+
+const FolderInsertModal=({modalClose})=> {
+
+    // modal창 인풋, 버튼 제외하고 클릭하였을 때 modal창 닫히도록
+    const onModalClose =(e) =>{
+        if(e.target === e.currentTarget) {
+            modalClose();
+        }
+    }
+
+    //
+    const { folder, setFolder } = useRoomContext();
+    // folder 내용 입력했을 때
+    const onChangeHandler = (e) => {
+        const folder_name = e.target.value;
+        setFolder({ ...folder, name: folder_name });
+    };
+
+    // folder insert 함수
+    const folderInsert = async () => {
+        const fetch_option = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(folder),
+        };
+
+        // await fetch("http://localhost:5050/folderAdd", fetch_option);
+    };
+
+    return (
+        
+    <div className="folderInsertMenu" onClick={onModalClose}>
+        <input placeholder="폴더명 입력하기" maxLength="10" onChange={onChangeHandler}/>
+        <div onClick={folderInsert}>+ 추가하기</div>
+    </div>
+    )
+}
+
+export default FolderInsertModal

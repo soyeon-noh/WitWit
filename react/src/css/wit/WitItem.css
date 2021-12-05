@@ -1,7 +1,8 @@
 div.wits {
     width: 60%;
     background-color: white;
-    border : 1px solid #ccc;
+    border: 1px solid #ad9fb6;
+    /* border : 1px solid #ccc; */
     border-radius: 10px;
     margin: 20px auto;
     padding: 10px;
@@ -31,13 +32,22 @@ span.wit_fromNow {
     font-weight: bold;
 }
 
+span.wit_menu {
+    margin-right: 0;
+    margin-left: auto;
+    text-align: right;
+    width: fit-content;
+}
+
+
 
 div.wit_text {
     text-align: left;
     font-size: 0.8rem;
     margin: 10px auto;
     width: 85%;
-    background-color: #eee;
+    background-color: rgba(241, 207, 241,0.3);
+    /* background-color: #eee; */
     padding: 10px;
     border-radius: 5px;
 }
