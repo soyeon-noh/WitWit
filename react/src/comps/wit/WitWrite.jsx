@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useWitContext } from "../../context/WitContextProvider";
-import "../../css/WitWrite.css";
+import "../../css/wit/WitWrite.css";
 
 const WitWrite = () => {
   const { wit, setWit } = useWitContext();
@@ -26,16 +26,15 @@ const WitWrite = () => {
       body: JSON.stringify(wit),
     };
 
-    // 입력시 화면에 바로 출력가능하도록
     await fetch("http://localhost:5050/", fetch_option);
     textReset();
   };
+
 
   // 글 입력시 overflow되면 textarea 부분 자동으로 높이 설정
   const textRef = React.createRef();
   const resize = () => {
     const obj = textRef.current;
-
     obj.style.height = "auto";
     obj.style.height = obj.scrollHeight + "px";
   };

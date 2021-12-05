@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { useWitContext } from "../../context/WitContextProvider";
 
-import "../../css/MyRoomWits.css";
+import "../../css/myroom/MyRoomWits.css";
 
 function RoomWitItem() {
   const { witList, setWitList } = useWitContext();

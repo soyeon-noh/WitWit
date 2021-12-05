@@ -53,33 +53,3 @@ div.myRoomBox {
 .folderBox::-webkit-scrollbar {
   display: none;
 }
-
-.windowUnder {
-  content: "";
-  height: 5%;
-  background-color: rgb(195, 195, 195);
-  width: 100%;
-
-  position: absolute;
-  bottom: 0;
-  border-radius: 0 0 10px 10px;
-}
-
-.folderInsert {
-  background-color: rgb(160, 160, 160);
-  width: fit-content;
-  height: fit-content;
-  padding: 3px 5px;
-  margin: 5px 0 auto 20px;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-.folderInsert:active {
-  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.5);
-}
-
-.folderInsertMenu {
-  position: absolute;
-  top: 90%;
-  left: 5%;
-}

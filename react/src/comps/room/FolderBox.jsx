@@ -1,7 +1,7 @@
 import React from "react";
 import { useRoomContext } from "../../context/RoomContextProvider";
 
-import "../../css/MyRoomFolder.css";
+import "../../css/myroom/MyRoomFolder.css";
 import FolderIcon from "../../static/img/folder-icon.png";
 
 const FolderBox = () => {
@@ -19,6 +19,8 @@ const FolderBox = () => {
   // };
 
   return folderList.map((folder) => {
+    
+
     return (
       <div className="folder">
         <div className="folder-icon">

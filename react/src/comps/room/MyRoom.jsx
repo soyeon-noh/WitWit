@@ -3,9 +3,11 @@ import { Outlet } from "react-router";
 import RoomContextProvider from "../../context/RoomContextProvider";
 import WitContextProvider from "../../context/WitContextProvider";
 
-import "../../css/MyRoom.css";
+import "../../css/myroom/MyRoom.css";
 import FolderBox from "./FolderBox";
+import FolderInsert from "./FolderInsert";
 import RoomWitItem from "./RoomWitItem";
+
 
 function MyRoom() {
   return (
@@ -20,15 +22,8 @@ function MyRoom() {
       <RoomContextProvider>
         <div className="folderBox">
           <FolderBox />
-          <div className="windowUnder">
-            <div className="folderInsert">
-              <span>+ 폴더추가하기</span>
-            </div>
-          </div>
-          <div className="folderInsertMenu">
-            <input placeholder="폴더명 입력하기" />
-            <button>추가하기</button>
-          </div>
+          <FolderInsert />
+          
         </div>
       </RoomContextProvider>
     </div>
