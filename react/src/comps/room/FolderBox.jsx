@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useRoomContext } from "../../context/RoomContextProvider";
 
 import "../../css/myroom/MyRoomFolder.css";
 import FolderIcon from "../../static/img/folder-icon.png";
 
 const FolderBox = () => {
-  const { folderList } = useRoomContext();
+  const { folderList, setFolderList } = useRoomContext();
   // const gridColumnStart = "1";
   // const gridColumnEnd = "2";
   // const gridRowStart = "1";
@@ -18,9 +18,15 @@ const FolderBox = () => {
   //   gridRowEnd: { gridRowEnd },
   // };
 
-  return folderList.map((folder) => {
-    
+  const folderFetch = useCallback(async()=>{
+    const res = await fetch("http://localhost:5050/@userID")
+    const folder = await res.json();
+    await setFolderList(folder);
+  },[])
+  useEffect(folderFetch,[folderFetch])
 
+
+  return folderList.map((folder) => {
     return (
       <div className="folder">
         <div className="folder-icon">

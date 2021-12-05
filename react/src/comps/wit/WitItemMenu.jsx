@@ -4,7 +4,8 @@ import "../../css/wit/WitItemMenu.css"
 function WitItemMenu({moda}) {
     return (
         <div className="witmenu">
-            adsf
+            <p>삭제하기</p>
+            <p>폴더에담기</p>
         </div>
     )
 }

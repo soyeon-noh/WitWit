@@ -36,12 +36,14 @@ const WitItem = () => {
 
   //wit메뉴창 open plag
   const [witMenuOpen,setWitMenuOpen] = useState(false)
-  const witMenuClose =() =>{
+  const witMenuClose =(e) =>{
+    // if(e.target.witId === )
     setWitMenuOpen(!witMenuOpen)
   }
 
 
   const { witList, setWitList } = useWitContext();
+  const {witId, setWitId} = useState([]);
 
   
   return witList.map((wit) => {
@@ -58,8 +60,9 @@ const WitItem = () => {
         <span className="wit_fromNow">
           {moment(Date.parse(createAt)).fromNow()}
         </span>
-        <span className="wit_menu" onClick={witMenuClose}><MyHamburger />
-          {witMenuOpen && <WitItemMenu witMenuClose={witMenuClose}></WitItemMenu>}
+        <span>{wit.id}</span>
+        <span className="wit_menu" onClick={witMenuClose} witId={wit.id}><MyHamburger />
+          {witMenuOpen && <WitItemMenu witMenuClose={witMenuClose} witId={wit.id}></WitItemMenu>}
         </span>
         <div className="wit_text">{wit.text}</div>
         <div className="icon_box">

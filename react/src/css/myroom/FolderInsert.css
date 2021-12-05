@@ -54,7 +54,20 @@
     color: #ad9fb6;
   }
   
-  .folderInsertMenu div{
+.secretBox {
+  display: flex;
+}
+
+.secretBox label{
+  text-align: right;
+  width: 85%;
+}
+.secretBox input{
+  text-align: left;
+  width: 15%;
+}
+
+  .folderInsertMenu div:nth-of-type(2){
     width: 70%;
     background-color: #bbb;
     padding: 5px;
@@ -66,7 +79,7 @@
       inset 1px 1px 2px rgba(255, 255, 255, 0.5);
 
   }
-  .folderInsertMenu div:active {
+  .folderInsertMenu div:nth-of-type(2):active {
     box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.5);
   }
   
