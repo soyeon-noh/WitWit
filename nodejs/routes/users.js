@@ -1,6 +1,6 @@
 import express from "express";
 
-const router = express.Router();
+const user = express.Router();
 /**
  * 회원인증방법 : session - based
  *
@@ -19,8 +19,8 @@ const user_test = [
 ];
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
+user.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-export default router;
+export default user;
