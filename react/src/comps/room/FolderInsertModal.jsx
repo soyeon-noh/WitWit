@@ -11,8 +11,6 @@ const FolderInsertModal=({modalClose})=> {
         }
     }
 
-    const userid = useParams();
-
     const { folder, setFolder } = useRoomContext();
     const [checked, setChecked] = useState(false);
 

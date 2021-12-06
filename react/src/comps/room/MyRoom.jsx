@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Outlet,useParams } from "react-router";
 import RoomContextProvider from "../../context/RoomContextProvider";
 import WitContextProvider from "../../context/WitContextProvider";
 
@@ -9,7 +9,7 @@ import FolderInsert from "./FolderInsert";
 import RoomWitItem from "./RoomWitItem";
 
 
-function MyRoom() {
+function MyRoom(props) {
   return (
     // <Outlet/>
     <div className="myRoomBox">

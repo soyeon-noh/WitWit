@@ -1,7 +1,7 @@
 import React from 'react'
 import "../../css/wit/WitItemMenu.css"
 
-function WitItemMenu({moda}) {
+function WitItemMenu() {
     return (
         <div className="witmenu">
             <p>삭제하기</p>

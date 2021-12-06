@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import "../../css/wit/WitItem.css";
 import { useWitContext } from "../../context/WitContextProvider";
 
@@ -17,13 +17,14 @@ import WitItemMenu from "./WitItemMenu";
 
 
 const WitItem = () => {
-
+  const { witList, setWitList } = useWitContext();
   
   // wit list 불러오기
   const witFetch = useCallback(async () => {
     const res = await fetch("http://localhost:5050/");
     const list = await res.json();
     await setWitList(list);
+    // console.log(list
   }, []);
   useEffect(witFetch, [witFetch]);
 
@@ -37,20 +38,20 @@ const WitItem = () => {
   //wit메뉴창 open plag
   const [witMenuOpen,setWitMenuOpen] = useState(false)
   const witMenuClose =(e) =>{
-    // if(e.target.witId === )
     setWitMenuOpen(!witMenuOpen)
   }
 
-
-  const { witList, setWitList } = useWitContext();
-  const {witId, setWitId} = useState([]);
+  const targetChecked = (e) =>{
+    const tchecked = e.target.dataset.witid
+    console.log("witID : ", tchecked)
+  }
 
   
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
-
+    const dataid = wit._id
     return (
-      <div className="wits">
+      <div className="wits" data-witid={dataid} >
         <span className="wit_profile">
           <img src={profile} className="wit_profile" />
         </span>
@@ -61,8 +62,10 @@ const WitItem = () => {
           {moment(Date.parse(createAt)).fromNow()}
         </span>
         <span>{wit.id}</span>
-        <span className="wit_menu" onClick={witMenuClose} witId={wit.id}><MyHamburger />
-          {witMenuOpen && <WitItemMenu witMenuClose={witMenuClose} witId={wit.id}></WitItemMenu>}
+        <span className="wit_menu" onClick={witMenuClose,targetChecked}><MyHamburger />
+
+          {witMenuOpen && 
+            <WitItemMenu witMenuClose={witMenuClose} ></WitItemMenu>}
         </span>
         <div className="wit_text">{wit.text}</div>
         <div className="icon_box">
