@@ -1,9 +1,11 @@
 import express from "express";
 import moment from "moment";
-const router = express.Router();
 import WIT from "../models/wit.js";
 import USER from "../models/user.js";
+import LIKEY from "../models/likey.js";
 import { v4 } from "uuid";
+
+const router = express.Router();
 
 const wit_test = [
   {
@@ -141,12 +143,22 @@ router.get("/search", async (req, res) => {
     // resultList.push(result);
     console.log("resultList: ", resultList);
   }
-
+  console.log("결과값: ", resultList);
   // filter는 return x
   resultList = resultList.filter((element, index) => {
-    resultList.indexOf(element) === index;
+    console.log(
+      "필터해보자 엘레멘트",
+      element,
+      "인덱스오브엘레멘트",
+      resultList.indexOf(element),
+      "인덱스",
+      index,
+      "아니 트루아니야?",
+      resultList.indexOf(element) === index
+    );
+    return resultList.indexOf(element) === index;
   });
-
+  console.log("결과값: ", resultList);
   result.reverse();
   res.json(resultList);
 });
