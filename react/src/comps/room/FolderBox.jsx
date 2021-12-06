@@ -18,13 +18,13 @@ const FolderBox = (props) => {
   //   gridRowEnd: { gridRowEnd },
   // };
 
-  const folderFetch = useCallback(async()=>{
-    const res = await fetch("http://localhost:5050/:userid")
+  const folderFetch = useCallback(async () => {
+    const userid = "@userID";
+    const res = await fetch(`http://localhost:5050/${userid}`);
     const folder = await res.json();
     await setFolderList(folder);
-  },[])
-  useEffect(folderFetch,[folderFetch])
-
+  }, []);
+  useEffect(folderFetch, [folderFetch]);
 
   return folderList.map((folder) => {
     return (
