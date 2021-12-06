@@ -120,7 +120,7 @@ router.get("/search", async (req, res) => {
   console.log("split한 query: ", splitQuery);
 
   let result;
-  let resultList = ["기본값1", "기본값2"];
+  let resultList = [];
 
   for (const num in splitQuery) {
     console.log("splitQuery[num]: ", splitQuery[num]);
@@ -135,16 +135,19 @@ router.get("/search", async (req, res) => {
       console.log("wit.js : 기본검색 ", splitQuery[num]);
       console.log("wit.js : 기본검색 결과 ", result);
     }
+
+    resultList = [...resultList, result];
     // push는 기본 배열값이 없으면 오류가 난다.
-    resultList.push(result);
+    // resultList.push(result);
+    console.log("resultList: ", resultList);
   }
 
-  // const resultList = resultList.filter((element, index) => {
-  //   resultList.indexOf(element) === index;
-  // });
+  // filter는 return x
+  resultList = resultList.filter((element, index) => {
+    resultList.indexOf(element) === index;
+  });
 
   result.reverse();
-  // res.json(result);
   res.json(resultList);
 });
 
