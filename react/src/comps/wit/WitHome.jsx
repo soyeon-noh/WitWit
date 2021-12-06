@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import WitContextProvider from "../../context/WitContextProvider";
 
 import WitItem from "./WitItem";

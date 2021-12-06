@@ -8,7 +8,6 @@ import Login from "./Login";
 import Join from "./Join";
 
 function BoardBox() {
-
   return (
     <section className="board_box">
       <section className="board">

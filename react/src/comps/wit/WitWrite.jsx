@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/wit/WitWrite.css";
 
 const WitWrite = () => {
+  const navigate = useNavigate();
   const { wit, setWit } = useWitContext();
 
   // wit 내용 입력했을 때
@@ -28,8 +30,8 @@ const WitWrite = () => {
 
     await fetch("http://localhost:5050/", fetch_option);
     textReset();
+    navigate("/");
   };
-
 
   // 글 입력시 overflow되면 textarea 부분 자동으로 높이 설정
   const textRef = React.createRef();

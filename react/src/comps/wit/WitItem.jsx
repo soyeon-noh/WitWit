@@ -9,64 +9,66 @@ import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import moment from "moment";
 import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
 
-
 const WitItem = () => {
   const { witList, setWitList } = useWitContext();
-  
+
   // wit list 불러오기
   const witFetch = useCallback(async () => {
     const res = await fetch("http://localhost:5050/");
     const list = await res.json();
     await setWitList(list);
-    // console.log(list
   }, []);
-  useEffect(witFetch, [witFetch]);
 
+  // useEffect(witFetch, [witFetch]);
+  useEffect(() => {
+    witFetch();
+  }, [witList]);
 
   // 햄버거 메뉴바 스타일 지정
-  const MyHamburger = styled(MoreVertIcon) ({
-    color : "#ad9fb6",
-    cursor:"pointer"
-  })
+  const MyHamburger = styled(MoreVertIcon)({
+    color: "#ad9fb6",
+    cursor: "pointer",
+  });
 
   //wit메뉴창 open plag
-  const [witMenuOpen,setWitMenuOpen] = useState(false)
-  const witMenuClose =(e) =>{
-    setWitMenuOpen(!witMenuOpen)
-  }
+  const [witMenuOpen, setWitMenuOpen] = useState(false);
 
-  const targetChecked = (e) =>{
-    const tchecked = e.target.dataset.witid
-    console.log("witID : ", tchecked)
-  }
+  // wit id 저장하는 state
+  const [dataId, setDataId] = useState("");
 
-  
+  const witMenuClose = (id) => {
+    setWitMenuOpen(!witMenuOpen);
+    setDataId(id); // 클릭된 대상의 wit id를 state에 저장
+  };
+
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
-    const dataid = wit._id
     return (
-      <div className="wits" data-witid={dataid} >
+      <div className="wits">
         <span className="wit_profile">
           <img src={profile} className="wit_profile" />
         </span>
-
         <span className="wit_userNick">{wit.userName}</span>
         <span className="wit_userid">{wit.userId}</span>
         <span className="wit_fromNow">
           {moment(Date.parse(createAt)).fromNow()}
         </span>
-        <span>{wit.id}</span>
-        <span className="wit_menu" onClick={witMenuClose,targetChecked}><MyHamburger />
-
-          {witMenuOpen && 
-            <WitItemMenu witMenuClose={witMenuClose} ></WitItemMenu>}
+        <span className="wit_menu" onClick={() => witMenuClose(wit.id)}>
+          <MyHamburger />
         </span>
+        {witMenuOpen && dataId === wit.id && (
+          <WitItemMenu
+            witMenuClose={witMenuClose}
+            data_id={wit.id}
+            witFetch={witFetch}
+          ></WitItemMenu>
+        )}
         <div className="wit_text">{wit.text}</div>
         <div className="icon_box">
           <span>
