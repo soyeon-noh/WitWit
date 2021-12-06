@@ -1,22 +1,34 @@
 import React, { useCallback, useEffect } from "react";
-import WitContextProvider from "../../context/WitContextProvider";
-
-import WitItem from "./WitItem";
-import WitWrite from "./WitWrite";
+import WitContextProvider, {
+  useWitContext,
+} from "../../context/WitContextProvider";
 
 import "../../css/wit/WitHome.css";
 import WitSearch from "./WitSearch";
+import WitItem from "./WitItem";
+import WitWrite from "./WitWrite";
 
-function WitHome() {
+const WitHome = () => {
+  const { witList, setWitList } = useWitContext();
+
+  // wit list 불러오기
+  const witFetch = useCallback(async () => {
+    const res = await fetch("http://localhost:5050/");
+    const list = await res.json();
+    await setWitList(list);
+  }, []);
+
+  useEffect(witFetch, [witFetch]);
+
   return (
     <>
       <WitContextProvider>
-        <WitSearch />
-        <WitWrite />
-        <WitItem />
+        <WitSearch witFetch={witFetch} />
+        <WitWrite witFetch={witFetch} />
+        <WitItem witFetch={witFetch} />
       </WitContextProvider>
     </>
   );
-}
+};
 
 export default WitHome;

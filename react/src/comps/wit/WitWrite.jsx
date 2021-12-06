@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/wit/WitWrite.css";
