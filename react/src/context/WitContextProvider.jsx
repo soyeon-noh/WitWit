@@ -22,10 +22,10 @@ function WitContextProvider({ children }) {
     createdTime: moment().format("HH:mm:ss"), // 위트 생성 시간
     userId: "@userID", // 작성자 ID
     userName: "userNick", // 작성자 이름
-    profileUrl: "none", // 작성자 프로필 이미지링크
+    profileUrl: "", // 작성자 프로필 이미지링크
 
-    folder_id: "none", // 폴더 seq (외래키)
-    image_id: "none", // 이미지 seq (외래키)
+    folder_id: "", // 폴더 seq (외래키)
+    image_id: "", // 이미지 seq (외래키)
   });
 
   const [witList, setWitList] = useState([]);

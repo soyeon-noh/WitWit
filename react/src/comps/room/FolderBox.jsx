@@ -4,7 +4,7 @@ import { useRoomContext } from "../../context/RoomContextProvider";
 import "../../css/myroom/MyRoomFolder.css";
 import FolderIcon from "../../static/img/folder-icon.png";
 
-const FolderBox = () => {
+const FolderBox = (props) => {
   const { folderList, setFolderList } = useRoomContext();
   // const gridColumnStart = "1";
   // const gridColumnEnd = "2";
@@ -19,7 +19,7 @@ const FolderBox = () => {
   // };
 
   const folderFetch = useCallback(async()=>{
-    const res = await fetch("http://localhost:5050/@userID")
+    const res = await fetch("http://localhost:5050/:userid")
     const folder = await res.json();
     await setFolderList(folder);
   },[])
