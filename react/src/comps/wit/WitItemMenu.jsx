@@ -26,7 +26,6 @@ function WitItemMenu({ data_id, witMenuClose, witFetch }) {
 
     if (window.confirm("삭제하시겠습니까?")) {
       await fetch(`http://localhost:5050/${userId}/${id}`, fetch_option);
-      navigate("/");
       witFetch();
     }
   };

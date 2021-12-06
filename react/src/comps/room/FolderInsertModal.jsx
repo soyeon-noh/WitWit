@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
 import { useRoomContext } from "../../context/RoomContextProvider";
 
-const FolderInsertModal = ({ modalClose }) => {
+const FolderInsertModal = ({ modalClose, folderFetch }) => {
   // modal창 인풋, 버튼 제외하고 클릭하였을 때 modal창 닫히도록
   const onModalClose = (e) => {
     if (e.target === e.currentTarget) {
@@ -37,6 +36,7 @@ const FolderInsertModal = ({ modalClose }) => {
 
     await fetch(`http://localhost:5050/:userId/folder`, fetch_option);
     modalClose();
+    folderFetch();
   };
 
   return (
