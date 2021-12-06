@@ -4,6 +4,12 @@ import { v4 } from "uuid";
 
 const router = express.Router();
 
+// 텟그트
+router.get("/", async (req, res) => {
+  const result = await LIKEY.find({});
+  res.json(result);
+});
+
 // 좋아요
 router.post("/:userId/:witId", async (req, res) => {
   const paramsUserId = req.params.userId;
@@ -12,21 +18,19 @@ router.post("/:userId/:witId", async (req, res) => {
     user_id: paramsUserId,
     wit_id: paramsWitId,
   });
-  console.log("likey1: ", likey);
+  console.log("likey: ", likey);
   if (!likey) {
-    let likey = new LIKEY();
-    likey.id = v4();
-    likey.userId = paramsUserId;
-    likey.witId = paramsWitId;
+    const insertJson = { id: v4(), user_id: paramsUserId, wit_id: paramsWitId };
 
-    await LIKEY.create({});
+    await LIKEY.create(insertJson);
   } else {
     const id = likey.id;
     await LIKEY.deleteOne({ id: id });
   }
 
-  res.json(likey);
-  console.log("likey2: ", likey);
+  const result = await LIKEY.find({});
+  res.json(result);
+  console.log("result: ", result);
 });
 
 export default router;
