@@ -16,16 +16,7 @@ import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
 
 const WitItem = ({ witFetch }) => {
-  const { witList, setWitList } = useWitContext();
-
-  // // wit list 불러오기
-  // const witFetch = useCallback(async () => {
-  //   const res = await fetch("http://localhost:5050/");
-  //   const list = await res.json();
-  //   await setWitList(list);
-  // }, []);
-
-  // useEffect(witFetch, [witFetch]);
+  const { witList } = useWitContext();
 
   // 햄버거 메뉴바 스타일 지정
   const MyHamburger = styled(MoreVertIcon)({

@@ -9,7 +9,7 @@ import WitItem from "./WitItem";
 import WitWrite from "./WitWrite";
 
 const WitHome = () => {
-  const { witList, setWitList } = useWitContext();
+  const { setWitList } = useWitContext();
 
   // wit list 불러오기
   const witFetch = useCallback(async () => {
@@ -22,11 +22,9 @@ const WitHome = () => {
 
   return (
     <>
-      <WitContextProvider>
-        <WitSearch witFetch={witFetch} />
-        <WitWrite witFetch={witFetch} />
-        <WitItem witFetch={witFetch} />
-      </WitContextProvider>
+      <WitSearch witFetch={witFetch} setWitList={setWitList} />
+      <WitWrite witFetch={witFetch} />
+      <WitItem witFetch={witFetch} />
     </>
   );
 };
