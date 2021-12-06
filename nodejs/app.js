@@ -18,6 +18,7 @@ import LocalStrategy from "passport-local";
 import witRouter from "./routes/wit.js";
 import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
+import likeyRouter from "./routes/likey.js";
 import cors from "cors";
 
 // mongoose : DB관련
@@ -77,6 +78,7 @@ app.use((req, res, next) => {
 
 app.use("/", witRouter);
 app.use("/", myroomRouter);
+app.use("/likey", likeyRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
