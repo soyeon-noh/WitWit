@@ -100,7 +100,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res) => {
   //   WIT.create(wit_test); // test code : 6개 wit 추가
 
-  req.body.id = v4();
+  //   req.body.id = v4();
   req.body.createdDate = moment().format("YYYY[-]MM[-]DD");
   req.body.createdTime = moment().format("HH:mm:ss");
   WIT.create(req.body);

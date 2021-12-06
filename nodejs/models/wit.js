@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
+import autoIncrement from "mongoose-auto-increment";
+// const mongoose = require("mongoose");
+// const autoIncrement = require("mongoose-auto-increment");
+autoIncrement.initialize(mongoose.connection);
 
 const Schema = mongoose.Schema;
 
 const wit = Schema({
-  id: String, // 위트 아이디
+  id: { type: Number, default: 0 }, // 위트 아이디
   text: String, // 위트 텍스트 (512자 제한)
   createdDate: String, // 위트 생성 날짜
   createdTime: String, // 위트 생성 시간
@@ -13,6 +17,13 @@ const wit = Schema({
 
   folder_id: String, // 폴더 seq (외래키)
   image_id: String, // 이미지 seq (외래키)
+});
+
+wit.plugin(autoIncrement.plugin, {
+  model: "witModel",
+  field: "id",
+  startAt: 1,
+  increment: 1,
 });
 
 export default mongoose.model("wit", wit);
