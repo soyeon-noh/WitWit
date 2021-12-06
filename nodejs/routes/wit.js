@@ -87,8 +87,7 @@ const wit_test = [
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
   /** db연동 기본코드 */
-  const result = await WIT.find({});
-  result.reverse();
+  const result = await WIT.find({}).sort({ createdDate: -1, createdTime: -1 });
   res.json(result);
 
   /** test 코드 */
@@ -110,65 +109,34 @@ router.post("/", async (req, res) => {
   console.log("wit insert: ", req.body);
 
   // wit 추가와 함께 리스트 갱신
-  const result = await WIT.find({});
-  result.reverse();
+  const result = await WIT.find({}).sort({ createdDate: -1, createdTime: -1 });
+
   res.json(result);
 });
 
 // wit 검색
 router.get("/search", async (req, res) => {
-  const query = req.query.q.toString();
-  const splitQuery = query.split(",");
+  // const queryString = req.query.q.toString();
+  const queryString = req.query.q;
+  const splitQuery = queryString.split(",");
   console.log("split한 query: ", splitQuery);
 
-  let result;
-  let resultList = [];
+  const resultList = await Promise.all(
+    splitQuery.map(async (query) => {
+      return await WIT.find({
+        $or: [{ userId: { $regex: query } }, { text: { $regex: query } }],
+      }).sort({ createdDate: -1, createdTime: -1 });
+    })
+  );
 
-  for (const num in splitQuery) {
-    console.log("splitQuery[num]: ", splitQuery[num]);
-
-    if (splitQuery[num].slice(0, 1) === "@") {
-      result = await WIT.find({
-        $or: [{ userId: splitQuery[num] }, { text: splitQuery[num] }],
-      });
-      console.log("wit.js : 아이디검색 결과 ", result);
-    } else {
-      result = await WIT.find({ text: { $regex: splitQuery[num] } });
-      console.log("wit.js : 기본검색 ", splitQuery[num]);
-      console.log("wit.js : 기본검색 결과 ", result);
-    }
-
-    resultList = [...resultList, result];
-    // push는 기본 배열값이 없으면 오류가 난다.
-    // resultList.push(result);
-    console.log("resultList: ", resultList);
-  }
-  console.log("결과값: ", resultList);
-  // filter는 return x
-  resultList = resultList.filter((element, index) => {
-    console.log(
-      "필터해보자 엘레멘트",
-      element,
-      "인덱스오브엘레멘트",
-      resultList.indexOf(element),
-      "인덱스",
-      index,
-      "아니 트루아니야?",
-      resultList.indexOf(element) === index
-    );
-    return resultList.indexOf(element) === index;
+  // 중복 삭제
+  const uniqueResultList = resultList.filter((element, index, array) => {
+    return array.findIndex((item) => item.id === element.id) === index;
   });
-  console.log("결과값: ", resultList);
-  result.reverse();
-  res.json(resultList);
-});
 
-// // 여기가 myroom인건 어떨까?
-// router.get("/:userId", async (req, res) => {
-//   const paramsUserID = req.params.userId;
-//   const result = await WIT.find({ userId: paramsUserID });
-//   res.json(result);
-// });
+  console.log("uniqueResultList: ", uniqueResultList);
+  res.json(uniqueResultList);
+});
 
 // wit 디테일
 router.get("/:userId/:id", async (req, res) => {
