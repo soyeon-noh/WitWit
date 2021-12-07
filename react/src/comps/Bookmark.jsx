@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Bookmark.css";
 import { NavLink } from "react-router-dom";
 
-const userId = "@userID";
+const user_id = "@userID";
 
 function Bookmark() {
   return (
@@ -12,7 +12,7 @@ function Bookmark() {
       </NavLink>
       <NavLink
         className="btn_bookmark myroom"
-        to={userId}
+        to={user_id}
         activeClassName="active"
       >
         MYROOM
