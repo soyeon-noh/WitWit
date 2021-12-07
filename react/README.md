@@ -43,3 +43,6 @@
 
 ### 2021. 12. 05
 * Folder Insert/list 출력 완료
+
+### 2021. 12.07
+* folder detail 

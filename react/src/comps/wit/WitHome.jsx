@@ -15,6 +15,7 @@ const WitHome = () => {
   const witFetch = useCallback(async () => {
     const res = await fetch("http://localhost:5050/");
     const list = await res.json();
+    console.log(list)
     await setWitList(list);
   }, []);
 
@@ -24,7 +25,9 @@ const WitHome = () => {
     <>
       <WitSearch witFetch={witFetch} setWitList={setWitList} />
       <WitWrite witFetch={witFetch} />
+      <div className="witStyle">
       <WitItem witFetch={witFetch} />
+      </div>
     </>
   );
 };

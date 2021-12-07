@@ -1,13 +1,12 @@
+
 div.wits {
-    width: 60%;
+    width: 100%;
     background-color: white;
     border: 1px solid #ad9fb6;
-    /* border : 1px solid #ccc; */
     border-radius: 10px;
     margin: 20px auto;
     padding: 10px;
     text-align: left;
-    /* box-shadow: 3px 3px 0px  rgba(0,0,255,0.3) ; */
 }
 
 img.wit_profile {

@@ -33,6 +33,7 @@ const WitItem = ({ witFetch }) => {
   const witMenuClose = (id) => {
     setWitMenuOpen(!witMenuOpen);
     setDataId(id); // 클릭된 대상의 wit id를 state에 저장
+    console.log(id)
   };
 
   return witList.map((wit) => {

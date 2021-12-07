@@ -33,7 +33,6 @@ const navigate = useNavigate()
         <div className="folder-icon">
           <img src={FolderIcon} />
         </div>
-        <span>{folder.id}</span>
         <span>{folder.name}</span>
       </div>
     );

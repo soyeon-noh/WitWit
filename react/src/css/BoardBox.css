@@ -26,8 +26,15 @@ section.board_box {
   section.board::-webkit-scrollbar {
     display: none;
   }
-  
+
+
   img.b_logo {
     height: 50px;
     margin-top: 15px;
   }
+
+  .witStyle {
+    width: 60%;
+    position: relative;
+    margin:  0 auto;
+}
