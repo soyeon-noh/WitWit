@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/wit/WitWrite.css";
 
-const WitWrite = () => {
+const WitWrite = ({witFetch}) => {
   const navigate = useNavigate();
   const { wit, setWit } = useWitContext();
 
@@ -30,6 +30,7 @@ const WitWrite = () => {
 
     await fetch("http://localhost:5050/", fetch_option);
     textReset();
+    witFetch();
     navigate("/");
   };
 
