@@ -1,6 +1,8 @@
 import express from "express";
 import moment from "moment";
 import WIT from "../models/wit.js";
+import FOLDER from "../models/myroom/folder.js";
+
 import USER from "../models/user.js";
 import LIKEY from "../models/likey.js";
 import { v4 } from "uuid";
@@ -82,6 +84,16 @@ router.delete("/:user_id/:id", async (req, res) => {
 });
 
 // wit 를 folder에 추가
-router.post("/:user_id/:id");
+router.post("/:id/:folder_id", async (req, res) => {
+  const paramsId = req.params.id;
+  const paramsFolderId = req.params.folder_id;
+
+  await WIT.updateOne(
+    { id: paramsId },
+    { $set: { folder_id: paramsFolderId } }
+  );
+
+  res.send("folder_id Update Success");
+});
 
 export default router;
