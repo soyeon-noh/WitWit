@@ -16,11 +16,11 @@ export const useWitContext = () => {
 
 function WitContextProvider({ children }) {
   const [wit, setWit] = useState({
-    id: "witID", // 위트 아이디
+    id: "", // 위트 아이디
     text: "", // 위트 텍스트 (150자 제한)
     createdDate: moment().format("YYYY-MM-DD"), // 위트 생성 날짜
     createdTime: moment().format("HH:mm:ss"), // 위트 생성 시간
-    userId: "@userID", // 작성자 ID
+    user_id: "@userID", // 작성자 ID
     userName: "userNick", // 작성자 이름
     profileUrl: "", // 작성자 프로필 이미지링크
 

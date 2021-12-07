@@ -2,10 +2,8 @@ import React, { useRef, useState } from "react";
 
 import { styled } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { useWitContext } from "../../context/WitContextProvider";
 
-function WitSearch() {
-  const { setWitList } = useWitContext();
+function WitSearch({ setWitList }) {
   const MyIcon = styled(SearchIcon)({
     color: "#ccc",
   });
@@ -40,7 +38,6 @@ function WitSearch() {
     }
   };
 
-  
   // Enter Press했을 때 나타나는 event
   const onKeyPressHandler = (e) => {
     if (e.key === "Enter") {

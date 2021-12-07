@@ -655,10 +655,17 @@
     "utils-merge" "1.0.1"
     "vary" "~1.1.2"
 
+<<<<<<< HEAD
 "eyes@~0.1.6":
   "integrity" "sha1-Ys8SAjTGg3hdkCNIqADvPgzCC8A="
   "resolved" "https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz"
   "version" "0.1.8"
+=======
+"extend@^3.0.0":
+  "integrity" "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g=="
+  "resolved" "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz"
+  "version" "3.0.2"
+>>>>>>> 9eded8340409f520f791cb73a1518e9860355a90
 
 "fill-range@^7.0.1":
   "integrity" "sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ=="
@@ -1237,7 +1244,14 @@
   optionalDependencies:
     "saslprep" "^1.0.3"
 
-"mongoose@^6.0.13":
+"mongoose-auto-increment@^5.0.1":
+  "integrity" "sha1-gn4FHZzDcdq+i/8acEQx00HLed8="
+  "resolved" "https://registry.npmjs.org/mongoose-auto-increment/-/mongoose-auto-increment-5.0.1.tgz"
+  "version" "5.0.1"
+  dependencies:
+    "extend" "^3.0.0"
+
+"mongoose@^4.1.12", "mongoose@^6.0.13":
   "integrity" "sha512-/M/YKgx23fCX+j0lwObaHbCibXnMjyWeQrXZf0WaQeS/hL86wQVSmaOxh+kZXfyLOUr+vT2Hl44o50GZHUrKWw=="
   "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.0.13.tgz"
   "version" "6.0.13"

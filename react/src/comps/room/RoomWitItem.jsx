@@ -5,7 +5,10 @@ import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/myroom/MyRoomWits.css";
 
 function RoomWitItem() {
+
   const { witList, setWitList } = useWitContext();
+
+  // MyRoom 나의 위트를 출력
   const witFetch = useCallback(async () => {
     const res = await fetch("http://localhost:5050/");
     const list = await res.json();
@@ -14,6 +17,7 @@ function RoomWitItem() {
   }, []);
   useEffect(witFetch, [witFetch]);
 
+  
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
 
