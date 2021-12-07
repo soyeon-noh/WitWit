@@ -11,9 +11,6 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import dotenv from "dotenv";
 import methodOverride from "method-override";
-import passport from "passport";
-import session from "express-session";
-import LocalStrategy from "passport-local";
 
 import witRouter from "./routes/wit.js";
 import myroomRouter from "./routes/myroom/myroom.js";
@@ -62,12 +59,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 app.use(methodOverride("_method"));
-//session 방식 로그인 구현
-app.use(
-  session({ secret: "비밀코드 ", resave: true, saveUninitialized: false })
-);
-app.use(passport.initialize());
-app.use(passport.session());
 
 // cors : 외부 도메인 요청을 선별적으로 허용
 app.use((req, res, next) => {
