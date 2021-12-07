@@ -25,7 +25,7 @@ export const fAdd = async (req, res) => {
     name: req.body.name,
     secret: req.body.secret,
   });
-  await folder.save(folder);
+  await folders.save(folder);
   res.send("저장완료");
 };
 
@@ -65,9 +65,12 @@ export const fDelete = async (req, res) => {
 };
 
 export const fInfo = async (req, res) => {
-  await wits.find({ id: req.params.id }, function (err, result) {
-    if (err) {
-      res.send(err);
-    }
-  });
+  await wits
+    .find({ folder_id: req.params.id }, function (err, result) {
+      res.send(result);
+      if (err) {
+        res.send(err);
+      }
+    })
+    .clone();
 };
