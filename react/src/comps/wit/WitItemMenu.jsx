@@ -22,10 +22,10 @@ function WitItemMenu({ data_id, witMenuClose, witFetch }) {
       body: null,
     };
     const id = data_id;
-    const userId = "@userID";
+    const user_id = "@userID";
 
     if (window.confirm("삭제하시겠습니까?")) {
-      await fetch(`http://localhost:5050/${userId}/${id}`, fetch_option);
+      await fetch(`http://localhost:5050/${user_id}/${id}`, fetch_option);
       witFetch();
     }
   };

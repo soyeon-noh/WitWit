@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import "../../css/wit/WitItem.css";
 import { useWitContext } from "../../context/WitContextProvider";
 
@@ -43,7 +43,7 @@ const WitItem = ({ witFetch }) => {
           <img src={profile} className="wit_profile" />
         </span>
         <span className="wit_userNick">{wit.userName}</span>
-        <span className="wit_userid">{wit.userId}</span>
+        <span className="wit_userid">{wit.user_id}</span>
         <span className="wit_fromNow">
           {moment(Date.parse(createAt)).fromNow()}
         </span>

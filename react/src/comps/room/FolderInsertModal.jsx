@@ -34,7 +34,7 @@ const FolderInsertModal = ({ modalClose, folderFetch }) => {
       body: JSON.stringify(folder),
     };
 
-    await fetch(`http://localhost:5050/:userId/folder`, fetch_option);
+    await fetch(`http://localhost:5050/:user_id/folder`, fetch_option);
     modalClose();
     folderFetch();
   };
