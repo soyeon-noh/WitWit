@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 // 답글 추가
 router.post("/:id", async (req, res) => {
   const paramsId = req.params.id;
-  req.body.previousWit = paramsId;
+  req.body.parentWit = paramsId;
   createWit(req, res);
 });
 
@@ -71,8 +71,18 @@ router.get("/search", async (req, res) => {
 // wit 디테일
 router.get("/:user_id/:id", async (req, res) => {
   const paramsId = req.params.id;
-  const result = await WIT.findOne({ id: paramsId });
-  res.json(result);
+  const witResult = await WIT.findOne({ id: paramsId });
+  const commentsResult = await WIT.find({ parentWit: paramsId }).sort({
+    createdDate: -1,
+    createdTime: -1,
+  });
+
+  const sendData = {
+    wit: witResult,
+    replys: commentsResult,
+  };
+
+  res.json(sendData);
 });
 
 // wit 삭제
