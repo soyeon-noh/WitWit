@@ -25,8 +25,10 @@ export const fAdd = async (req, res) => {
     name: req.body.name,
     secret: req.body.secret,
   });
-  await folders.save(folder);
-  res.send("저장완료");
+  await folder.save(folder, function (err, result) {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(result);
+  });
 };
 
 export const fUpdate = async (req, res) => {
