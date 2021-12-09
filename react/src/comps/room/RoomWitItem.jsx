@@ -3,19 +3,18 @@ import React, { useCallback, useEffect } from "react";
 import { useWitContext } from "../../context/WitContextProvider";
 
 import "../../css/myroom/MyRoomWits.css";
+import { WitFetch } from "../../functions/WitFetch";
 
 function RoomWitItem() {
 
   const { witList, setWitList } = useWitContext();
 
   // MyRoom 나의 위트를 출력
-  const witFetch = useCallback(async () => {
-    const res = await fetch("http://localhost:5050/");
-    const list = await res.json();
-
+  const showWitList = useCallback(async () => {
+   const list = await WitFetch()
     await setWitList(list);
   }, []);
-  useEffect(witFetch, [witFetch]);
+  useEffect(showWitList, [showWitList]);
 
   
   return witList.map((wit) => {

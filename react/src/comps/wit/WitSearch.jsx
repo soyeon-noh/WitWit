@@ -3,6 +3,8 @@ import React, { useRef, useState } from "react";
 import { styled } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 
+import { WitSearchFetch } from "../../functions/WitFetch";
+
 function WitSearch({ setWitList }) {
   const MyIcon = styled(SearchIcon)({
     color: "#ccc",
@@ -25,15 +27,12 @@ function WitSearch({ setWitList }) {
 
   // 검색어 서버에 보내고 받기
   const witSearch = async () => {
-    console.log(keyword);
     if (keyword == "") {
       searchBar.current.focus();
       return;
     } else {
-      const result = await fetch(`http://localhost:5050/search?q=${keyword}`);
-      const json = await result.json();
-      console.table(json);
-      setWitList(json);
+      const json = await WitSearchFetch(keyword);
+      await setWitList(json);
       searchReset();
     }
   };

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useRoomContext } from "../../context/RoomContextProvider";
+import { FolderInsertFetch } from "../../functions/FolderFetch";
 
-const FolderInsertModal = ({ modalClose, folderFetch }) => {
+const FolderInsertModal = ({ modalClose, showFolderList }) => {
+
+const user_id="@userID"
+
   // modal창 인풋, 버튼 제외하고 클릭하였을 때 modal창 닫히도록
   const onModalClose = (e) => {
     if (e.target === e.currentTarget) {
@@ -18,26 +22,24 @@ const FolderInsertModal = ({ modalClose, folderFetch }) => {
     setFolder({ ...folder, name: folder_name });
   };
 
-  const onChecked = (e) => {
+  //folder 비공개 여부
+  const onChecked = () => {
     setChecked(!checked);
     setFolder({ ...folder, secret: checked });
     console.log(checked);
   };
 
+  
   // folder insert 함수
-  const folderInsert = async () => {
-    const fetch_option = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(folder),
-    };
-
-    await fetch(`http://localhost:5050/:user_id/folder`, fetch_option);
+  const folderInsert =  async () => {
+    console.log(folder)
+    console.log(`http://localhost:5050/myroom/${user_id}/folder`)
+    await FolderInsertFetch(user_id,folder)
+    
     modalClose();
-    folderFetch();
-  };
+    await showFolderList();
+  }
+
 
   return (
     <div className="folderInsertMenu" onClick={onModalClose}>

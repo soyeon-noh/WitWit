@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import WitContextProvider, {
+import {
   useWitContext,
 } from "../../context/WitContextProvider";
 
@@ -7,26 +7,24 @@ import "../../css/wit/WitHome.css";
 import WitSearch from "./WitSearch";
 import WitItem from "./WitItem";
 import WitWrite from "./WitWrite";
+import { WitFetch } from "../../functions/WitFetch";
 
 const WitHome = () => {
   const { setWitList } = useWitContext();
 
   // wit list 불러오기
-  const witFetch = useCallback(async () => {
-    const res = await fetch("http://localhost:5050/");
-    const list = await res.json();
-    console.log(list)
+  const showWitList = useCallback(async () => {
+    const list = await WitFetch()
     await setWitList(list);
   }, []);
-
-  useEffect(witFetch, [witFetch]);
+  useEffect(showWitList, [showWitList]);
 
   return (
     <>
-      <WitSearch witFetch={witFetch} setWitList={setWitList} />
-      <WitWrite witFetch={witFetch} />
+      <WitSearch setWitList={setWitList} />
+      <WitWrite showWitList={showWitList}/>
       <div className="witStyle">
-      <WitItem witFetch={witFetch} />
+      <WitItem showWitList={showWitList}/>
       </div>
     </>
   );

@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import "../../css/myroom/FolderInsert.css";
 import FolderInsertModal from "./FolderInsertModal";
 
-function FolderInsert({ folderFetch }) {
+function FolderInsert({ showFolderList }) {
+  
   // modal창 open plag
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -20,7 +21,7 @@ function FolderInsert({ folderFetch }) {
         {modalOpen && (
           <FolderInsertModal
             modalClose={modalClose}
-            folderFetch={folderFetch}
+            showFolderList={showFolderList}
           ></FolderInsertModal>
         )}
       </div>

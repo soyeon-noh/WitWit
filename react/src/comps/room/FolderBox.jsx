@@ -4,29 +4,25 @@ import { useRoomContext } from "../../context/RoomContextProvider";
 
 import "../../css/myroom/MyRoomFolder.css";
 import FolderIcon from "../../static/img/folder-icon.png";
+import { FolderFetch } from "../../functions/FolderFetch";
 import FolderInsert from "./FolderInsert";
 
 const FolderBox = () => {
+
   const { folderList, setFolderList } = useRoomContext();
   const user_id = "@userID";
-const navigate = useNavigate()
+  const navigate = useNavigate()
+
 
 // 유저의 folder 명 출력하기
-  const folderFetch = useCallback(async () => {
-    const res = await fetch(`http://localhost:5050/${user_id}`);
-    const folder = await res.json();
+  const showFolderList = useCallback(async () => {
+    const folder = await FolderFetch(user_id)
     await setFolderList(folder);
   }, []);
-  useEffect(folderFetch, [folderFetch]);
+  useEffect(showFolderList, [showFolderList]);
+    
 
-
-  // 폴더 이름 클릭시 폴더 해당하는 위트들 출력하도록 url 이동
-  const folderDetail = (fId) =>{
-    console.log(fId)
-    navigate(`folder/${fId}`)
-  }
-
-// 폴더 하나하나 map으로 돌려서 출력하기
+// 폴더 map으로 돌려서 출력하기
   const folderlistBox = folderList.map((folder) => {
     return (
       <div className="folder" onClick={()=>folderDetail(folder.id)} >
@@ -40,10 +36,17 @@ const navigate = useNavigate()
 
 
 
+  // 폴더 이름 클릭시 폴더 해당하는 위트들 출력하도록 url 이동
+  const folderDetail = (fId) =>{
+    console.log(fId)
+    navigate(`folder/${fId}`)
+  }
+
+
   return (
     <div className="folderBox">
       {folderlistBox}
-      <FolderInsert folderFetch={folderFetch} />
+      <FolderInsert showFolderList={showFolderList}/>
     </div>
   );
 };

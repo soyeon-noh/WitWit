@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/wit/WitWrite.css";
+import { WitFetch, WitInsertFetch } from "../../functions/WitFetch";
 
-const WitWrite = ({witFetch}) => {
+const WitWrite = ({showWitList}) => {
   const navigate = useNavigate();
   const { wit, setWit } = useWitContext();
 
@@ -20,17 +21,9 @@ const WitWrite = ({witFetch}) => {
 
   // insert 함수
   const witInsert = async () => {
-    const fetch_option = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(wit),
-    };
-
-    await fetch("http://localhost:5050/", fetch_option);
+    await WitInsertFetch(wit)
     textReset();
-    witFetch();
+    showWitList()
     navigate("/");
   };
 

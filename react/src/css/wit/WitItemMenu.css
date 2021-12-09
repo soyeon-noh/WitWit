@@ -2,7 +2,7 @@
   position: absolute;
   left: 45%;
   width: 15%;
-  height: 15%;
+  height: fit-content;
   background-color: white;
   border-radius: 5px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -17,4 +17,15 @@
 .witmenu p {
   margin: 5px auto;
   cursor: pointer;
+}
+
+.menu_foldername {
+  font-size: small;
+  color: #333;
+  text-align: left;
+}
+
+.menu_foldername:hover {
+  background-color: rgba(241, 207, 241,0.3);
+  color: black;
 }
