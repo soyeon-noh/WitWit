@@ -67,8 +67,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", witRouter);
-app.use("/", myroomRouter);
+app.use("/wit", witRouter);
+app.use("/myroom", myroomRouter);
 app.use("/likey", likeyRouter);
 app.use("/users", usersRouter);
 
