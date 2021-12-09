@@ -11,16 +11,52 @@ const router = express.Router();
 
 /* GET home page. */
 
+// wit 전체 불러오는 함수
+const getWit = async (req, res) => {
+  //   const witResult = await WIT.find({}).sort({
+  //     createdDate: -1,
+  //     createdTime: -1,
+  //   });
+
+  const result = await WIT.aggregate([
+    {
+      $lookup: {
+        from: "likeys",
+        localField: "id",
+        foreignField: "wit_id",
+        as: "likeys",
+      },
+    },
+    {
+      $project: {
+        id: 1,
+        text: 1,
+        createdDate: 1,
+        createdTime: 1,
+        userId: 1,
+        userName: 1,
+        profileUrl: 1,
+        parentWit: 1,
+
+        folder_id: 1,
+        image_id: 1,
+
+        likeyCount: { $size: "$likeys" },
+      },
+    },
+    { $sort: { createdDate: -1, createdTime: -1 } },
+  ]);
+  console.log("wit find: ", result);
+  res.json(result);
+};
+
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
   /** db연동 기본코드 */
-  const result = await WIT.find({}).sort({ createdDate: -1, createdTime: -1 });
-  console.log("wit find: ", result);
-  res.json(result);
+  const result = getWit(req, res);
 });
 
 // wit 추가
-
 const createWit = async (req, res) => {
   req.body.createdDate = moment().format("YYYY[-]MM[-]DD");
   req.body.createdTime = moment().format("HH:mm:ss");
@@ -98,10 +134,14 @@ router.post("/:id/:folder_id", async (req, res) => {
   const paramsId = req.params.id;
   const paramsFolderId = req.params.folder_id;
 
-  await WIT.updateOne(
-    { id: paramsId },
-    { $set: { folder_id: paramsFolderId } }
-  );
+  if (paramsFolderId === "0") {
+    await WIT.updateOne({ id: paramsId }, { $set: { folder_id: "" } });
+  } else {
+    await WIT.updateOne(
+      { id: paramsId },
+      { $set: { folder_id: paramsFolderId } }
+    );
+  }
 
   res.send("folder_id Update Success");
 });
