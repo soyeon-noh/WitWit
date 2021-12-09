@@ -1,16 +1,17 @@
 import "./App.css";
 import "./static/fonts/font.css";
-import { Bookmark, MyRoom, Login, Join, WitHome } from "./comps/index.jsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Bookmark, } from "./comps/index.jsx"; 
 
-import logo1 from "./static/img/logo1.svg";
 import BoardBox from "./comps/BoardBox";
 import BoardHeader from "./comps/BoardHeader";
 import WitContextProvider from "./context/WitContextProvider";
+import RoomContextProvider from "./context/RoomContextProvider";
+
 
 function App() {
   return (
     <WitContextProvider>
+    <RoomContextProvider>
       <div className="App">
         <section className="bg">
           <div className="bg_img"></div>
@@ -20,7 +21,9 @@ function App() {
         <Bookmark />
         <BoardBox />
       </div>
+    </RoomContextProvider>
     </WitContextProvider>
+
   );
 }
 

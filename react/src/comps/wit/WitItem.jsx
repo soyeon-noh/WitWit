@@ -15,7 +15,7 @@ import moment from "moment";
 import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
 
-const WitItem = ({ witFetch }) => {
+const WitItem = ({showWitList}) => {
   const { witList } = useWitContext();
 
   // 햄버거 메뉴바 스타일 지정
@@ -33,9 +33,9 @@ const WitItem = ({ witFetch }) => {
   const witMenuClose = (id) => {
     setWitMenuOpen(!witMenuOpen);
     setDataId(id); // 클릭된 대상의 wit id를 state에 저장
-    console.log(id)
   };
 
+  
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     return (
@@ -55,7 +55,7 @@ const WitItem = ({ witFetch }) => {
           <WitItemMenu
             witMenuClose={witMenuClose}
             data_id={wit.id}
-            witFetch={witFetch}
+            showWitList={showWitList}
           ></WitItemMenu>
         )}
         <div className="wit_text">{wit.text}</div>

@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useWitContext } from "../../context/WitContextProvider";
 
 import "../../css/myroom/FolderDetail.css"
+import { FolderDetailFetch } from "../../functions/FolderFetch";
 
 import WitItem from "../wit/WitItem";
 
@@ -11,15 +12,10 @@ function FolderDetail({}) {
   const { witList, setWitList } = useWitContext();
   const {id} = useParams("id") 
 
-  // 폴더 포함 wit 출력
+  
+  // 폴더에 포함되는 wit 출력
   const folderDetailFetch = useCallback(async () => {
-    const res = await fetch(
-      `http://localhost:5050/${user_id}/folder/${id}`
-    );
-    const fWits = await res.json();
-    console.log("userid : ", user_id)
-    console.log("folderid : ", id)
-    console.log("wits : ", fWits)
+    const fWits = await FolderDetailFetch(user_id, id)
     await setWitList(fWits)
   },[]);
   useEffect(folderDetailFetch, [folderDetailFetch])
