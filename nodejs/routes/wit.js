@@ -27,6 +27,7 @@ const getWit = async (req, res) => {
         as: "likeys",
       },
     },
+    // { $unwind: "$likeys" },
     {
       $project: {
         id: 1,
@@ -41,7 +42,8 @@ const getWit = async (req, res) => {
         folder_id: 1,
         image_id: 1,
 
-        likeyCount: { $size: "$likeys" },
+        likey: "$likeys",
+        // likeyCount: { $size: "$likeys" },
       },
     },
     { $sort: { createdDate: -1, createdTime: -1 } },
@@ -135,15 +137,26 @@ router.post("/:id/:folder_id", async (req, res) => {
   const paramsFolderId = req.params.folder_id;
 
   if (paramsFolderId === "0") {
+    // _id값으로 조회하기떄문에 별도의 조치를 취하지 않으면 사용할 수 없는 코드이다.
+    // await WIT.findByIdAndUpdate(
+    //   paramsId,
+    //   { folder_id: "" },
+    //   { returnOrigininal: false }
+    // );
     await WIT.updateOne({ id: paramsId }, { $set: { folder_id: "" } });
+    res.send("folder_id Delete Success");
   } else {
+    // await WIT.findByIdAndUpdate(
+    //   paramsId,
+    //   { folder_id: paramsFolderId },
+    //   { returnOrigininal: false }
+    // );
     await WIT.updateOne(
       { id: paramsId },
       { $set: { folder_id: paramsFolderId } }
     );
+    res.send("folder_id Update Success");
   }
-
-  res.send("folder_id Update Success");
 });
 
 export default router;

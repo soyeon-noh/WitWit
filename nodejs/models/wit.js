@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 
 const wit = Schema({
   id: { type: Number, default: 0 }, // 위트 아이디
-  text: String, // 위트 텍스트 (512자 제한)
+  text: { type: String, required: true }, // 위트 텍스트 (512자 제한)
   createdDate: String, // 위트 생성 날짜
   createdTime: String, // 위트 생성 시간
   userId: String, // 작성자 ID
