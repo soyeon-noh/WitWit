@@ -8,6 +8,7 @@ export const WitFetch = async()=>{
 }
 
 
+
 //wit Insert
 export const WitInsertFetch = async(wit)=>{
   const fetch_option = {
@@ -41,4 +42,23 @@ export const WitSearchFetch = async(keyword) =>{
   const result = await fetch(`http://localhost:5050/wit/search?q=${keyword}`);
   const json = await result.json();
   return json
+}
+
+
+// wit를 folder에 넣기
+export const WitInFolderFetch = async(id,folder_id, list) =>{
+  
+  console.log("wit ID : ",id )
+  console.log("folder ID : ",folder_id)
+
+  const fetch_option = {
+    method : "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(list),
+  };
+
+  await fetch(`http://localhost:5050/wit/${id}/${folder_id}`,fetch_option)
+  
 }

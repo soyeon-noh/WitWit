@@ -20,8 +20,8 @@ function WitContextProvider({ children }) {
     text: "", // 위트 텍스트 (150자 제한)
     createdDate: moment().format("YYYY-MM-DD"), // 위트 생성 날짜
     createdTime: moment().format("HH:mm:ss"), // 위트 생성 시간
-    user_id: "@userID", // 작성자 ID
-    userName: "userNick", // 작성자 이름
+    userId: "@c_a_y", // 작성자 ID
+    userName: "ay", // 작성자 이름
     profileUrl: "", // 작성자 프로필 이미지링크
 
     folder_id: "", // 폴더 seq (외래키)

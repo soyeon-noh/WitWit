@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../css/wit/WitItemMenu.css";
-import { WitDelete } from "../../functions/WitFetch";
+import { WitDelete, WitInFolderFetch } from "../../functions/WitFetch";
 import { FolderFetch } from "../../functions/FolderFetch"
 import { useRoomContext } from "../../context/RoomContextProvider";
 
@@ -21,7 +21,6 @@ function WitItemMenu({ data_id, witMenuClose,showWitList }) {
   // 위트 삭제함수
   const witDelete = async (e) => {
     const id = data_id;
-    const user_id = "@userID";
 
     if (window.confirm("삭제하시겠습니까?")) {
       await WitDelete(user_id, id)
@@ -36,8 +35,13 @@ function WitItemMenu({ data_id, witMenuClose,showWitList }) {
     await setFolderList(list);
   }
 
-  const witInFolder = (list) =>{
-    window.confirm("담으실래요?")
+  const witInFolder = (data_id, list) =>{
+    const id = data_id;
+    const folder_id = list.id
+    if(window.confirm("담으실래요?")){
+      WitInFolderFetch(id,folder_id, list);
+    }
+    witMenuClose();
   }
 
   return (
@@ -46,7 +50,7 @@ function WitItemMenu({ data_id, witMenuClose,showWitList }) {
       {folderNameList ? 
         <p onClick={onFolderOpen}>폴더담기</p> : 
         folderList.map((list)=>{
-          return(<p className="menu_foldername" onClick={()=>witInFolder(list)}>{list.name}</p>)
+          return(<p className="menu_foldername" onClick={()=>witInFolder(data_id, list)}>{list.name}</p>)
         })
       }
       
