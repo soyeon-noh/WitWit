@@ -12,13 +12,11 @@ const router = express.Router();
 /* GET home page. */
 
 // wit 전체 불러오는 함수
-const getWit = async (req, res) => {
-  //   const witResult = await WIT.find({}).sort({
-  //     createdDate: -1,
-  //     createdTime: -1,
-  //   });
+const getWit = async (req, res, searchQuery) => {
+  //   const witResult = await WIT.find({}).sort({createdDate: -1, createdTime: -1,});
 
   const result = await WIT.aggregate([
+    { $match: searchQuery },
     {
       $lookup: {
         from: "likeys",
@@ -27,7 +25,6 @@ const getWit = async (req, res) => {
         as: "likeys",
       },
     },
-    // { $unwind: "$likeys" },
     {
       $project: {
         id: 1,
@@ -42,20 +39,23 @@ const getWit = async (req, res) => {
         folder_id: 1,
         image_id: 1,
 
-        likey: "$likeys",
-        // likeyCount: { $size: "$likeys" },
+        likeyCount: { $size: "$likeys" },
       },
     },
+
     { $sort: { createdDate: -1, createdTime: -1 } },
   ]);
   console.log("wit find: ", result);
-  res.json(result);
+  return result;
+  //   res.json(result);
 };
 
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
   /** db연동 기본코드 */
-  const result = getWit(req, res);
+  const result = await getWit(req, res, { userId: { $regex: /^@/ } });
+  console.log("result: ", result);
+  res.json(result);
 });
 
 // wit 추가
@@ -66,7 +66,9 @@ const createWit = async (req, res) => {
   console.log("wit insert: ", req.body);
 
   // wit 추가와 함께 리스트 갱신
-  const result = await WIT.find({}).sort({ createdDate: -1, createdTime: -1 });
+  //   const result = await WIT.find({}).sort({ createdDate: -1, createdTime: -1 });
+  //   res.json(result);
+  const result = await getWit(req, res, { userId: { $regex: /^@/ } });
   res.json(result);
 };
 
@@ -91,11 +93,19 @@ router.get("/search", async (req, res) => {
 
   const resultList = await Promise.all(
     splitQuery.map(async (query) => {
-      return await WIT.find({
+      return await getWit(req, res, {
         $or: [{ userId: { $regex: query } }, { text: { $regex: query } }],
-      }).sort({ createdDate: -1, createdTime: -1 });
+      });
     })
   );
+
+  //   const resultList = await Promise.all(
+  //     splitQuery.map(async (query) => {
+  //       return await WIT.find({
+  //         $or: [{ userId: { $regex: query } }, { text: { $regex: query } }],
+  //       }).sort({ createdDate: -1, createdTime: -1 });
+  //     })
+  //   );
 
   // 중복 삭제
   const uniqueResultList = resultList.filter((element, index, array) => {
