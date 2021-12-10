@@ -26,6 +26,14 @@ const getWit = async (req, res, searchQuery) => {
       },
     },
     {
+      $lookup: {
+        from: "wits",
+        localField: "parentWit",
+        foreignField: "id",
+        as: "replyArray",
+      },
+    },
+    {
       $project: {
         id: 1,
         text: 1,
@@ -40,6 +48,8 @@ const getWit = async (req, res, searchQuery) => {
         image_id: 1,
 
         likeyCount: { $size: "$likeys" },
+        // replys: "$replyArray",
+        replyCount: { $size: "$replyArray" },
       },
     },
 
