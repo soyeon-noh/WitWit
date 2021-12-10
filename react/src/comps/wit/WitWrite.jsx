@@ -21,10 +21,12 @@ const WitWrite = ({showWitList}) => {
 
   // insert 함수
   const witInsert = async () => {
+    console.table(wit)
     await WitInsertFetch(wit)
     textReset();
-    showWitList()
-    navigate("/");
+    await WitFetch();
+    await showWitList();
+    
   };
 
   // 글 입력시 overflow되면 textarea 부분 자동으로 높이 설정
