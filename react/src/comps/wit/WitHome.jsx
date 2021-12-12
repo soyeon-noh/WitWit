@@ -10,7 +10,7 @@ import WitWrite from "./WitWrite";
 import { WitFetch } from "../../functions/WitFetch";
 
 const WitHome = () => {
-  const { setWitList } = useWitContext();
+  const { setWitList, witList } = useWitContext();
 
   // wit list 불러오기
   const showWitList = useCallback(async () => {
@@ -24,7 +24,7 @@ const WitHome = () => {
       <WitSearch setWitList={setWitList} />
       <WitWrite showWitList={showWitList}/>
       <div className="witStyle">
-      <WitItem showWitList={showWitList}/>
+      <WitItem showWitList={showWitList} witList={witList}/>
       </div>
     </>
   );

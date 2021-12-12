@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useRef } from "react";
 import { useRoomContext } from "../../context/RoomContextProvider";
 import { FolderInsertFetch } from "../../functions/FolderFetch";
 
@@ -16,6 +17,8 @@ const user_id="@userID"
   const { folder, setFolder } = useRoomContext();
   const [checked, setChecked] = useState(false);
 
+  const refName = useRef()
+
   // folder 내용 입력했을 때
   const onChangeHandler = (e) => {
     const folder_name = e.target.value;
@@ -26,20 +29,21 @@ const user_id="@userID"
   const onChecked = () => {
     setChecked(!checked);
     setFolder({ ...folder, secret: checked });
-    console.log(checked);
   };
 
   
   // folder insert 함수
   const folderInsert =  async () => {
-    console.log(folder)
-    console.log(`http://localhost:5050/myroom/${user_id}/folder`)
+    // 입력 유효성 검사
+    if(folder.name === "") {
+      window.alert("폴더명을 입력하세요")
+      refName.current.focus()
+      return
+    }
     await FolderInsertFetch(user_id,folder)
-    
     modalClose();
     await showFolderList();
   }
-
 
   return (
     <div className="folderInsertMenu" onClick={onModalClose}>
@@ -47,6 +51,7 @@ const user_id="@userID"
         placeholder="폴더명 입력하기"
         maxLength="10"
         onChange={onChangeHandler}
+        ref={refName}
       />
       <div className="secretBox">
         <label>비공개폴더</label>

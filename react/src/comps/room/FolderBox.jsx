@@ -34,14 +34,11 @@ const FolderBox = () => {
     );
   });
 
-
-
   // 폴더 이름 클릭시 폴더 해당하는 위트들 출력하도록 url 이동
   const folderDetail = (fId) =>{
     console.log(fId)
     navigate(`folder/${fId}`)
   }
-
 
   return (
     <div className="folderBox">

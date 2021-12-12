@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../css/wit/WitItem.css";
-import { useWitContext } from "../../context/WitContextProvider";
-
 import { styled } from "@mui/system";
 import profile from "../../static/img/profile-basic.png";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
@@ -14,14 +12,18 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import moment from "moment";
 import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
+import { WitFetch } from "../../functions/WitFetch";
+import { WitLikeFetch } from "../../functions/LikeFetch";
 
-const WitItem = ({showWitList}) => {
-  const { witList } = useWitContext();
+const WitItem = ({showWitList, witList}) => {
+
+  const user_id = "@c_a_y"
 
   // 햄버거 메뉴바 스타일 지정
   const MyHamburger = styled(MoreVertIcon)({
     color: "#ad9fb6",
     cursor: "pointer",
+    float : "right"
   });
 
   //wit메뉴창 open plag
@@ -30,11 +32,17 @@ const WitItem = ({showWitList}) => {
   // wit id 저장하는 state
   const [dataId, setDataId] = useState("");
 
+  // 메뉴창 열고 닫기
   const witMenuClose = (id) => {
     setWitMenuOpen(!witMenuOpen);
     setDataId(id); // 클릭된 대상의 wit id를 state에 저장
   };
 
+  // 좋아요 기능
+  const like =async(user_id, wit) =>{
+    await WitLikeFetch(user_id, wit);
+    await WitFetch();
+  }
   
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
@@ -44,7 +52,7 @@ const WitItem = ({showWitList}) => {
           <img src={profile} className="wit_profile" />
         </span>
         <span className="wit_userNick">{wit.userName}</span>
-        <span className="wit_userid">{wit.user_id}</span>
+        <span className="wit_userid">{wit.userId}</span>
         <span className="wit_fromNow">
           {moment(Date.parse(createAt)).fromNow()}
         </span>
@@ -52,8 +60,9 @@ const WitItem = ({showWitList}) => {
           <MyHamburger />
         </span>
         {witMenuOpen && dataId === wit.id && (
-          <WitItemMenu
+          <WitItemMenu 
             witMenuClose={witMenuClose}
+            wit_folderId ={wit.folder_id}
             data_id={wit.id}
             showWitList={showWitList}
           ></WitItemMenu>
@@ -61,18 +70,22 @@ const WitItem = ({showWitList}) => {
         <div className="wit_text">{wit.text}</div>
         <div className="icon_box">
           <span>
-            <BookmarkBorderRoundedIcon fontSize="" />
+            <BookmarkBorderRoundedIcon fontSize="" /><span className="count">{wit.replyCount}</span>
           </span>
           <span>
-            <BorderColorRoundedIcon fontSize="" />
+            <BorderColorRoundedIcon fontSize="" /> <span className="count">{wit.replyCount}</span>
           </span>
-          <span>
-            <FavoriteBorderRoundedIcon fontSize="" />
-          </span>
+          <span><FavoriteBorderRoundedIcon fontSize="" onClick={()=>like(user_id, wit)}/> <span className="count">{wit.likeyCount}</span> </span>
+            {/* { likeCheck? 
+            <span><FavoriteRoundedIcon fontSize="" color="red" onClick={()=>like(user_id, wit)}/> <span className="count">{wit.likeyCount}</span> </span>
+            : <span><FavoriteBorderRoundedIcon fontSize="" onClick={()=>like(user_id, wit)} /><span className="count">{wit.likeyCount}</span></span> 
+            }  */}
+          
         </div>
       </div>
     );
   });
-};
+
+}
 
 export default WitItem;

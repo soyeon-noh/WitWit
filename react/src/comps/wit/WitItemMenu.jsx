@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../css/wit/WitItemMenu.css";
-import { WitDelete, WitInFolderFetch } from "../../functions/WitFetch";
+import { WitDelete, WitFetch, WitInFolderFetch } from "../../functions/WitFetch";
 import { FolderFetch } from "../../functions/FolderFetch"
 import { useRoomContext } from "../../context/RoomContextProvider";
 
-function WitItemMenu({ data_id, witMenuClose,showWitList }) {
-  const navigate = useNavigate();
+function WitItemMenu({ data_id, witMenuClose,showWitList,wit_folderId }) {
+
+
   const user_id = "@userID"
   const { folderList, setFolderList } = useRoomContext();
   const [folderNameList, setFolderNameList] = useState(true)
@@ -15,7 +16,7 @@ function WitItemMenu({ data_id, witMenuClose,showWitList }) {
   const onWitMenuClose = (e) => {
     if (e.target === e.currentTarget) {
       witMenuClose();
-    }
+    } 
   };
 
   // 위트 삭제함수
@@ -35,23 +36,30 @@ function WitItemMenu({ data_id, witMenuClose,showWitList }) {
     await setFolderList(list);
   }
 
-  const witInFolder = (data_id, list) =>{
+  //폴더 담기
+  const witInFolder = async(data_id, list) =>{
     const id = data_id;
     const folder_id = list.id
     if(window.confirm("담으실래요?")){
-      WitInFolderFetch(id,folder_id, list);
+      await WitInFolderFetch(id,folder_id, list);
+      await WitFetch();
     }
     witMenuClose();
   }
+
 
   return (
     <div className="witmenu" id={data_id} onClick={onWitMenuClose}>
       <p onClick={witDelete}>삭제하기</p>
       {folderNameList ? 
-        <p onClick={onFolderOpen}>폴더담기</p> : 
-        folderList.map((list)=>{
-          return(<p className="menu_foldername" onClick={()=>witInFolder(data_id, list)}>{list.name}</p>)
-        })
+        <p onClick={onFolderOpen}>폴더담기</p> 
+        : folderList.map((list)=>{
+            return(
+              wit_folderId == list.id?
+              <p className="menu_foldername foldercheck" onClick={()=>witInFolder(data_id, list)}>{list.name}</p>
+              : <p className="menu_foldername" onClick={()=>witInFolder(data_id, list)}>{list.name}</p>
+            )
+          })
       }
       
     </div>

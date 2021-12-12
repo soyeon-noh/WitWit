@@ -47,10 +47,6 @@ export const WitSearchFetch = async(keyword) =>{
 
 // wit를 folder에 넣기
 export const WitInFolderFetch = async(id,folder_id, list) =>{
-  
-  console.log("wit ID : ",id )
-  console.log("folder ID : ",folder_id)
-
   const fetch_option = {
     method : "POST",
     headers: {
@@ -62,3 +58,4 @@ export const WitInFolderFetch = async(id,folder_id, list) =>{
   await fetch(`http://localhost:5050/wit/${id}/${folder_id}`,fetch_option)
   
 }
+
