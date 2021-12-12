@@ -1,6 +1,6 @@
 .witmenu {
   position: absolute;
-  left: 45%;
+  left: 90%;
   width: 15%;
   height: fit-content;
   background-color: white;
@@ -19,6 +19,8 @@
 }
 
 .menu_foldername {
+
+  width: 100%;
   font-size: small;
   color: #333;
   text-align: left;
@@ -28,4 +30,9 @@
 .menu_foldername:hover {
   background-color: rgba(241, 207, 241,0.3);
   color: black;
+}
+
+.foldercheck {
+  background-color: rgba(241, 207, 241,1);
+  color: white;
 }

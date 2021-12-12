@@ -7,26 +7,33 @@ import { FolderDetailFetch } from "../../functions/FolderFetch";
 
 import WitItem from "../wit/WitItem";
 
+
+
 function FolderDetail({}) {
   const user_id = "@userID";
-  const { witList, setWitList } = useWitContext();
+
+  // 폴더에 해당하는 wit를 출력하기 위한 임시 state
+  const [_witList, _setWitList] = useState([]);
+
   const {id} = useParams("id") 
 
-  
   // 폴더에 포함되는 wit 출력
   const folderDetailFetch = useCallback(async () => {
     const fWits = await FolderDetailFetch(user_id, id)
-    await setWitList(fWits)
+    _setWitList(fWits)
   },[]);
   useEffect(folderDetailFetch, [folderDetailFetch])
 
-  
+
 
 
   return (
-    <div className="foldeWitBox">
-      {witList && <WitItem witFetch={folderDetailFetch} />}
-    </div>
+    <>
+      <div className="folderWitBox">
+      <div className="detailheader">ggg</div>
+        {_witList && <WitItem showWitList={folderDetailFetch} witList={_witList}/>}
+      </div>
+    </>
     )
 }
 

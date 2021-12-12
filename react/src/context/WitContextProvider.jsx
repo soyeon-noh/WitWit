@@ -14,6 +14,8 @@ export const useWitContext = () => {
   return useContext(AppContext);
 };
 
+export const User_id = "@c_a_y";
+
 function WitContextProvider({ children }) {
   const [wit, setWit] = useState({
     id: "", // 위트 아이디
