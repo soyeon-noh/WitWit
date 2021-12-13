@@ -4,9 +4,8 @@ import { FolderDetailFetch } from "../../functions/FolderFetch";
 import WitItem from "../wit/WitItem";
 
 function FolderDetailWitBox() {
-  const user_id = "@userID";
-  const { id } = useParams("id");
-  const { fId } = useParams("fId");
+  const { user_id } = useParams("user_id");
+  const { id } = useParams("id"); // folder_id
 
   // 폴더에 해당하는 wit를 출력하기 위한 임시 state
   const [_witList, _setWitList] = useState([]);
