@@ -1,43 +1,51 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Outlet, Route, Routes, useNavigate, useParams } from "react-router";
-import { useWitContext } from "../../context/WitContextProvider";
+import { Outlet, useNavigate, useParams } from "react-router";
+import { useRoomContext } from "../../context/RoomContextProvider";
 
 import "../../css/myroom/FolderDetail.css";
-import { FolderDetailFetch } from "../../functions/FolderFetch";
-
-import WitItem from "../wit/WitItem";
-import FolderDetailWitBox from "./FolderDetailWitBox";
+import { FolderFindFetch } from "../../functions/FolderFetch";
 
 function FolderDetail({}) {
   const navigate = useNavigate();
 
   const { user_id } = useParams("user_id");
   const { id } = useParams("id");
+  const { folderList, setFolderList } = useRoomContext();
 
   //뒤로가기 버튼
   const onClickBack = () => {};
 
-  //뒤로가기 버튼
+  //폴더 수정하기 버튼
   const onClickSetting = () => {
     navigate(`/${user_id}/folder/${id}/folderinfo`);
   };
 
-  return (
-    <>
-      <div className="folderWitBox">
-        <div className="detailheader">
-          폴더이름
-          <spna className="xBox">x</spna>
-        </div>
-        <div className="detailheaderMenu">
-          <span>|</span>
-          <span onClick={onClickSetting}>폴더수정</span>
-        </div>
+  // 폴더 정보 찾기
+  const folderFind = useCallback(async () => {
+    const info = await FolderFindFetch(id);
+    await setFolderList(info);
+    console.table(folderList);
+  }, []);
+  useEffect(folderFind, [folderFind]);
 
-        <Outlet />
-      </div>
-    </>
-  );
+  return folderList.map((folder) => {
+    return (
+      <>
+        <div className="folderWitBox">
+          <div className="detailheader">
+            {folder.name}
+            <span className="xBox">x</span>
+          </div>
+          <div className="detailheaderMenu">
+            <span>|</span>
+            <span onClick={onClickSetting}>폴더수정</span>
+          </div>
+
+          <Outlet />
+        </div>
+      </>
+    );
+  });
 }
 
 export default FolderDetail;
