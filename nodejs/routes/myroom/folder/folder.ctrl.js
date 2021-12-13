@@ -2,6 +2,7 @@ import folders from "../../../models/myroom/folder.js";
 import wits from "../../../models/wit.js";
 import { v4 } from "uuid";
 
+///myroom/:user_id get
 export const fMain = async (req, res) => {
   //   await folders //folders document 생성
   //     .save()
@@ -11,6 +12,7 @@ export const fMain = async (req, res) => {
   //     .catch((err) => {
   //       console.error(err);
   //     });
+
   await folders
     .find({ user_id: req.params.user_id }, function (err, data) {
       res.json(data);
@@ -18,6 +20,7 @@ export const fMain = async (req, res) => {
     .clone();
 };
 
+///myroom/:user_id/folder post
 export const fAdd = async (req, res) => {
   const folder = new folders({
     id: v4(),
@@ -30,7 +33,7 @@ export const fAdd = async (req, res) => {
     return res.status(200).json(result);
   });
 };
-
+///myroom/:user_id/folder put
 export const fUpdate = async (req, res) => {
   await folders
     .updateOne(
@@ -48,6 +51,7 @@ export const fUpdate = async (req, res) => {
     .clone();
 };
 
+///myroom/:user_id/folder/:id delete
 export const fDelete = async (req, res) => {
   const id = req.params.id;
   console.log(id);
@@ -65,7 +69,7 @@ export const fDelete = async (req, res) => {
       res.status(500).json({ message: err });
     });
 };
-
+///myroom/:user_id/folder/:id get
 export const fInfo = async (req, res) => {
   await wits
     .find({ folder_id: req.params.id }, function (err, result) {
@@ -76,6 +80,7 @@ export const fInfo = async (req, res) => {
     })
     .clone();
 };
+///myroom/folderFind/:id get
 export const fFind = async (req, res) => {
   console.log("fFined ", req.body);
   await folders

@@ -6,7 +6,7 @@ import Joi from "joi";
 // url  :  users/join
 export const Join = async (req, res, next) => {
   const schema = Joi.object().keys({
-    userId: Joi.string().alphanum().min(4).max(30).required(),
+    userId: Joi.string().min(4).max(30).required(),
     password: Joi.string().min(5).max(20).required(),
     name: Joi.string(),
     email: Joi.string(),
@@ -24,7 +24,7 @@ export const Join = async (req, res, next) => {
     if (exists) {
       return res.sendStatus(409);
     }
-    const user = await new User({
+    const user = new User({
       userId,
       name,
       email,
@@ -45,8 +45,9 @@ export const Join = async (req, res, next) => {
   }
 };
 // url : users/login
-export const login = async (res, req) => {
-  const { userId, userPassword } = req.body;
+//test  id :  test password : 1111111
+export const login = async (req, res, next) => {
+  const { userId, password } = req.body;
 
   if (!userId || !password) {
     return res.sendStatus(401);
@@ -56,14 +57,34 @@ export const login = async (res, req) => {
     if (!user) {
       res.sendStatus(401);
     }
-    const valid = await user.checkPassword(userPassword);
+    const valid = await user.checkedPassword(password);
     if (!valid) {
       return res.sendStatus(401);
     }
     const token = user.getToken();
-  } catch (error) {}
-  const password = checkPassword(userPassword);
-  if (!password) {
+    res
+      .cookie("access_token", token, {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+      })
+      .send(user.serialize());
+  } catch (error) {
+    next(error);
+  }
+};
+// /users/check
+export const userCheck = async (req, res, next) => {
+  const { user } = res.locals;
+  if (!user) {
     return res.sendStatus(401);
   }
+  res.json(user);
+};
+
+export const userLogout = async (req, res, next) => {
+  res.cookie(
+    "access_token ",
+    "",
+    { maxAge: 1, httpOnly: true }.sendStatus(204)
+  );
 };
