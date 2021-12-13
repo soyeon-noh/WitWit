@@ -76,3 +76,19 @@ export const fInfo = async (req, res) => {
     })
     .clone();
 };
+export const fFind = async (req, res) => {
+  console.log("fFined ", req.body);
+  await folders
+    .find(
+      {
+        user_id: req.params.id,
+      },
+      function (err, result) {
+        res.status(200).json(result);
+        if (err) {
+          res.status(401).send(err);
+        }
+      }
+    )
+    .clone();
+};
