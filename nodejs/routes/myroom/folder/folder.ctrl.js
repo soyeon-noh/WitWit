@@ -81,7 +81,7 @@ export const fFind = async (req, res) => {
   await folders
     .find(
       {
-        user_id: req.params.id,
+        id: req.params.id,
       },
       function (err, result) {
         res.status(200).json(result);

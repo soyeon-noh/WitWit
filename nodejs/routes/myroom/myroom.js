@@ -34,6 +34,6 @@ myroom.put("/:user_id/folder", folderCtrl.fUpdate);
 myroom.post("/:user_id/folder", folderCtrl.fAdd);
 myroom.delete("/:user_id/folder/:id", folderCtrl.fDelete);
 myroom.get("/:user_id/folder/:id", folderCtrl.fInfo);
-myroom.post("/:user_id/folderFind", folderCtrl.fFind);
+myroom.get("/folderFind/:id", folderCtrl.fFind);
 
 export default myroom;
