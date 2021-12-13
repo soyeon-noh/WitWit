@@ -1,73 +1,72 @@
-
 div.wits {
-    width: 90%;
-    background-color: white;
-    border: 2px solid #ad9fb6;
-    box-shadow: 3px 3px 2px rgba(241, 207, 241,0.5);
-    border-radius: 10px;
-    margin: 20px auto;
-    padding: 10px;
-    text-align: left;
+  width: 90%;
+  background-color: white;
+  border: 2px solid #ad9fb6;
+  box-shadow: 3px 3px 2px rgba(241, 207, 241, 0.5);
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: left;
 }
 
 img.wit_profile {
-    width: 20px;
-    transform: translateY(5px);
-    margin-right:5px ;
+  width: 20px;
+  transform: translateY(5px);
+  margin-right: 5px;
 }
 
 span.wit_userNick {
-    font-family: "DungGeunMo";
-    font-size: 1rem;
-    margin-right:5px ;
+  font-family: "DungGeunMo";
+  font-size: 1rem;
+  margin-right: 5px;
 }
 
-span.wit_userid,span.wit_fromNow {
-    font-size: 0.8rem;
-    color: #333;
+span.wit_userid,
+span.wit_fromNow {
+  font-size: 0.8rem;
+  color: #333;
 }
 
 span.wit_fromNow {
-    margin-left: 10px;
-    font-weight: bold;
+  margin-left: 10px;
+  font-weight: bold;
 }
 
 span.wit_menu {
-    margin-right: 0;
-    margin-left: auto;
-    text-align: right;
-    width: fit-content;
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+  width: fit-content;
 }
 
-
-
 div.wit_text {
-    text-align: left;
-    font-size: 0.8rem;
-    margin: 10px auto;
-    width: 85%;
-    background-color: rgba(241, 207, 241,0.3);
-    padding: 10px;
-    border-radius: 5px;
+  text-align: left;
+  font-size: 0.8rem;
+  margin: 10px auto;
+  width: 85%;
+  background-color: rgba(241, 207, 241, 0.3);
+  padding: 10px;
+  border-radius: 5px;
 }
 
 div.icon_box {
-    width: 90%;
-    text-align: right;
-    margin: 5px auto;
-    padding-right: 5%;
+  width: 90%;
+  text-align: right;
+  margin: 5px auto;
+  padding-right: 5%;
 }
 
 div.icon_box span {
-    margin-left:20%;
-    color: #07364d;
-    cursor: pointer;
-    font-size: 1.1rem;
+  margin-left: 20%;
+  color: #07364d;
+  cursor: pointer;
+  font-size: 1.1rem;
 }
 
 div.icon_box span span.count {
-    color: #07364d;
-    font-size: 0.8rem;
-    margin-left: 5px;
-    line-height: 100%;
+  color: #07364d;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  line-height: 100%;
+  cursor: default;
 }

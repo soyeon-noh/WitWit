@@ -8,6 +8,8 @@ import Login from "./Login";
 import Join from "./Join";
 import FolderDetail from "./room/FolderDetail";
 import FolderBox from "./room/FolderBox";
+import FolderUpdate from "./room/FolderUpdate";
+import FolderDetailWitBox from "./room/FolderDetailWitBox";
 
 function BoardBox() {
   return (
@@ -16,11 +18,14 @@ function BoardBox() {
         <Routes>
           <Route path="" element={<WitHome />} />
 
-          <Route path=":user_id" element={<MyRoom />} >
-            <Route path = "" element={<FolderBox/>}/>
-            <Route path = "folder/:id" element={<FolderDetail/>}/>
+          <Route path=":user_id" element={<MyRoom />}>
+            <Route path="" element={<FolderBox />} />
+            <Route path="folder/:id" element={<FolderDetail />}>
+              <Route path="" element={<FolderDetailWitBox />} />
+              <Route path="folderinfo" element={<FolderUpdate />} />
+            </Route>
           </Route>
-          
+
           <Route extract path="login" element={<Login />} />
           <Route extract path="signup" element={<Join />} />
         </Routes>
