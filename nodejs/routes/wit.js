@@ -44,9 +44,9 @@ const getWit = async (req, res, searchQuery) => {
     {
       $lookup: {
         from: "wits",
-        localField: "rewitId",
+        localField: "originalWit",
         foreignField: "id",
-        as: "rewit",
+        as: "originalWit",
       },
     },
     {
@@ -65,7 +65,7 @@ const getWit = async (req, res, searchQuery) => {
         image_id: 1,
 
         parentWit: "$parentWit",
-        rewit: "$rewit",
+        originalWit: "$originalWit",
         replyArray: "$replyArray",
 
         likeyCount: { $size: "$likeys" },
