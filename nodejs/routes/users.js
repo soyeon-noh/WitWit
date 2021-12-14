@@ -9,4 +9,6 @@ import * as userCtrl from "./user.ctrl.js";
 /* GET users listing. */
 users.post("/login", userCtrl.login);
 users.post("/join", userCtrl.Join);
+users.post("/logout", userCtrl.userLogout);
+users.post("/check", userCtrl.userCheck);
 export default users;

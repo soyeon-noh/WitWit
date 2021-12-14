@@ -88,3 +88,20 @@ export const userLogout = async (req, res, next) => {
     { maxAge: 1, httpOnly: true }.sendStatus(204)
   );
 };
+
+export const verifyToken = (req, res, next) => {
+  try {
+    const clientToken = req.cookies.user;
+
+    const decoded = jwt.verify(clientToken, process.env.JWT_SECRET);
+
+    if (decoded) {
+      res.locals.userId = decoded.userId;
+      next();
+    } else {
+      res.status(401).json({ error: "unauthorized" });
+    }
+  } catch (error) {
+    res.status(401).json({ error: "token exporired " });
+  }
+};

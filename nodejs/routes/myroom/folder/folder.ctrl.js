@@ -2,7 +2,7 @@ import folders from "../../../models/myroom/folder.js";
 import wits from "../../../models/wit.js";
 import { v4 } from "uuid";
 
-///myroom/:user_id get
+///myroom/:user_i
 export const fMain = async (req, res) => {
   //   await folders //folders document 생성
   //     .save()
@@ -57,10 +57,28 @@ export const fDelete = async (req, res) => {
   console.log(id);
   await folders
     .deleteOne({ id: id })
+    .then(
+      await wits
+        .updateMany(
+          {
+            folder_id: id,
+          },
+          {
+            $set: { folder_id: "삭제된 폴더" },
+          },
+          function (err, result) {
+            {
+              if (err) {
+                return res.status.json({ err });
+              }
+            }
+          }
+        )
+        .clone()
+    )
     .then((output) => {
       if (output.n == 0)
         return res.status(404).json({ message: "post not found" });
-      console.log("삭제완료");
       res.status(200).json({
         message: "delete sucess",
       });
@@ -69,14 +87,31 @@ export const fDelete = async (req, res) => {
       res.status(500).json({ message: err });
     });
 };
+
+//폴더 삭제할때 , 폴더 내부도 삭제를 누를 때 wits 에있는 글도 삭제가 된다
+// test 0472da45-f893-427f-907c-5616c817722e
+export const fDetailDel = async (req, res) => {
+  const id = req.params.id;
+  //wit 내부에 접근하여 id 값을 삭제한 후 folder도 삭제한다 .
+  await wits.deleteMany({ folder_id: id }).then(
+    await folders
+      .deleteOne({ id }, function (err, result) {
+        if (err) {
+          return res.status(501).json(err);
+        }
+        return res.status(200).json(result);
+      })
+      .clone()
+  );
+};
 ///myroom/:user_id/folder/:id get
 export const fInfo = async (req, res) => {
   await wits
     .find({ folder_id: req.params.id }, function (err, result) {
-      res.send(result);
       if (err) {
-        res.send(err);
+        res.stauts(501).send(err);
       }
+      res.status(200).send(result);
     })
     .clone();
 };
