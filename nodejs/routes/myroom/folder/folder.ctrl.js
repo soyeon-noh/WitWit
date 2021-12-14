@@ -95,11 +95,16 @@ export const fDetailDel = async (req, res) => {
   //wit 내부에 접근하여 id 값을 삭제한 후 folder도 삭제한다 .
   await wits.deleteMany({ folder_id: id }).then(
     await folders
-      .deleteOne({ id }, function (err, result) {
-        if (err) {
-          return res.status(501).json(err);
-        }
-        return res.status(200).json(result);
+      .deleteOne({ id })
+      .then((output) => {
+        if (output.n == 0)
+          return res.status(404).json({ message: "post not found" });
+        res.status(200).json({
+          message: "delete sucess",
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err });
       })
       .clone()
   );
