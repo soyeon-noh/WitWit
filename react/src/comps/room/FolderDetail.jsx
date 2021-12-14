@@ -24,7 +24,6 @@ function FolderDetail({}) {
   const folderFind = useCallback(async () => {
     const info = await FolderFindFetch(id);
     await setFolderList(info);
-    console.table(folderList);
   }, []);
   useEffect(folderFind, [folderFind]);
 

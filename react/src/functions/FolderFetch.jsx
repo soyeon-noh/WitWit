@@ -34,3 +34,33 @@ export const FolderFindFetch = async (id) => {
 
   return info;
 };
+
+//폴더 정보 갱신하기
+export const FolderUpdateFetch = async (user_id, folder) => {
+  // myroom.put("/:user_id/folder", folderCtrl.fUpdate);
+  const fetch_option = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(folder),
+  };
+  console.log(folder);
+  await fetch(`http://localhost:5050/myroom/${user_id}/folder`, fetch_option);
+};
+
+//폴더 삭제하기
+export const FolderDeleteFetch = async (user_id, folder) => {
+  const id = folder.id;
+  const fetch_option = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(folder),
+  };
+  await fetch(
+    `http://localhost:5050/myroom/${user_id}/folder/${id}`,
+    fetch_option
+  );
+};

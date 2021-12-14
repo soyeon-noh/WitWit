@@ -1,0 +1,40 @@
+.settinglayout {
+  background: white;
+  width: 100%;
+  margin: 10px auto;
+  padding: 20px;
+  box-shadow: 1px 1px 0px rgb(129, 129, 129), inset 2px 2px 1px rgba(0, 0, 0);
+  border: 1px solid rgb(129, 129, 129);
+}
+
+.input_box {
+  margin: 10px;
+}
+
+.input_box label {
+  width: 30%;
+  text-align: right;
+}
+
+.input_box input {
+  width: 60%;
+  text-align: left;
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.sudmitbutton {
+  display: inline-block;
+  width: 30%;
+  background-color: rgb(195, 195, 195);
+  padding: 5px;
+  margin: 25px 10px 0 10px;
+  cursor: pointer;
+
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.8),
+    inset 2px 2px 1px rgba(255, 255, 255, 0.8);
+}
+
+.sudmitbutton:active {
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.5);
+}

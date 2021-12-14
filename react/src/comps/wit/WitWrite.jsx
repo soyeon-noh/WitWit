@@ -4,7 +4,7 @@ import { useWitContext } from "../../context/WitContextProvider";
 import "../../css/wit/WitWrite.css";
 import { WitFetch, WitInsertFetch } from "../../functions/WitFetch";
 
-const WitWrite = ({showWitList}) => {
+const WitWrite = ({ showWitList }) => {
   const navigate = useNavigate();
   const { wit, setWit } = useWitContext();
 
@@ -21,17 +21,16 @@ const WitWrite = ({showWitList}) => {
 
   // insert 함수
   const witInsert = async () => {
-    
     //유효성검사
-  if(wit.text === "") {
-    window.alert("위트를 입력하세요")
-    textRef.current.focus()
-    return
-  } else{
-    await WitInsertFetch(wit)
-    textReset();
-    await WitFetch();
-    await showWitList();
+    if (wit.text === "") {
+      window.alert("위트를 입력하세요");
+      textRef.current.focus();
+      return;
+    } else {
+      await WitInsertFetch(wit);
+      textReset();
+      await WitFetch();
+      await showWitList();
     }
   };
 
