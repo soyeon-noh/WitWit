@@ -15,9 +15,9 @@ const wit = Schema({
   userId: String, // 작성자 ID
   userName: String, // 작성자 이름
   profileUrl: String, // 작성자 프로필 이미지링크
-  parentWit: Number, // 이전 위트 id값
 
-  rewitId: Number, // 리위트 id값
+  parentWit: Number, // 이전 위트 id값
+  originalWit: Number, // 인용,리마크당한 오리지널위트 id값
 
   folder_id: String, // 폴더 seq (외래키)
   image_id: String, // 이미지 seq (외래키)
