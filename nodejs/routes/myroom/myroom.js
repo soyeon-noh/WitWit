@@ -33,7 +33,7 @@ myroom.get("/:user_id", folderCtrl.fMain);
 myroom.put("/:user_id/folder", folderCtrl.fUpdate);
 myroom.post("/:user_id/folder", folderCtrl.fAdd);
 myroom.delete("/:user_id/folder/:id", folderCtrl.fDelete);
+myroom.delete("/:user_id/folder/detail/:id", folderCtrl.fDetailDel);
 myroom.get("/:user_id/folder/:id", folderCtrl.fInfo);
 myroom.get("/folderFind/:id", folderCtrl.fFind);
-myroom.delete("/folder/fDetailDel/:id", folderCtrl.fDetailDel);
 export default myroom;
