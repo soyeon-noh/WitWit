@@ -28,9 +28,25 @@ const getWit = async (req, res, searchQuery) => {
     {
       $lookup: {
         from: "wits",
+        localField: "id",
+        foreignField: "parentWit",
+        as: "replyArray",
+      },
+    },
+    {
+      $lookup: {
+        from: "wits",
         localField: "parentWit",
         foreignField: "id",
-        as: "replyArray",
+        as: "parentWit",
+      },
+    },
+    {
+      $lookup: {
+        from: "wits",
+        localField: "rewitId",
+        foreignField: "id",
+        as: "rewit",
       },
     },
     {
@@ -43,9 +59,14 @@ const getWit = async (req, res, searchQuery) => {
         userName: 1,
         profileUrl: 1,
         parentWit: 1,
+        rewitId: 1,
 
         folder_id: 1,
         image_id: 1,
+
+        parentWit: "$parentWit",
+        rewit: "$rewit",
+        replyArray: "$replyArray",
 
         likeyCount: { $size: "$likeys" },
         // replys: "$replyArray",
@@ -91,6 +112,13 @@ router.post("/", async (req, res) => {
 router.post("/:id", async (req, res) => {
   const paramsId = req.params.id;
   req.body.parentWit = paramsId;
+  createWit(req, res);
+});
+
+// 리위트하기
+router.post("/rewit/:id", async (req, res) => {
+  const paramsId = req.params.id;
+  req.body.rewitId = paramsId;
   createWit(req, res);
 });
 
