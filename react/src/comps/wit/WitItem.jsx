@@ -42,10 +42,11 @@ const WitItem = ({ showWitList, witList }) => {
     await WitLikeFetch(user_id, wit);
     showWitList();
   };
+  useEffect(showWitList, [showWitList]);
 
   //리위트 기능
-  const reWit = async () => {
-    window.alert("리위트");
+  const reply = async () => {
+    window.alert("리플라이");
   };
 
   //북마크
@@ -83,7 +84,7 @@ const WitItem = ({ showWitList, witList }) => {
             <span className="count">{wit.replyCount}</span>
           </span>
           <span>
-            <BorderColorRoundedIcon fontSize="" onClick={reWit} />
+            <BorderColorRoundedIcon fontSize="" onClick={reply} />
             <span className="count">{wit.replyCount}</span>
           </span>
           <span>
