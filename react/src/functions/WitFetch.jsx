@@ -55,6 +55,7 @@ export const WitInFolderFetch = async (id, folder_id, list) => {
 //위마크하기
 export const WitMarkFetch = async (wit) => {
   const id = wit.id;
+  console.table(wit);
   const fetch_option = {
     method: "POST",
     headers: {
