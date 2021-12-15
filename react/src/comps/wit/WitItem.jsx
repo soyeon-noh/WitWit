@@ -1,19 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/wit/WitItem.css";
 import { styled } from "@mui/system";
-import profile from "../../static/img/profile-basic.png";
-import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
-import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import moment from "moment";
-import "moment/locale/ko";
-import WitItemMenu from "./WitItemMenu";
-import { WitFetch } from "../../functions/WitFetch";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import LinkIcon from "@mui/icons-material/Link";
+
 import { WitLikeFetch } from "../../functions/LikeFetch";
+import WitItemContain from "./WitItemContain";
+import { WitMarkFetch } from "../../functions/WitFetch";
 
 const WitItem = ({ showWitList, witList }) => {
   const user_id = "@c_a_y";
@@ -44,61 +38,57 @@ const WitItem = ({ showWitList, witList }) => {
   };
   useEffect(showWitList, [showWitList]);
 
-  //리위트 기능
+  //답글 기능
   const reply = async () => {
-    window.alert("리플라이");
+    window.alert("답글");
   };
 
-  //북마크
-  const witMark = async () => {
-    window.alert("위마크");
+  //위마크
+  const witMark = async (wit) => {
+    window.alert("위마크하기");
+    await WitMarkFetch(wit);
+  };
+
+  const propsList = {
+    showWitList,
+    witList,
+    user_id,
+    MyHamburger,
+    witMenuOpen,
+    setWitMenuOpen,
+    dataId,
+    setDataId,
+    witMenuClose,
+    like,
+    reply,
+    witMark,
   };
 
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     return (
       <div className="wits">
-        <span className="wit_profile">
-          <img src={profile} className="wit_profile" />
-        </span>
-        <span className="wit_userNick">{wit.userName}</span>
-        <span className="wit_userid">{wit.userId}</span>
-        <span className="wit_fromNow">
-          {moment(Date.parse(createAt)).fromNow()}
-        </span>
-        <span className="wit_menu" onClick={() => witMenuClose(wit.id)}>
-          <MyHamburger />
-        </span>
-        {witMenuOpen && dataId === wit.id && (
-          <WitItemMenu
-            witMenuClose={witMenuClose}
-            wit_folderId={wit.folder_id}
-            data_id={wit.id}
-            showWitList={showWitList}
-          ></WitItemMenu>
+        {wit.text === "" && wit.originalWit ? (
+          <>
+            <span className="wemarkCheckingBox">
+              <span>
+                <LinkIcon fontSize="1rem" />
+                &nbsp;<b>{user_id}</b>님이 위마크한 위트입니다
+              </span>
+            </span>
+            <WitItemContain
+              propsList={propsList}
+              wit={wit.originalWit}
+              createAt={createAt}
+            ></WitItemContain>
+          </>
+        ) : (
+          <WitItemContain
+            propsList={propsList}
+            wit={wit}
+            createAt={createAt}
+          ></WitItemContain>
         )}
-        <div className="wit_text">{wit.text}</div>
-        <div className="icon_box">
-          <span>
-            <BookmarkBorderRoundedIcon fontSize="" onClick={witMark} />
-            <span className="count">{wit.replyCount}</span>
-          </span>
-          <span>
-            <BorderColorRoundedIcon fontSize="" onClick={reply} />
-            <span className="count">{wit.replyCount}</span>
-          </span>
-          <span>
-            <FavoriteBorderRoundedIcon
-              fontSize=""
-              onClick={() => like(user_id, wit)}
-            />{" "}
-            <span className="count">{wit.likeyCount}</span>
-          </span>
-          {/* { likeCheck? 
-            <span><FavoriteRoundedIcon fontSize="" color="red" onClick={()=>like(user_id, wit)}/> <span className="count">{wit.likeyCount}</span> </span>
-            : <span><FavoriteBorderRoundedIcon fontSize="" onClick={()=>like(user_id, wit)} /><span className="count">{wit.likeyCount}</span></span> 
-            }  */}
-        </div>
       </div>
     );
   });

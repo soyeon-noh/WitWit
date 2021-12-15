@@ -9,6 +9,16 @@ div.wits {
   text-align: left;
 }
 
+.wemarkCheckingBox span {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 5px auto;
+  color: #333;
+  font-size: 0.8rem;
+  line-height: 100%;
+}
+
 img.wit_profile {
   width: 20px;
   transform: translateY(5px);
