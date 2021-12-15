@@ -59,7 +59,6 @@ const getWit = async (req, res, searchQuery) => {
         userName: 1,
         profileUrl: 1,
         parentWit: 1,
-        rewitId: 1,
 
         folder_id: 1,
         image_id: 1,
@@ -73,7 +72,6 @@ const getWit = async (req, res, searchQuery) => {
         replyCount: { $size: "$replyArray" },
       },
     },
-
     { $sort: { createdDate: -1, createdTime: -1 } },
   ]);
   console.log("wit find: ", result);
@@ -109,16 +107,23 @@ router.post("/", async (req, res) => {
 });
 
 // 답글 추가
-router.post("/:id", async (req, res) => {
-  const paramsId = req.params.id;
-  req.body.parentWit = paramsId;
+router.post("/:wit_id", async (req, res) => {
+  const paramsWitId = req.params.wit_id;
+  req.body.parentWit = paramsWitId;
   createWit(req, res);
 });
 
-// 리위트하기
+// 위마크하기
 router.post("/wimark/:id", async (req, res) => {
-  const paramsId = req.params.id;
-  req.body.rewitId = paramsId;
+  const paramsWitId = req.params.wit_id;
+  req.body.rewitId = paramsWitId;
+  createWit(req, res);
+});
+
+// 인용하기
+router.post("/quote/:id", async (req, res) => {
+  const paramsWitId = req.params.wit_id;
+  req.body.rewitId = paramsWitId;
   createWit(req, res);
 });
 
@@ -155,52 +160,62 @@ router.get("/search", async (req, res) => {
 });
 
 // wit 디테일
-router.get("/:user_id/:id", async (req, res) => {
-  const paramsId = req.params.id;
-  const witResult = await WIT.findOne({ id: paramsId });
-  const commentsResult = await WIT.find({ parentWit: paramsId }).sort({
-    createdDate: -1,
-    createdTime: -1,
-  });
+router.get("/:user_id/:wit_id", async (req, res) => {
+  // const paramsWitId = req.params.wit_id;
+  // const witResult = await WIT.findOne({ id: paramsWitId });
+  // const commentsResult = await WIT.find({ parentWit: paramsWitId }).sort({
+  //   createdDate: -1,
+  //   createdTime: -1,
+  // });
 
-  const sendData = {
-    wit: witResult,
-    replys: commentsResult,
-  };
+  // const sendData = {
+  //   wit: witResult,
+  //   replys: commentsResult,
+  // };
+  // res.json(sendData);
 
-  res.json(sendData);
+  /**
+   * getWit의 searchQuery에 기존과 동일하게 paramsWitId 를 대입하면 결과가 나오지 않는다.
+   * 이는 Type 문제로 Number로 강제 형변환을 시켜주면 해결된다.
+   */
+  const paramsWitId = req.params.wit_id;
+  const numWitId = Number(paramsWitId);
+
+  const result = await getWit(req, res, { id: numWitId });
+
+  res.json(result);
 });
 
 // wit 삭제
-router.delete("/:user_id/:id", async (req, res) => {
-  const paramsId = req.params.id;
-  await WIT.deleteOne({ id: paramsId });
+router.delete("/:user_id/:wit_id", async (req, res) => {
+  const paramsWitId = req.params.wit_id;
+  await WIT.deleteOne({ id: paramsWitId });
 
   res.send("Delete Success");
 });
 
 // wit 를 folder에 추가
-router.post("/:id/:folder_id", async (req, res) => {
-  const paramsId = req.params.id;
+router.post("/:wit_id/:folder_id", async (req, res) => {
+  const paramsWitId = req.params.wit_id;
   const paramsFolderId = req.params.folder_id;
 
   if (paramsFolderId === "0") {
     // _id값으로 조회하기떄문에 별도의 조치를 취하지 않으면 사용할 수 없는 코드이다.
     // await WIT.findByIdAndUpdate(
-    //   paramsId,
+    //   paramsWitId,
     //   { folder_id: "" },
     //   { returnOrigininal: false }
     // );
-    await WIT.updateOne({ id: paramsId }, { $set: { folder_id: "" } });
+    await WIT.updateOne({ id: paramsWitId }, { $set: { folder_id: "" } });
     res.send("folder_id Delete Success");
   } else {
     // await WIT.findByIdAndUpdate(
-    //   paramsId,
+    //   paramsWitId,
     //   { folder_id: paramsFolderId },
     //   { returnOrigininal: false }
     // );
     await WIT.updateOne(
-      { id: paramsId },
+      { id: paramsWitId },
       { $set: { folder_id: paramsFolderId } }
     );
     res.send("folder_id Update Success");
