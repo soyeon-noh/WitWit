@@ -116,7 +116,7 @@ router.post("/:id", async (req, res) => {
 });
 
 // 리위트하기
-router.post("/rewit/:id", async (req, res) => {
+router.post("/wimark/:id", async (req, res) => {
   const paramsId = req.params.id;
   req.body.rewitId = paramsId;
   createWit(req, res);
