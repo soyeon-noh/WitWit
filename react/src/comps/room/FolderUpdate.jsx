@@ -41,7 +41,28 @@ function FolderUpdate({}) {
   };
 
   // 폴더 삭제하기
-  const folderDelete = () => {};
+  const folderDelete = async(folder) => {
+    const id = folder.id
+    const fetch_option = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(folder),
+    };
+
+    console.table(folder)
+
+    if(window.confirm("폴더에 포함된 위트도 삭제하시겠습니까?")) {
+      //폴더에 포함된 위트도 삭제하기 
+      // /:user_id/folder/detail/:id"
+      await fetch(`http://localhost:5050/myroom/${user_id}/folder/detail/${id}`,fetch_option)
+    } else {
+      //폴더만 삭제하기
+      await fetch(`http://localhost:5050/myroom/${user_id}/folder/${id}`,fetch_option)
+    }
+    navigate(`http://localhost:5050/myroom/${user_id}`)
+  };
 
   return folderList.map((f) => {
     return (
@@ -62,7 +83,7 @@ function FolderUpdate({}) {
           <div className="sudmitbutton" onClick={() => folderUpdate(folder)}>
             수정하기
           </div>
-          <div className="sudmitbutton">삭제하기</div>
+          <div className="sudmitbutton" onClick={() => folderDelete(folder)}>삭제하기</div>
         </div>
       </>
     );
