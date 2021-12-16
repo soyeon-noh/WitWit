@@ -7,7 +7,10 @@ import USER from "../models/user.js";
 import LIKEY from "../models/likey.js";
 import { v4 } from "uuid";
 
+import multer from "multer";
+
 const router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
 /* GET home page. */
 
@@ -103,7 +106,29 @@ const createWit = async (req, res) => {
 
 // 단순 추가
 router.post("/", async (req, res) => {
+  // router.post("/", upload.single("file"), async (req, res) => {
+  //   const {
+  //     fieldname,
+  //     originalname,
+  //     encoding,
+  //     mimetype,
+  //     destination,
+  //     filename,
+  //     path,
+  //     size,
+  //   } = req.file;
+  //   const { name } = req.body;
+  //   console.log("body 데이터 : ", name);
+  //   console.log("폼에 정의된 필드명 : ", fieldname);
+  //   console.log("사용자가 업로드한 파일 명 : ", originalname);
+  //   console.log("파일의 엔코딩 타입 : ", encoding);
+  //   console.log("파일의 Mime 타입 : ", mimetype);
+  //   console.log("파일이 저장된 폴더 : ", destination);
+  //   console.log("destinatin에 저장된 파일 명 : ", filename);
+  //   console.log("업로드된 파일의 전체 경로 ", path);
+  //   console.log("파일의 바이트(byte 사이즈)", size);
   createWit(req, res);
+  //   res.json({ ok: true, data: "Single Upload Ok" });
 });
 
 // 답글 추가
