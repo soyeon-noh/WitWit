@@ -12,6 +12,14 @@ function FolderDetail({}) {
   const { id } = useParams("id");
   const { folderList, setFolderList } = useRoomContext();
 
+  // 폴더 정보 찾기
+  const folderFind = useCallback(async () => {
+    const info = await FolderFindFetch(id);
+    await setFolderList(info);
+  }, []);
+  useEffect(folderFind, [folderFind]);
+
+  
   //뒤로가기 버튼
   const onClickBack = () => {};
 
@@ -20,12 +28,6 @@ function FolderDetail({}) {
     navigate(`/${user_id}/folder/${id}/folderinfo`);
   };
 
-  // 폴더 정보 찾기
-  const folderFind = useCallback(async () => {
-    const info = await FolderFindFetch(id);
-    await setFolderList(info);
-  }, []);
-  useEffect(folderFind, [folderFind]);
 
   return folderList.map((folder) => {
     return (

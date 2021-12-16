@@ -28,6 +28,13 @@ function WitContextProvider({ children }) {
 
     folder_id: "", // 폴더 seq (외래키)
     image_id: "", // 이미지 seq (외래키)
+    parentWit: null,
+    originalWit: null,
+    replyArray: null,
+
+    likeyCount: null,
+    // replys: "$replyArray",
+    replyCount: null,
   });
 
   const [witList, setWitList] = useState([]);
