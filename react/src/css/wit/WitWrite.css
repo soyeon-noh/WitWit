@@ -1,39 +1,45 @@
 div.wit_input_box {
-    width: 60%;
-    height: fit-content;
-    border-bottom: 2px double #ad9fb6;
-    margin: 10px auto;
-    text-align: left;
+  width: 60%;
+  height: fit-content;
+  border-bottom: 2px double #ad9fb6;
+  margin: 10px auto;
+  text-align: left;
 
-    display: flex;
+  display: flex;
 }
 
 div.wit_input_box textarea {
-    background-color: #eee;
-    outline: none;
-    border:none;
-    padding: 2%;
-    width: 78%;
-    min-height: 10px;
-    text-align: left;
-    vertical-align: top;
-    margin: 3%;
-    resize: none;
-    font-size: 1rem;
-    overflow: hidden;
+  background-color: #eee;
+  outline: none;
+  border: none;
+  padding: 2%;
+  width: 78%;
+  min-height: 10px;
+  text-align: left;
+  vertical-align: top;
+  margin: 3%;
+  resize: none;
+  font-size: 1rem;
+  overflow: hidden;
 
-    flex:1;
+  flex: 1;
 }
 
-
 div.wit_input_box button {
-    border: none;
-    background-color: #ad9fb6;
-    /* background-color: #de724b; */
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: auto 1%;
+  border: none;
+  background-color: #ad9fb6;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: auto 1%;
+}
+
+.etcBox {
+  display: block;
+  max-width: 100%;
+}
+.insertImg {
+  cursor: pointer;
 }

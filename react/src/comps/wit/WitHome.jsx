@@ -1,20 +1,19 @@
 import React, { useCallback, useEffect } from "react";
-import {
-  useWitContext,
-} from "../../context/WitContextProvider";
+import { useWitContext } from "../../context/WitContextProvider";
 
 import "../../css/wit/WitHome.css";
 import WitSearch from "./WitSearch";
 import WitItem from "./WitItem";
 import WitWrite from "./WitWrite";
 import { WitFetch } from "../../functions/WitFetch";
+import { Outlet } from "react-router-dom";
 
 const WitHome = () => {
   const { setWitList, witList } = useWitContext();
 
   // wit list 불러오기
   const showWitList = useCallback(async () => {
-    const list = await WitFetch()
+    const list = await WitFetch();
     await setWitList(list);
   }, []);
   useEffect(showWitList, [showWitList]);
@@ -22,9 +21,10 @@ const WitHome = () => {
   return (
     <>
       <WitSearch setWitList={setWitList} />
-      <WitWrite showWitList={showWitList}/>
+      <WitWrite showWitList={showWitList} />
+      {/* <Outlet /> */}
       <div className="witStyle">
-      <WitItem showWitList={showWitList} witList={witList}/>
+        <WitItem showWitList={showWitList} witList={witList} />
       </div>
     </>
   );

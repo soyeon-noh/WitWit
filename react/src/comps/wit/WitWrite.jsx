@@ -32,6 +32,7 @@ const WitWrite = ({ showWitList }) => {
       await WitFetch();
       await showWitList();
     }
+    console.table(wit);
   };
 
   // 글 입력시 overflow되면 textarea 부분 자동으로 높이 설정
@@ -57,6 +58,9 @@ const WitWrite = ({ showWitList }) => {
           placeholder="당신의 생각을 wit하세요"
         />
         <button onClick={witInsert}>위트하기</button>
+        <div className="etcBox">
+          <div className="insertImg">■</div>
+        </div>
       </div>
     </div>
   );

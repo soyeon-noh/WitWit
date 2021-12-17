@@ -3,6 +3,7 @@ import "../css/BoardBox.css";
 
 import { Route, Routes } from "react-router-dom";
 import WitHome from "./wit/WitHome";
+import WitDetail from "./wit/WitDetaill";
 import MyRoom from "./room/MyRoom";
 import Login from "./Login";
 import Join from "./Join";
@@ -16,7 +17,9 @@ function BoardBox() {
     <section className="board_box">
       <section className="board">
         <Routes>
-          <Route path="" element={<WitHome />} />
+          <Route path="" element={<WitHome />}>
+            <Route path="/wit/:wit_id" element={<WitDetail />} />
+          </Route>
 
           <Route path=":user_id" element={<MyRoom />}>
             <Route path="" element={<FolderBox />} />

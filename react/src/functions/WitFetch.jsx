@@ -53,8 +53,8 @@ export const WitInFolderFetch = async (id, folder_id, list) => {
 };
 
 //위마크하기
-export const WitMarkFetch = async (wit) => {
-  const wit_id = wit.id;
+export const WitMarkFetch = async (wit, _witId) => {
+  const wit_id = _witId;
   const fetch_option = {
     method: "POST",
     headers: {
