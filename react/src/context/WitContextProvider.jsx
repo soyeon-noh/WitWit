@@ -26,6 +26,9 @@ function WitContextProvider({ children }) {
     userName: "ay", // 작성자 이름
     profileUrl: "", // 작성자 프로필 이미지링크
 
+    parentWit: "", // 이전 위트 id값
+    originalWit: "", // 인용,리마크당한 오리지널위트 id값
+
     folder_id: "", // 폴더 seq (외래키)
     image_id: "", // 이미지 seq (외래키)
     parentWit: null,
