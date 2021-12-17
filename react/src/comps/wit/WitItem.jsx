@@ -15,8 +15,6 @@ const WitItem = ({ showWitList, witList }) => {
   const user_id = "@c_a_y";
   const navigate = useNavigate();
   const { wit, setWit } = useWitContext();
-  const [originalWit, setOriginalWit] = useState();
-
   // 햄버거 메뉴바 스타일 지정
   const MyHamburger = styled(MoreVertIcon)({
     color: "#ad9fb6",
@@ -84,13 +82,15 @@ const WitItem = ({ showWitList, witList }) => {
 
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
-
+    var createAtO = null;
     if (wit.text === "" && wit.originalWit[0]) {
       console.table("오리지널", wit.originalWit[0]);
       console.table("왜이렇게 많이 출력되지?");
-      // const createdDate = wit.originalWit[0].createdDate;
-      // const createdTime = wit.originalWit[0].createdTime;
-      // createAt = createdDate + " " + createdTime;
+      const createdDate = wit.originalWit[0].createdDate;
+      const createdTime = wit.originalWit[0].createdTime;
+      console.log("createdDate", createdDate);
+      console.log("createdTime?", createdTime);
+      createAtO = createdDate + " " + createdTime;
     }
 
     return (
@@ -106,7 +106,7 @@ const WitItem = ({ showWitList, witList }) => {
             <WitItemContain
               propsList={propsList}
               wit={wit.originalWit[0]}
-              createAt={createAt}
+              createAt={createAtO}
             ></WitItemContain>
           </>
         ) : (
