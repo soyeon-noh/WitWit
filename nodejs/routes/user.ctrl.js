@@ -3,6 +3,8 @@
 import User from "../models/user.js";
 import Joi from "joi";
 
+
+
 // url  :  users/join
 export const Join = async (req, res, next) => {
   const schema = Joi.object().keys({
