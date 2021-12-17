@@ -36,14 +36,14 @@ const getWit = async (req, res, searchQuery) => {
         as: "replyArray",
       },
     },
-    {
-      $lookup: {
-        from: "wits",
-        localField: "parentWit",
-        foreignField: "id",
-        as: "parentWit",
-      },
-    },
+    // {
+    //     $lookup: {
+    //       from: "wits",
+    //       localField: "parentWit",
+    //       foreignField: "id",
+    //       as: "parentWit",
+    //     },
+    // },
     {
       $lookup: {
         from: "wits",
@@ -66,7 +66,7 @@ const getWit = async (req, res, searchQuery) => {
         folder_id: 1,
         image_id: 1,
 
-        parentWit: "$parentWit",
+        // parentWit: "$parentWit",
         originalWit: "$originalWit",
         replyArray: "$replyArray",
 
@@ -139,16 +139,16 @@ router.post("/:wit_id", async (req, res) => {
 });
 
 // 위마크하기
-router.post("/wimark/:id", async (req, res) => {
+router.post("/wimark/:wit_id", async (req, res) => {
   const paramsWitId = req.params.wit_id;
-  req.body.rewitId = paramsWitId;
+  req.body.originalWit = paramsWitId;
   createWit(req, res);
 });
 
 // 인용하기
-router.post("/quote/:id", async (req, res) => {
+router.post("/quote/:wit_id", async (req, res) => {
   const paramsWitId = req.params.wit_id;
-  req.body.rewitId = paramsWitId;
+  req.body.originalWit = paramsWitId;
   createWit(req, res);
 });
 
