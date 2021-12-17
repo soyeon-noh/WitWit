@@ -2,17 +2,8 @@ import folders from "../../../models/myroom/folder.js";
 import wits from "../../../models/wit.js";
 import { v4 } from "uuid";
 
-///myroom/:user_i
+///myroom/:user_id
 export const fMain = async (req, res) => {
-  //   await folders //folders document 생성
-  //     .save()
-  //     .then(() => {
-  //       console.log("성공");
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-
   await folders
     .find({ user_id: req.params.user_id }, function (err, data) {
       res.json(data);
@@ -33,6 +24,7 @@ export const fAdd = async (req, res) => {
     return res.status(200).json(result);
   });
 };
+
 ///myroom/:user_id/folder put
 export const fUpdate = async (req, res) => {
   await folders
@@ -87,39 +79,37 @@ export const fDelete = async (req, res) => {
       res.status(500).json({ message: err });
     });
 };
-
-//폴더 삭제할때 , 폴더 내부도 삭제를 누를 때 wits 에있는 글도 삭제가 된다
-// test 0472da45-f893-427f-907c-5616c817722e
+//http://localhost:3000/@userID/folder/0dc85eb5-eefb-4263-9518-a54c51ebe90e
+//myroom/:user_id/folder/detail/:id delete
 export const fDetailDel = async (req, res) => {
   const id = req.params.id;
-  //wit 내부에 접근하여 id 값을 삭제한 후 folder도 삭제한다 .
-  await wits.deleteMany({ folder_id: id }).then(
-    await folders
-      .deleteOne({ id })
-      .then((output) => {
-        if (output.n == 0)
-          return res.status(404).json({ message: "post not found" });
-        res.status(200).json({
-          message: "delete sucess",
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({ message: err });
-      })
-      .clone()
-  );
+
+  await wits
+    .deleteMany({ folder_id: id })
+    .then(await folders.deleteOne({ id }))
+    .then((output) => {
+      if (output.n == 0)
+        return res.status(404).json({ message: "post not found" });
+      res.status(200).json({
+        message: "delete sucess",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
 };
 ///myroom/:user_id/folder/:id get
 export const fInfo = async (req, res) => {
   await wits
     .find({ folder_id: req.params.id }, function (err, result) {
       if (err) {
-        res.stauts(501).send(err);
+        res.stauts(404).send(err);
       }
       res.status(200).send(result);
     })
     .clone();
 };
+
 ///myroom/folderFind/:id get
 export const fFind = async (req, res) => {
   console.log("fFined ", req.body);
@@ -131,7 +121,7 @@ export const fFind = async (req, res) => {
       function (err, result) {
         res.status(200).json(result);
         if (err) {
-          res.status(401).send(err);
+          res.status(404).send(err);
         }
       }
     )
