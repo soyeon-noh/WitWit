@@ -56,13 +56,12 @@ const WitItem = ({ showWitList, witList }) => {
       userId: _wit.userId,
       userName: _wit.userName,
     });
-    window.alert("위마크하기");
     await WitMarkFetch(wit, _witId);
   };
 
   // 위트 눌렀을 때 위트의 디테일 화면으로 들어가기
   const intoWitDetail = (wit) => {
-    navigate(`/wit/${wit.id}`);
+    // navigate(`/wit/${wit.id}`);
   };
 
   const propsList = {
@@ -84,12 +83,8 @@ const WitItem = ({ showWitList, witList }) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     var createAtO = null;
     if (wit.text === "" && wit.originalWit[0]) {
-      console.table("오리지널", wit.originalWit[0]);
-      console.table("왜이렇게 많이 출력되지?");
       const createdDate = wit.originalWit[0].createdDate;
       const createdTime = wit.originalWit[0].createdTime;
-      console.log("createdDate", createdDate);
-      console.log("createdTime?", createdTime);
       createAtO = createdDate + " " + createdTime;
     }
 

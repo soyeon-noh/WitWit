@@ -19,15 +19,20 @@ function FolderDetail({}) {
   }, []);
   useEffect(folderFind, [folderFind]);
 
-  
   //뒤로가기 버튼
-  const onClickBack = () => {};
+  const onClickBack = () => {
+    navigate(-1);
+  };
+
+  //닫기 버튼
+  const onClickClose = () => {
+    navigate(`/${user_id}`);
+  };
 
   //폴더 수정하기 버튼
   const onClickSetting = () => {
     navigate(`/${user_id}/folder/${id}/folderinfo`);
   };
-
 
   return folderList.map((folder) => {
     return (
@@ -35,10 +40,13 @@ function FolderDetail({}) {
         <div className="folderWitBox">
           <div className="detailheader">
             {folder.name}
-            <span className="xBox">x</span>
+            <span className="xBox" onClick={onClickClose}>
+              x
+            </span>
           </div>
           <div className="detailheaderMenu">
             <span>|</span>
+            <span onClick={onClickBack}>←</span>
             <span onClick={onClickSetting}>폴더수정</span>
           </div>
 
