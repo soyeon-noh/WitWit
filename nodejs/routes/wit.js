@@ -1,10 +1,6 @@
 import express from "express";
 import moment from "moment";
 import WIT from "../models/wit.js";
-import FOLDER from "../models/myroom/folder.js";
-
-import USER from "../models/user.js";
-import LIKEY from "../models/likey.js";
 import { v4 } from "uuid";
 
 import multer from "multer";
@@ -31,19 +27,12 @@ const getWit = async (req, res, searchQuery) => {
     {
       $lookup: {
         from: "wits",
+
         localField: "id",
         foreignField: "parentWit",
         as: "replyArray",
       },
     },
-    // {
-    //     $lookup: {
-    //       from: "wits",
-    //       localField: "parentWit",
-    //       foreignField: "id",
-    //       as: "parentWit",
-    //     },
-    // },
     {
       $lookup: {
         from: "wits",
@@ -66,12 +55,10 @@ const getWit = async (req, res, searchQuery) => {
         folder_id: 1,
         image_id: 1,
 
-        // parentWit: "$parentWit",
         originalWit: "$originalWit",
         replyArray: "$replyArray",
 
         likeyCount: { $size: "$likeys" },
-        // replys: "$replyArray",
         replyCount: { $size: "$replyArray" },
       },
     },
@@ -98,37 +85,15 @@ const createWit = async (req, res) => {
   console.log("wit insert: ", req.body);
 
   // wit 추가와 함께 리스트 갱신
-  //   const result = await WIT.find({}).sort({ createdDate: -1, createdTime: -1 });
-  //   res.json(result);
   const result = await getWit(req, res, { userId: { $regex: /^@/ } });
   res.json(result);
 };
 
+const fileFields = upload.fields();
+
 // 단순 추가
-router.post("/", async (req, res) => {
-  // router.post("/", upload.single("file"), async (req, res) => {
-  //   const {
-  //     fieldname,
-  //     originalname,
-  //     encoding,
-  //     mimetype,
-  //     destination,
-  //     filename,
-  //     path,
-  //     size,
-  //   } = req.file;
-  //   const { name } = req.body;
-  //   console.log("body 데이터 : ", name);
-  //   console.log("폼에 정의된 필드명 : ", fieldname);
-  //   console.log("사용자가 업로드한 파일 명 : ", originalname);
-  //   console.log("파일의 엔코딩 타입 : ", encoding);
-  //   console.log("파일의 Mime 타입 : ", mimetype);
-  //   console.log("파일이 저장된 폴더 : ", destination);
-  //   console.log("destinatin에 저장된 파일 명 : ", filename);
-  //   console.log("업로드된 파일의 전체 경로 ", path);
-  //   console.log("파일의 바이트(byte 사이즈)", size);
+router.post("/", fileFields, async (req, res) => {
   createWit(req, res);
-  //   res.json({ ok: true, data: "Single Upload Ok" });
 });
 
 // 답글 추가
@@ -141,8 +106,24 @@ router.post("/:wit_id", async (req, res) => {
 // 위마크하기
 router.post("/wimark/:wit_id", async (req, res) => {
   const paramsWitId = req.params.wit_id;
-  req.body.originalWit = paramsWitId;
-  createWit(req, res);
+  //유저아이디도 필요
+  const userId = "@bob";
+
+  const findedWit = await WIT.findOne({
+    user_id: userId,
+    originalWit: paramsWitId,
+  });
+  console.log("findedWit: ", findedWit);
+
+  if (!findedWit) {
+    req.body.originalWit = paramsWitId;
+    createWit(req, res);
+  } else {
+    await WIT.deleteOne({ id: findedWit.id });
+
+    const result = await getWit(req, res, { userId: { $regex: /^@/ } });
+    res.json(result);
+  }
 });
 
 // 인용하기
@@ -154,7 +135,6 @@ router.post("/quote/:wit_id", async (req, res) => {
 
 // wit 검색
 router.get("/search", async (req, res) => {
-  // const queryString = req.query.q.toString();
   const queryString = req.query.q;
   const splitQuery = queryString.split(",");
   console.log("split한 query: ", splitQuery);
@@ -234,11 +214,6 @@ router.post("/:wit_id/:folder_id", async (req, res) => {
     await WIT.updateOne({ id: paramsWitId }, { $set: { folder_id: "" } });
     res.send("folder_id Delete Success");
   } else {
-    // await WIT.findByIdAndUpdate(
-    //   paramsWitId,
-    //   { folder_id: paramsFolderId },
-    //   { returnOrigininal: false }
-    // );
     await WIT.updateOne(
       { id: paramsWitId },
       { $set: { folder_id: paramsFolderId } }
