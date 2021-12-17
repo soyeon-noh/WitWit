@@ -17,6 +17,7 @@ import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
 import likeyRouter from "./routes/likey.js";
 import cors from "cors";
+// import multer from "multer";
 
 // mongoose : DB관련
 import mongoose from "mongoose";
@@ -45,6 +46,12 @@ const corsOption = {
   // 로그인 후 세션정보를 클라이언트에게 전달 허용
   credentials: true,
 };
+
+// // multer : 파일업로드 관련
+// // 파일 저장할 디렉토리 설정
+// const upload = multer({
+//   dest: "uploads/",
+// });
 
 const app = express();
 
