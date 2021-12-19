@@ -8,18 +8,16 @@ import {
 } from "../../functions/WitFetch";
 import { FolderFetch } from "../../functions/FolderFetch";
 import { useRoomContext } from "../../context/RoomContextProvider";
+import { useModalContext } from "../../context/ModalContextProvider";
+import { useWitContext } from "../../context/WitContextProvider";
 
-function WitItemMenu({ data_id, witMenuClose, showWitList, wit_folderId }) {
+function WitItemMenu({ data_id, wit_folderId }) {
   const user_id = "@userID";
   const { folderList, setFolderList } = useRoomContext();
   const [folderNameList, setFolderNameList] = useState(true);
 
-  // menu 모달 닫는 함수
-  const onWitMenuClose = (e) => {
-    if (e.target === e.currentTarget) {
-      witMenuClose();
-    }
-  };
+  const {onModalClose,modalControl} = useModalContext();
+  const {showWitList} = useWitContext()
 
   // 위트 삭제함수
   const witDelete = async (e) => {
@@ -46,11 +44,11 @@ function WitItemMenu({ data_id, witMenuClose, showWitList, wit_folderId }) {
       await WitInFolderFetch(id, folder_id, list);
       await WitFetch();
     }
-    witMenuClose();
+    modalControl();
   };
 
   return (
-    <div className="witmenu" id={data_id} onClick={onWitMenuClose}>
+    <div className="witmenu" id={data_id} onClick={onModalClose}>
       <p onClick={witDelete}>삭제하기</p>
       {folderNameList ? (
         <p onClick={onFolderOpen}>폴더담기</p>

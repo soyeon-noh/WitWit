@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../../css/wit/WitItem.css";
-import { styled } from "@mui/system";
-
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LinkIcon from "@mui/icons-material/Link";
 
 import { useWitContext } from "../../context/WitContextProvider";
@@ -10,29 +7,14 @@ import { WitLikeFetch } from "../../functions/LikeFetch";
 import WitItemContain from "./WitItemContain";
 import { WitMarkFetch } from "../../functions/WitFetch";
 import { useNavigate } from "react-router-dom";
+import { useModalContext } from "../../context/ModalContextProvider";
 
-const WitItem = ({ showWitList, witList }) => {
+const WitItem = ({showWitList, witList}) => {
   const user_id = "@c_a_y";
   const navigate = useNavigate();
-  const { wit, setWit } = useWitContext();
-  // 햄버거 메뉴바 스타일 지정
-  const MyHamburger = styled(MoreVertIcon)({
-    color: "#ad9fb6",
-    cursor: "pointer",
-    float: "right",
-  });
+  const { wit, setWit, } = useWitContext();
+  const {} = useModalContext();
 
-  //wit메뉴창 open plag
-  const [witMenuOpen, setWitMenuOpen] = useState(false);
-
-  // wit id 저장하는 state
-  const [dataId, setDataId] = useState("");
-
-  // 메뉴창 열고 닫기
-  const witMenuClose = (id) => {
-    setWitMenuOpen(!witMenuOpen);
-    setDataId(id); // 클릭된 대상의 wit id를 state에 저장
-  };
 
   // 좋아요 기능
   const like = async (user_id, wit) => {
@@ -65,15 +47,7 @@ const WitItem = ({ showWitList, witList }) => {
   };
 
   const propsList = {
-    showWitList,
-    witList,
     user_id,
-    MyHamburger,
-    witMenuOpen,
-    setWitMenuOpen,
-    dataId,
-    setDataId,
-    witMenuClose,
     like,
     reply,
     witMark,

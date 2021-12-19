@@ -4,11 +4,16 @@ import { styled } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { WitSearchFetch } from "../../functions/WitFetch";
+import { useWitContext } from "../../context/WitContextProvider";
 
-function WitSearch({ setWitList }) {
+
+
+function WitSearch() {
   const MyIcon = styled(SearchIcon)({
     color: "#ccc",
   });
+
+  const {setWitList} = useWitContext();
 
   // 검색어 setting
   const [keyword, setKeyword] = useState([]);

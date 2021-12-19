@@ -1,5 +1,8 @@
 import profile from "../../static/img/profile-basic.png";
 
+import { styled } from "@mui/system";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
@@ -9,19 +12,28 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import moment from "moment";
 import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
+import { useModalContext } from "../../context/ModalContextProvider";
 
 function WitItemContain({ propsList, wit, createAt }) {
+  
+  const {modalOpen, modalControl,dataId} = useModalContext()
+
+
+  // 햄버거 메뉴바 스타일 지정
+  const MyHamburger = styled(MoreVertIcon)({
+    color: "#ad9fb6",
+    cursor: "pointer",
+    float: "right",
+  });
+
   const {
-    showWitList,
     user_id,
-    MyHamburger,
-    witMenuOpen,
-    dataId,
-    witMenuClose,
     like,
     reply,
     witMark,
   } = propsList;
+
+  
 
   return (
     <>
@@ -33,15 +45,13 @@ function WitItemContain({ propsList, wit, createAt }) {
       <span className="wit_fromNow">
         {moment(Date.parse(createAt)).fromNow()}
       </span>
-      <span className="wit_menu" onClick={() => witMenuClose(wit.id)}>
+      <span className="wit_menu" onClick={() => modalControl(wit.id)}>
         <MyHamburger />
       </span>
-      {witMenuOpen && dataId === wit.id && (
+      {modalOpen && dataId === wit.id && (
         <WitItemMenu
-          witMenuClose={witMenuClose}
           wit_folderId={wit.folder_id}
           data_id={wit.id}
-          showWitList={showWitList}
         ></WitItemMenu>
       )}
       <div className="wit_text">{wit.text}</div>

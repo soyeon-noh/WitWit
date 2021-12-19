@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { Outlet } from "react-router";
+import { useParams } from "react-router-dom";
 
 import "../../css/myroom/MyRoom.css";
 import WitItem from "../wit/WitItem";
@@ -9,7 +10,7 @@ import { useEffect } from "react";
 
 function MyRoom() {
   const { setWitList, witList } = useWitContext();
-  const user_id = "@c_a_y";
+  const user_id = useParams("user_id")
 
   // wit list 불러오기
   const showWitList = useCallback(async () => {
@@ -18,10 +19,10 @@ function MyRoom() {
     list.map((wit) => {
       if (wit.userId === user_id) {
         setWitList((witList) => [...witList, wit]);
-      }
+      } return
     });
   }, []);
-  useEffect(showWitList, [showWitList]);
+  // useEffect(showWitList, [showWitList]);
 
   return (
     <div className="myRoomBox">

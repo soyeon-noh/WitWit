@@ -9,22 +9,17 @@ import { WitFetch } from "../../functions/WitFetch";
 import { Outlet } from "react-router-dom";
 
 const WitHome = () => {
-  const { setWitList, witList } = useWitContext();
+  const {showWitList, witList } = useWitContext();
 
-  // wit list 불러오기
-  const showWitList = useCallback(async () => {
-    const list = await WitFetch();
-    await setWitList(list);
-  }, []);
+
   useEffect(showWitList, [showWitList]);
-
   return (
     <>
-      <WitSearch setWitList={setWitList} />
-      <WitWrite showWitList={showWitList} />
+      <WitSearch />
+      <WitWrite  />
       {/* <Outlet /> */}
       <div className="witStyle">
-        <WitItem showWitList={showWitList} witList={witList} />
+        <WitItem showWitList={showWitList} witList={witList}/>
       </div>
     </>
   );

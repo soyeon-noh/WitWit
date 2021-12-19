@@ -4,11 +4,20 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import ModalContextProvider from "./context/ModalContextProvider";
+import WitContextProvider from "./context/WitContextProvider";
+import RoomContextProvider from "./context/RoomContextProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <WitContextProvider>
+    <RoomContextProvider>
+    <ModalContextProvider>
       <App />
+    </ModalContextProvider>
+    </RoomContextProvider>
+    </WitContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
