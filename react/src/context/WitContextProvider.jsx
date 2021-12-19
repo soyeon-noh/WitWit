@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 
-import moment from "moment";
 import "moment/locale/ko";
+import { useCallback } from "react";
+import { WitFetch } from "../functions/WitFetch";
 
 const AppContext = createContext();
 export const useWitContext = () => {
@@ -16,8 +17,6 @@ function WitContextProvider({ children }) {
     text: "", // 위트 텍스트 (150자 제한)
     createdDate: "", // 위트 생성 날짜
     createdTime: "", // 위트 생성 시간
-    // createdDate: moment().format("YYYY-MM-DD"), // 위트 생성 날짜
-    // createdTime: moment().format("HH:mm:ss"), // 위트 생성 시간
     userId: "@c_a_y", // 작성자 ID
     userName: "ay", // 작성자 이름
     profileUrl: "", // 작성자 프로필 이미지링크
@@ -37,11 +36,20 @@ function WitContextProvider({ children }) {
   });
 
   const [witList, setWitList] = useState([]);
+
+// wit list 불러오기
+  const showWitList = useCallback(async () => {
+    const list = await WitFetch();
+    await setWitList(list);
+  }, []);
+
+
+
+
   const providerData = {
-    wit,
-    setWit,
-    witList,
-    setWitList,
+    wit, setWit,
+    witList, setWitList,
+    showWitList
   };
 
   return (

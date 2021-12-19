@@ -4,19 +4,14 @@ import { Bookmark } from "./comps/index.jsx";
 
 import BoardBox from "./comps/BoardBox";
 import BoardHeader from "./comps/BoardHeader";
-import WitContextProvider from "./context/WitContextProvider";
-import RoomContextProvider from "./context/RoomContextProvider";
+import { useModalContext } from "./context/ModalContextProvider";
 
 function App() {
-  // const onClickTargetCheck = (e) => {
-  //   const target = e.target.className;
-  //   console.log(target);
-  // };
+
+  const {onCloseControl} = useModalContext()
 
   return (
-    <WitContextProvider>
-      <RoomContextProvider>
-        <div className="App">
+        <div className="App" onClick={onCloseControl}>
           <section className="bg">
             <div className="bg_img"></div>
           </section>
@@ -25,8 +20,6 @@ function App() {
           <Bookmark />
           <BoardBox />
         </div>
-      </RoomContextProvider>
-    </WitContextProvider>
   );
 }
 

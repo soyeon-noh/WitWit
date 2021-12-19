@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Bookmark.css";
 import { NavLink } from "react-router-dom";
 
-const user_id = "@userID";
+const user_id = "@c_a_y";
 
 function Bookmark() {
   return (
