@@ -6,6 +6,13 @@ export const WitFetch = async () => {
   return list;
 };
 
+// wit id로 wit 검색하기
+export const WitIdSearchFetch = async (user_id, wit_id) => {
+  const res = await fetch(`http://localhost:5050/wit/${user_id}/${wit_id}`);
+  const list = await res.json();
+  return list;
+};
+
 //wit Insert
 export const WitInsertFetch = async (wit) => {
   const fetch_option = {
@@ -63,4 +70,28 @@ export const WitMarkFetch = async (wit, _witId) => {
     body: JSON.stringify(wit),
   };
   await fetch(`http://localhost:5050/wit/wimark/${wit_id}`, fetch_option);
+};
+
+// 인용하기
+export const WitQuoteFetch = async (wit, wit_id) => {
+  const fetch_option = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(wit),
+  };
+  await fetch(`http://localhost:5050/wit/quote/${wit_id}`, fetch_option);
+};
+
+// 답글달기
+export const WitReplyFetch = async (wit, wit_id) => {
+  const fetch_option = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(wit),
+  };
+  await fetch(`http://localhost:5050/wit/${wit_id}`, fetch_option);
 };

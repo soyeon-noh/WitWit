@@ -13,11 +13,11 @@ import moment from "moment";
 import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
 import { useModalContext } from "../../context/ModalContextProvider";
+import WitReply from "./WitReply";
 
 function WitItemContain({ propsList, wit, createAt }) {
-  
-  const {modalOpen, modalControl,dataId} = useModalContext()
-
+  //모달창 plag변수
+  const { modalFlag, modalControl, dataId } = useModalContext();
 
   // 햄버거 메뉴바 스타일 지정
   const MyHamburger = styled(MoreVertIcon)({
@@ -26,14 +26,7 @@ function WitItemContain({ propsList, wit, createAt }) {
     float: "right",
   });
 
-  const {
-    user_id,
-    like,
-    reply,
-    witMark,
-  } = propsList;
-
-  
+  const { user_id, like, reply, witMark } = propsList;
 
   return (
     <>
@@ -45,10 +38,10 @@ function WitItemContain({ propsList, wit, createAt }) {
       <span className="wit_fromNow">
         {moment(Date.parse(createAt)).fromNow()}
       </span>
-      <span className="wit_menu" onClick={() => modalControl(wit.id)}>
+      <span className="wit_menu" onClick={() => modalControl("MENU", wit.id)}>
         <MyHamburger />
       </span>
-      {modalOpen && dataId === wit.id && (
+      {modalFlag.menu && dataId === wit.id && (
         <WitItemMenu
           wit_folderId={wit.folder_id}
           data_id={wit.id}
@@ -61,7 +54,10 @@ function WitItemContain({ propsList, wit, createAt }) {
           <span className="count">{wit.replyCount}</span>
         </span>
         <span>
-          <BorderColorRoundedIcon fontSize="" onClick={reply} />
+          <BorderColorRoundedIcon
+            fontSize=""
+            onClick={() => modalControl("REPLY", wit.id)}
+          />
           <span className="count">{wit.replyCount}</span>
         </span>
         <span>
@@ -76,6 +72,9 @@ function WitItemContain({ propsList, wit, createAt }) {
             : <span><FavoriteBorderRoundedIcon fontSize="" onClick={()=>like(user_id, wit)} /><span className="count">{wit.likeyCount}</span></span> 
             }  */}
       </div>
+      {modalFlag.reply && dataId === wit.id && (
+        <WitReply data_id={wit.id} reply={reply} parentWit={wit}></WitReply>
+      )}
     </>
   );
 }

@@ -16,8 +16,8 @@ function WitItemMenu({ data_id, wit_folderId }) {
   const { folderList, setFolderList } = useRoomContext();
   const [folderNameList, setFolderNameList] = useState(true);
 
-  const {onModalClose,modalControl} = useModalContext();
-  const {showWitList} = useWitContext()
+  const { onModalClose, modalControl } = useModalContext();
+  const { showWitList } = useWitContext();
 
   // 위트 삭제함수
   const witDelete = async (e) => {
@@ -45,10 +45,14 @@ function WitItemMenu({ data_id, wit_folderId }) {
       await WitFetch();
     }
     modalControl();
+    showWitList();
   };
 
   return (
-    <div className="witmenu" id={data_id} onClick={onModalClose}>
+    <div className="witmenu" id={data_id}>
+      <span className="exit" onClick={() => modalControl("MENU")}>
+        닫기
+      </span>
       <p onClick={witDelete}>삭제하기</p>
       {folderNameList ? (
         <p onClick={onFolderOpen}>폴더담기</p>
