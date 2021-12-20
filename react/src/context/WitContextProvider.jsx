@@ -37,19 +37,19 @@ function WitContextProvider({ children }) {
 
   const [witList, setWitList] = useState([]);
 
-// wit list 불러오기
+  // wit list 불러오기
   const showWitList = useCallback(async () => {
     const list = await WitFetch();
+    console.table(list);
     await setWitList(list);
   }, []);
 
-
-
-
   const providerData = {
-    wit, setWit,
-    witList, setWitList,
-    showWitList
+    wit,
+    setWit,
+    witList,
+    setWitList,
+    showWitList,
   };
 
   return (

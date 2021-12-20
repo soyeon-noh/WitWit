@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .App {
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 section.bg {
@@ -22,10 +23,25 @@ section.bg {
 }
 
 section.bg .bg_img {
-  background:url("./static/img/bg3.png") no-repeat ;
+  background: url("./static/img/bg3.png") no-repeat;
   background-size: cover;
   background-position-y: 100%;
   width: 100vw;
   height: 100vh;
 }
 
+.black_back {
+  position: absolute;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 105vw;
+  height: 100vh;
+  z-index: -50;
+  transform: translate(calc(-20vw + 3%), calc(-20vh + 5%));
+}
+
+.up {
+  position: absolute;
+  display: flex;
+  z-index: 90;
+}

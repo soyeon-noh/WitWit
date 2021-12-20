@@ -80,3 +80,27 @@ div.icon_box span span.count {
   line-height: 100%;
   cursor: default;
 }
+
+.quoteBox {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  text-align: left;
+  margin: 3%;
+  margin-left: 5%;
+  background-color: #07364d;
+  color: white;
+}
+
+.quoteBox span.wit_userid,
+.quoteBox span.wit_fromNow,
+.quoteBox .wit_userNick,
+.quoteBox div.icon_box span {
+  color: white;
+  font-weight: normal;
+}
+
+.quoteBox .wit_text {
+  background-color: white;
+  color: black;
+}

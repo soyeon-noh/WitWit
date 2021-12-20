@@ -10,25 +10,13 @@ function Bookmark() {
       <NavLink className="btn_bookmark home" to="/" activeClassName="active">
         HOME
       </NavLink>
-      <NavLink
-        className="btn_bookmark myroom"
-        to={user_id}
-        activeClassName="active"
-      >
+      <NavLink className="btn_bookmark myroom" to={user_id}>
         MYROOM
       </NavLink>
-      <NavLink
-        className="btn_bookmark login"
-        to="/login"
-        activeClassName="active"
-      >
+      <NavLink className="btn_bookmark login" to="/login">
         LOGIN
       </NavLink>
-      <NavLink
-        className="btn_bookmark join"
-        to="/signup"
-        activeClassName="active"
-      >
+      <NavLink className="btn_bookmark join" to="/signup">
         JOIN
       </NavLink>
     </div>

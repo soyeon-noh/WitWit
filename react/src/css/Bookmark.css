@@ -1,43 +1,37 @@
-
-
 div.btn_bookmark_box {
-    position: absolute;
-    top: 18%;
-    left: 10.5%;
-    width: 6%;
-    
-  }
-  
-  a.btn_bookmark {
-    background-color: #ffb200;
-    border-radius: 10px 0 0 10px;
-    border: 2px solid black;
-    width: 100%;
-    font-family: "DungGeunMo";
-    font-size: 2vh;
-    margin-bottom: 10%;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+  position: absolute;
+  top: 18%;
+  left: 10.5%;
+  width: 6%;
+}
 
-    display: inline-block;
-    text-decoration: none;
-    color: inherit;
+a.btn_bookmark {
+  background-color: #ffb200;
+  border-radius: 10px 0 0 10px;
+  border: 2px solid black;
+  width: 100%;
+  font-family: "DungGeunMo";
+  font-size: 2vh;
+  margin-bottom: 10%;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 
-    position: relative;
-    z-index: 5;
-  }
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
 
+  position: relative;
+  z-index: 5;
+}
 
-  a.active {
-    background-color: white;
-    border-right: 2px solid transparent;
-    z-index: 20;
-  }
+a.active {
+  background-color: white;
+  border-right: 2px solid transparent;
+  z-index: 20;
+}
 
-  
-
-  
-  
-  
-  
-  
+a.active {
+  background-color: white;
+  border-right: 2px solid transparent;
+  z-index: 20;
+}
