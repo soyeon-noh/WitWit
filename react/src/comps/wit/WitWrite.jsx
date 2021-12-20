@@ -45,7 +45,7 @@ const WitWrite = ({ showWitList }) => {
 
   return (
     <div>
-      <div className="wit_input_box">
+      <form className="wit_input_box" enctype="multipart/form-data">
         <textarea
           type="text"
           maxLength="150"
@@ -61,7 +61,7 @@ const WitWrite = ({ showWitList }) => {
         <div className="etcBox">
           <div className="insertImg">■</div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

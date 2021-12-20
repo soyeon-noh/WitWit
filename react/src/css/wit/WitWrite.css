@@ -1,4 +1,4 @@
-div.wit_input_box {
+.wit_input_box {
   width: 60%;
   height: fit-content;
   border-bottom: 2px double #ad9fb6;
@@ -8,7 +8,7 @@ div.wit_input_box {
   display: flex;
 }
 
-div.wit_input_box textarea {
+.wit_input_box textarea {
   background-color: #eee;
   outline: none;
   border: none;
@@ -25,7 +25,7 @@ div.wit_input_box textarea {
   flex: 1;
 }
 
-div.wit_input_box button {
+.wit_input_box button {
   border: none;
   background-color: #ad9fb6;
   color: white;
