@@ -12,8 +12,6 @@ const upload = multer({ dest: "uploads/" });
 
 // wit 전체 불러오는 함수
 const getWit = async (req, res, searchQuery) => {
-  //   const witResult = await WIT.find({}).sort({createdDate: -1, createdTime: -1,});
-
   const result = await WIT.aggregate([
     { $match: searchQuery },
     {
@@ -27,7 +25,6 @@ const getWit = async (req, res, searchQuery) => {
     {
       $lookup: {
         from: "wits",
-
         localField: "id",
         foreignField: "parentWit",
         as: "replyArray",
@@ -35,12 +32,20 @@ const getWit = async (req, res, searchQuery) => {
     },
     {
       $lookup: {
-        from: "wits",
-        localField: "originalWit",
-        foreignField: "id",
-        as: "originalWit",
+        from: "wimarks",
+        localField: "id",
+        foreignField: "wit_id",
+        as: "wimarks",
       },
     },
+    // {
+    //   $lookup: {
+    //     from: "wits",
+    //     localField: "originalWit",
+    //     foreignField: "id",
+    //     as: "originalWit",
+    //   },
+    // },
     {
       $project: {
         id: 1,
@@ -51,6 +56,7 @@ const getWit = async (req, res, searchQuery) => {
         userName: 1,
         profileUrl: 1,
         parentWit: 1,
+        // originalWit: 1, // id값으로변경
 
         folder_id: 1,
         image_id: 1,
@@ -91,22 +97,22 @@ const createWit = async (req, res) => {
 
 // 단순 추가
 router.post("/", upload.array("file"), async (req, res) => {
-  // const { name } = req.body;
-  // console.log("body 데이터 : ", name);
+  const { name } = req.body;
+  console.log("body 데이터 : ", name);
 
-  // req.files.map((data) => {
-  //   console.log("폼에 정의된 필드명 : ", data.fieldname);
-  //   console.log("사용자가 업로드한 파일 명 : ", data.originalname);
-  //   console.log("파일의 엔코딩 타입 : ", data.encoding);
-  //   console.log("파일의 Mime 타입 : ", data.mimetype);
-  //   console.log("파일이 저장된 폴더 : ", data.destination);
-  //   console.log("destinatin에 저장된 파일 명 : ", data.filename);
-  //   console.log("업로드된 파일의 전체 경로 ", data.path);
-  //   console.log("파일의 바이트(byte 사이즈)", data.size);
-  // });
+  req.files.map((data) => {
+    console.log("폼에 정의된 필드명 : ", data.fieldname);
+    console.log("사용자가 업로드한 파일 명 : ", data.originalname);
+    console.log("파일의 엔코딩 타입 : ", data.encoding);
+    console.log("파일의 Mime 타입 : ", data.mimetype);
+    console.log("파일이 저장된 폴더 : ", data.destination);
+    console.log("destinatin에 저장된 파일 명 : ", data.filename);
+    console.log("업로드된 파일의 전체 경로 ", data.path);
+    console.log("파일의 바이트(byte 사이즈)", data.size);
+  });
 
-  // res.json({ ok: true, data: "Multipart Upload Ok" });
-  createWit(req, res);
+  res.json({ ok: true, data: "Multipart Upload Ok" });
+  //   createWit(req, res);
 });
 
 // 답글 추가
