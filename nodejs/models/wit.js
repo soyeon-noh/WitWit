@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
-// const mongoose = require("mongoose");
-// const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
 const Schema = mongoose.Schema;
