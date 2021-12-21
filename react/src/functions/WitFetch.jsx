@@ -22,7 +22,7 @@ export const WitInsertFetch = async (wit) => {
     },
     body: JSON.stringify(wit),
   };
-
+  console.table(wit);
   await fetch("http://localhost:5050/wit", fetch_option);
 };
 

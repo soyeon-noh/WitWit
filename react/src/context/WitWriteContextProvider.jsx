@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { createContext } from "react";
 import { WitFetch, WitInsertFetch } from "../functions/WitFetch";
 import { useWitContext } from "./WitContextProvider";
@@ -23,7 +23,7 @@ function WitWriteContextProvider({ children }) {
   };
 
   // insert 함수
-  const witInsert = async () => {
+  const witInsert = async ({ files }) => {
     //유효성검사
     if (wit.text === "") {
       window.alert("위트를 입력하세요");
@@ -31,8 +31,9 @@ function WitWriteContextProvider({ children }) {
       return;
     } else {
       await WitInsertFetch(wit);
+
       textReset();
-      await WitFetch();
+      // await WitFetch();
       await showWitList();
     }
     console.table(wit);

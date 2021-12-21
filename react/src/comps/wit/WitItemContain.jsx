@@ -51,7 +51,7 @@ function WitItemContain({ propsList, wit, createAt }) {
       <div className="icon_box">
         <span>
           <BookmarkBorderRoundedIcon fontSize="" onClick={() => witMark(wit)} />
-          <span className="count">{wit.replyCount}</span>
+          <span className="count">0</span>
         </span>
         <span>
           <BorderColorRoundedIcon
