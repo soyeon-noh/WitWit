@@ -39,10 +39,15 @@
 }
 
 .etcBox {
-  max-width: 78%;
+  max-width: 100%;
   text-align: left;
   margin: 0% 3% 3% 3%;
 }
 .insertImg {
   cursor: pointer;
+}
+
+.imgPreview img {
+  width: 30%;
+  margin: 2%;
 }
