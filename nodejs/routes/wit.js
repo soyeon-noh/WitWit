@@ -10,10 +10,11 @@ const router = express.Router();
 
 const upload = multer({
   dest: "uploads/",
-  limits: {
-    files: 4, // 최대 파일 업로드 수
-    fileSize: 5 * 1024 * 1024, // 5MB 로 제한
-  },
+
+  //   limits: {
+  //     files: 4, // 최대 파일 업로드 수
+  //     fileSize: 5 * 1024 * 1024, // 5MB 로 제한
+  //   },
 });
 
 /* GET home page. */
@@ -55,6 +56,14 @@ const getWit = async (req, res, searchQuery) => {
     //   },
     // },
     {
+      $lookup: {
+        from: "files",
+        localField: "file_id",
+        foreignField: "wit_id",
+        as: "fileArray",
+      },
+    },
+    {
       $project: {
         id: 1,
         text: 1,
@@ -67,7 +76,9 @@ const getWit = async (req, res, searchQuery) => {
         // originalWit: 1, // id값으로변경
 
         folder_id: 1,
-        image_id: 1,
+        image_id: 1, // 임시삭제
+
+        fileArray: "$fileArray",
 
         originalWit: "$originalWit",
         replyArray: "$replyArray",
@@ -78,7 +89,7 @@ const getWit = async (req, res, searchQuery) => {
     },
     { $sort: { createdDate: -1, createdTime: -1 } },
   ]);
-  console.log("wit find: ", result);
+  //   console.log("wit find: ", result);
   return result;
   //   res.json(result);
 };
@@ -87,12 +98,13 @@ const getWit = async (req, res, searchQuery) => {
 router.get("/", async (req, res, next) => {
   /** db연동 기본코드 */
   const result = await getWit(req, res, { userId: { $regex: /^@/ } });
-  console.log("result: ", result);
+  //   console.log("result: ", result);
   res.json(result);
 });
 
 // wit 추가
 const createWit = async (req, res) => {
+  console.log("여기가 안오는디");
   req.body.createdDate = moment().format("YYYY[-]MM[-]DD");
   req.body.createdTime = moment().format("HH:mm:ss");
   WIT.create(req.body);
@@ -101,7 +113,7 @@ const createWit = async (req, res) => {
   if (req.files) {
     req.files.map((data) => {
       FILE.create(data);
-      console.log("file insert: ", req.file);
+      console.log("file insert: ", data);
     });
   }
 
@@ -112,6 +124,7 @@ const createWit = async (req, res) => {
 
 // 단순 추가
 router.post("/", upload.array("file"), async (req, res) => {
+  console.log("여기는 나오냐?");
   createWit(req, res);
 });
 
