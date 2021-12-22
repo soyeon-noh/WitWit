@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const file = Schema({
   id: { type: Number, default: 0 },
-  fieldname: String, // req.files.filename
+  filename: String, // req.files.filename
   originalname: String, // req.files.originalname
   size: String, // req.files.size
   wit_id: String,
