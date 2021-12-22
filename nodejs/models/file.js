@@ -6,7 +6,16 @@ const Schema = mongoose.Schema;
 
 const file = Schema({
   id: { type: Number, default: 0 },
-  name: String,
-  originalname: String,
-  byte_size: String,
+  fieldname: String, // req.files.filename
+  originalname: String, // req.files.originalname
+  size: String, // req.files.size
 });
+
+file.plugin(autoIncrement.plugin, {
+  model: "fileModel",
+  field: "id",
+  startAt: 1,
+  increment: 1,
+});
+
+export default mongoose.model("file", file);

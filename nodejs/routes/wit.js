@@ -1,12 +1,20 @@
 import express from "express";
 import moment from "moment";
 import WIT from "../models/wit.js";
+import FILE from "../models/file.js";
 import { v4 } from "uuid";
 
 import multer from "multer";
 
 const router = express.Router();
-const upload = multer({ dest: "uploads/" });
+
+const upload = multer({
+  dest: "uploads/",
+  limits: {
+    files: 4, // 최대 파일 업로드 수
+    fileSize: 5 * 1024 * 1024, // 5MB 로 제한
+  },
+});
 
 /* GET home page. */
 
@@ -90,6 +98,13 @@ const createWit = async (req, res) => {
   WIT.create(req.body);
   console.log("wit insert: ", req.body);
 
+  if (req.files) {
+    req.files.map((data) => {
+      FILE.create(data);
+      console.log("file insert: ", req.file);
+    });
+  }
+
   // wit 추가와 함께 리스트 갱신
   const result = await getWit(req, res, { userId: { $regex: /^@/ } });
   res.json(result);
@@ -97,21 +112,6 @@ const createWit = async (req, res) => {
 
 // 단순 추가
 router.post("/", upload.array("file"), async (req, res) => {
-  //   const { name } = req.body;
-  //   console.log("body 데이터 : ", name);
-
-  //   req.files.map((data) => {
-  //     console.log("폼에 정의된 필드명 : ", data.fieldname);
-  //     console.log("사용자가 업로드한 파일 명 : ", data.originalname);
-  //     console.log("파일의 엔코딩 타입 : ", data.encoding);
-  //     console.log("파일의 Mime 타입 : ", data.mimetype);
-  //     console.log("파일이 저장된 폴더 : ", data.destination);
-  //     console.log("destinatin에 저장된 파일 명 : ", data.filename);
-  //     console.log("업로드된 파일의 전체 경로 ", data.path);
-  //     console.log("파일의 바이트(byte 사이즈)", data.size);
-  //   });
-
-  //   res.json({ ok: true, data: "Multipart Upload Ok" });
   createWit(req, res);
 });
 
