@@ -25,7 +25,6 @@ function WitContextProvider({ children }) {
     originalWit: "", // 인용,리마크당한 오리지널위트 id값
 
     folder_id: "", // 폴더 seq (외래키)
-    image_id: "", // 이미지 seq (외래키)
     parentWit: null,
     originalWit: null,
     replyArray: null,

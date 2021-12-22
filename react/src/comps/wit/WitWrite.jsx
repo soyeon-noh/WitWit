@@ -12,11 +12,14 @@ const WitWrite = () => {
   const { onChangeHandler, witInsert, textRef, resize,
     imgBase, setImgBase,imgFile, setImgFile } = useWitWriteContext();
 
+    
   const fileRef = useRef();
   //아이콘 클릭하면 파일첨부하기 창이 뜨도록
   const fileUp = () => {
     fileRef.current.click();
   };
+
+
 
   const onChangeIMGFile = (e) => {
     setImgFile(e.target.files);
@@ -54,6 +57,7 @@ const WitWrite = () => {
             placeholder="당신의 생각을 wit하세요"
           />
           
+      {/* <button onClick={() => witInsert()}>위트하기</button> */}
         </div>
 
         <div className="etcBox">
@@ -77,7 +81,9 @@ const WitWrite = () => {
           </span>
         </div>
       </form>
+
       <button onClick={() => witInsert()}>위트하기</button>
+
     </div>
   );
 };
