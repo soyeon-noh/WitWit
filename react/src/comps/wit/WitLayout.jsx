@@ -4,6 +4,7 @@ import WitItem from "./WitItem";
 
 function WitLayout() {
   const { showWitList, witList } = useWitContext();
+  
   return (
     <div className="witStyle">
       <WitItem showWitList={showWitList} witList={witList} />
