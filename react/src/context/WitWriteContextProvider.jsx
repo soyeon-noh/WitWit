@@ -11,6 +11,13 @@ export const useWitWriteContext = () => {
 function WitWriteContextProvider({ children }) {
   const { wit, setWit, showWitList } = useWitContext();
 
+  // 이미지 미리보기를 위해 받을  state
+  const [imgBase, setImgBase] = useState([]);
+  //이미지 파일 그 자체를 받을 state
+  const [imgFile, setImgFile] = useState(null);
+
+
+
   // wit 내용 입력했을 때
   const onChangeHandler = (e) => {
     const wit_text = e.target.value;
@@ -22,22 +29,25 @@ function WitWriteContextProvider({ children }) {
     setWit({ ...wit, text: "" });
   };
 
+
   // insert 함수
-  const witInsert = async ({ files }) => {
+  const witInsert = async () => {
     //유효성검사
     if (wit.text === "") {
       window.alert("위트를 입력하세요");
       textRef.current.focus();
       return;
     } else {
-      await WitInsertFetch(wit);
 
+      await WitInsertFetch(wit,imgFile);
+
+      setImgBase([])
       textReset();
-      // await WitFetch();
+      await WitFetch();
       await showWitList();
     }
-    console.table(wit);
   };
+
 
   // 글 입력시 overflow되면 textarea 부분 자동으로 높이 설정
   const textRef = React.createRef();
@@ -47,7 +57,8 @@ function WitWriteContextProvider({ children }) {
     obj.style.height = obj.scrollHeight + "px";
   };
 
-  const dataList = { onChangeHandler, textReset, witInsert, textRef, resize };
+  const dataList = { onChangeHandler, textReset, witInsert, textRef, resize,
+    imgBase, setImgBase,imgFile, setImgFile };
   return <AppContext.Provider value={dataList}>{children}</AppContext.Provider>;
 }
 

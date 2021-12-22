@@ -15,10 +15,12 @@ import { useNavigate } from "react-router-dom";
 import { useWitWriteContext } from "../../context/WitWriteContextProvider";
 import WitQuote from "./WitQuote";
 
-const WitItem = ({ showWitList, witList }) => {
+
+
+const WitItem = ({showWitList, witList }) => {
   const user_id = "@c_a_y";
   const navigate = useNavigate();
-  const { wit, setWit } = useWitContext();
+  const { wit, setWit} = useWitContext();
   const { textReset } = useWitWriteContext();
 
   // 좋아요 기능
@@ -72,12 +74,18 @@ const WitItem = ({ showWitList, witList }) => {
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     var createAtO = null;
-    if (wit.originalWit[0]) {
-      createAtO =
-        wit.originalWit[0].createdDate + " " + wit.originalWit[0].createdTime;
-    }
+    // if (wit.originalWit) {
+    //   createAtO =
+    //     wit.originalWit.createdDate + " " + wit.originalWit.createdTime;
+    // }
     return (
       <div className="wits" onClick={() => intoWitDetail(wit)}>
+<WitItemContain
+            propsList={propsList}
+            wit={wit}
+            createAt={createAt}
+          ></WitItemContain>
+{/*         
         {wit.text === "" && wit.originalWit ? ( //위마크
           <>
             <span className="wemarkCheckingBox">
@@ -99,7 +107,8 @@ const WitItem = ({ showWitList, witList }) => {
             createAt={createAt}
             createAtO={createAtO}
           />
-        ) : wit.parentWit ? ( //답글
+        ) : 
+        wit.parentWit ? ( //답글
           <>
             <span className="wemarkCheckingBox">
               <span>
@@ -118,7 +127,10 @@ const WitItem = ({ showWitList, witList }) => {
             wit={wit}
             createAt={createAt}
           ></WitItemContain>
-        )}
+        )} */}
+
+
+
       </div>
     );
   });

@@ -9,14 +9,11 @@ import "../../css/wit/WitWrite.css";
 const WitWrite = () => {
   const navigate = useNavigate();
   const { wit } = useWitContext();
-  const { onChangeHandler, witInsert, textRef, resize } = useWitWriteContext();
-
-  // 이미지 미리보기를 위해 받을  state
-  const [imgBase, setImgBase] = useState([]);
-  //이미지 파일 그 자체를 받을 state
-  const [imgFile, setImgFile] = useState(null);
+  const { onChangeHandler, witInsert, textRef, resize,
+    imgBase, setImgBase,imgFile, setImgFile } = useWitWriteContext();
 
   const fileRef = useRef();
+  //아이콘 클릭하면 파일첨부하기 창이 뜨도록
   const fileUp = () => {
     fileRef.current.click();
   };
@@ -40,6 +37,7 @@ const WitWrite = () => {
     }
   };
 
+
   return (
     <div>
       <form className="wit_input_box" enctype="multipart/form-data">
@@ -55,7 +53,7 @@ const WitWrite = () => {
             className="write"
             placeholder="당신의 생각을 wit하세요"
           />
-          <button onClick={() => witInsert({ imgFile })}>위트하기</button>
+          
         </div>
 
         <div className="etcBox">
@@ -69,9 +67,9 @@ const WitWrite = () => {
             <ImageIcon onClick={fileUp} />
             <input
               type="file"
-              id="imgFile"
-              name="imgFile"
-              multiple
+              id="file"
+              name="file"
+              multiple="multiple"
               style={{ display: "none" }}
               ref={fileRef}
               onChange={onChangeIMGFile}
@@ -79,6 +77,7 @@ const WitWrite = () => {
           </span>
         </div>
       </form>
+      <button onClick={() => witInsert()}>위트하기</button>
     </div>
   );
 };

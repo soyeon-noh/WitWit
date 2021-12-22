@@ -13,16 +13,36 @@ export const WitIdSearchFetch = async (user_id, wit_id) => {
   return list;
 };
 
+const dataInsert =(wit, files) =>{
+
+  const fData = new FormData();
+  if(files.length > 0) {
+
+    for(let i = 0 ; i < files.length ; i++) {
+      fData.append("file",files[i])
+    }
+
+  }
+  fData.append("json",JSON.stringify(wit) )
+
+  return fData
+}
+
+
 //wit Insert
-export const WitInsertFetch = async (wit) => {
+export const WitInsertFetch = async (wit, files) => {
+
+  const fData = dataInsert(wit, files);
+
   const fetch_option = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
     },
-    body: JSON.stringify(wit),
+    body: fData
   };
-  console.table(wit);
+  console.log("FORMDATA",fData)
+
   await fetch("http://localhost:5050/wit", fetch_option);
 };
 
