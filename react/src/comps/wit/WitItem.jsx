@@ -60,8 +60,8 @@ const WitItem = ({showWitList, witList }) => {
 
   // 위트 눌렀을 때 위트의 디테일 화면으로 들어가기
   const intoWitDetail = (wit) => {
-    const wit_id = wit.id;
-    navigate(`/wit/${wit_id}`);
+    // const wit_id = wit.id;
+    // navigate(`/wit/${wit_id}`);
   };
 
   const propsList = {
