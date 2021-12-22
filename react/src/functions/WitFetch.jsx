@@ -16,7 +16,8 @@ export const WitIdSearchFetch = async (user_id, wit_id) => {
 const dataInsert =(wit, files) =>{
 
   const fData = new FormData();
-  if(files.length > 0) {
+
+  if(files) {
 
     for(let i = 0 ; i < files.length ; i++) {
       fData.append("file",files[i])
@@ -41,7 +42,13 @@ export const WitInsertFetch = async (wit, files) => {
     },
     body: fData
   };
-  console.log("FORMDATA",fData)
+
+  
+  // for (var value of formData.values()) {
+  
+  //   console.log(value);
+  
+  // }
 
   await fetch("http://localhost:5050/wit", fetch_option);
 };
