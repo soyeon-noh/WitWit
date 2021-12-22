@@ -105,10 +105,11 @@ router.get("/", async (req, res, next) => {
 // wit 추가
 const createWit = async (req, res) => {
   console.log("여기가 안오는디");
-  req.body.createdDate = moment().format("YYYY[-]MM[-]DD");
-  req.body.createdTime = moment().format("HH:mm:ss");
-  WIT.create(req.body);
-  console.log("wit insert: ", req.body);
+  const witJson = JSON.parse(req.body.wit); // string으로 넘어온 값은 json으로 변환
+  witJson.createdDate = moment().format("YYYY[-]MM[-]DD");
+  witJson.createdTime = moment().format("HH:mm:ss");
+  WIT.create(witJson);
+  console.log("wit insert: ", witJson);
 
   if (req.files) {
     req.files.map((data) => {
