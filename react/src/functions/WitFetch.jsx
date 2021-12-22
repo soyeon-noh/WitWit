@@ -24,7 +24,7 @@ const dataInsert =(wit, files) =>{
     }
 
   }
-  fData.append("json",JSON.stringify(wit) )
+  fData.append("wit",JSON.stringify(wit) )
 
   
   for (var value of fData.values()) {
