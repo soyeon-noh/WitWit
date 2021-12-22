@@ -26,6 +26,11 @@ const dataInsert =(wit, files) =>{
   }
   fData.append("json",JSON.stringify(wit) )
 
+  
+  for (var value of fData.values()) {
+    console.log(value);
+  }
+
   return fData
 }
 
@@ -37,18 +42,12 @@ export const WitInsertFetch = async (wit, files) => {
 
   const fetch_option = {
     method: "POST",
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+    // headers: {
+    //   "Content-Type": "multipart/form-data",
+    //   // "Content-Type": "application/json",
+    // },
     body: fData
   };
-
-  
-  // for (var value of formData.values()) {
-  
-  //   console.log(value);
-  
-  // }
 
   await fetch("http://localhost:5050/wit", fetch_option);
 };
