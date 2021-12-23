@@ -11,10 +11,10 @@ const router = express.Router();
 const upload = multer({
   dest: "uploads/",
 
-  //   limits: {
-  //     files: 4, // 최대 파일 업로드 수
-  //     fileSize: 5 * 1024 * 1024, // 5MB 로 제한
-  //   },
+  limits: {
+    files: 4, // 최대 파일 업로드 수
+    fileSize: 5 * 1024 * 1024, // 5MB 로 제한
+  },
 });
 
 /* GET home page. */
@@ -58,7 +58,7 @@ const getWit = async (req, res, searchQuery) => {
     {
       $lookup: {
         from: "files",
-        localField: "file_id",
+        localField: "id",
         foreignField: "wit_id",
         as: "fileArray",
       },
@@ -76,7 +76,7 @@ const getWit = async (req, res, searchQuery) => {
         // originalWit: 1, // id값으로변경
 
         folder_id: 1,
-        image_id: 1, // 임시삭제
+        // image_id: 1, // 임시삭제
 
         fileArray: "$fileArray",
 
@@ -104,15 +104,20 @@ router.get("/", async (req, res, next) => {
 
 // wit 추가
 const createWit = async (req, res) => {
-  console.log("여기가 안오는디");
   const witJson = JSON.parse(req.body.wit); // string으로 넘어온 값은 json으로 변환
   witJson.createdDate = moment().format("YYYY[-]MM[-]DD");
   witJson.createdTime = moment().format("HH:mm:ss");
-  WIT.create(witJson);
+  await WIT.create(witJson);
   console.log("wit insert: ", witJson);
 
+  const wit = await WIT.findOne({ userId: witJson.userId }).sort({
+    createdDate: -1,
+    createdTime: -1,
+  });
+  console.log("괜찮아?: ", wit);
   if (req.files) {
     req.files.map((data) => {
+      data.wit_id = wit.id;
       FILE.create(data);
       console.log("file insert: ", data);
     });
@@ -125,7 +130,6 @@ const createWit = async (req, res) => {
 
 // 단순 추가
 router.post("/", upload.array("file"), async (req, res) => {
-  console.log("여기는 나오냐?");
   createWit(req, res);
 });
 

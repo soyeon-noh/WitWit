@@ -18,7 +18,7 @@ const wit = Schema({
   originalWit: Number, // 인용,리마크당한 오리지널위트 id값
 
   folder_id: String, // 폴더 seq (외래키)
-  image_id: String, // 이미지 seq (외래키)
+  //   file_id: String, // 이미지 seq (외래키)
 });
 
 wit.plugin(autoIncrement.plugin, {
