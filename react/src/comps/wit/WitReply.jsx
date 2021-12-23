@@ -36,7 +36,7 @@ function WitReply({ parentWit, reply, data_id }) {
           <div className="wit_text">{parentWit.text}</div>
         </div>
 
-        <form className="wit_input_box" enctype="multipart/form-data">
+        <div className="wit_input_box" >
           <div className="divBox">
             <SubdirectoryArrowRightIcon className="arrow" />
             <textarea
@@ -58,7 +58,6 @@ function WitReply({ parentWit, reply, data_id }) {
           <div className="etcBox">
             <span className="insertImg">
               <ImageIcon />
-              이미지 추가하기
             </span>
             {replyModalFlag ? (
               <span>
@@ -70,7 +69,7 @@ function WitReply({ parentWit, reply, data_id }) {
               </span>
             )}
           </div>
-        </form>
+        </div>
       </div>
     </>
   );

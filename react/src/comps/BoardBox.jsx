@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/BoardBox.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import WitHome from "./wit/WitHome";
 import WitDetail from "./wit/WitDetaill";
 import MyRoom from "./room/MyRoom";
@@ -14,6 +14,12 @@ import FolderDetailWitBox from "./room/FolderDetailWitBox";
 import WitLayout from "./wit/WitLayout";
 
 function BoardBox() {
+
+  const navigate = useNavigate();
+  const goBackHome =() =>{
+    navigate(`/`)
+  }
+
   return (
     <>
       <section className="board_box">
@@ -32,8 +38,8 @@ function BoardBox() {
               </Route>
             </Route>
 
-            <Route extract path="login" element={<Login />} />
-            <Route extract path="signup" element={<Join />} />
+            <Route extract path="login" element={<Login goBackHome={goBackHome}/>} />
+            <Route extract path="signup" element={<Join  goBackHome={goBackHome} />} />
           </Routes>
         </section>
       </section>

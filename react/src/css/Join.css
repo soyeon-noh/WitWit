@@ -1,0 +1,59 @@
+.joinLayout {
+    text-align: left;
+    width: 70%;
+    background-color: rgb(195, 195, 195);
+    border: 2px solid black;
+  
+    padding: 5px;
+    margin: 3% auto;
+    position: relative;
+    z-index: 25;
+  
+    overflow: auto;
+  
+    display: flex;
+    flex-direction: column;
+}
+
+.joinLayoutHeader {
+    font-family: "DungGeunMo";
+    width: 100%;
+  background: linear-gradient(to right, mediumvioletred, violet);
+  padding: 0.3rem;
+
+  text-align: left;
+  color: white;
+}
+
+
+.joinForm div{
+    margin: 3%;
+}
+
+.joinForm div p{
+    font-family: "DungGeunMo";
+    text-align: left;
+    width: 30%;
+    margin: 1%;
+}
+
+.joinForm div input{
+    background-color:  white;
+    width: 70%;
+    padding: 1%;
+    text-align: left;
+}
+.joinForm div input::placeholder{
+    color: mediumvioletred;
+    text-align: left;
+}
+
+.joinForm button {
+    font-family: "DungGeunMo";
+    font-size: larger;
+    background-color: mediumvioletred;
+    padding: 1%;
+    width: 80%;
+    margin-bottom: 2%;
+    cursor: pointer;
+}

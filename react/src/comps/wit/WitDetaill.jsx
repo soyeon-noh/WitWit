@@ -7,19 +7,22 @@ import { WitIdSearchFetch } from "../../functions/WitFetch";
 import WitItem from "./WitItem";
 
 function WitDetaill() {
-  const wit_id = useParams("wit_id");
+  const {wit_id} = useParams();
   const user_id = "@c_a_y";
-  const { witList, setWitList, showWitList } = useWitContext();
+  const { witList, setWitList, } = useWitContext();
 
-  const wit = useCallback(async () => {
+  const showWitList = useCallback(async () => {
     const res = await WitIdSearchFetch(user_id, wit_id);
-    console.table("안나오나", res);
     await setWitList(res);
   }, []);
-  useEffect(wit, [wit]);
+  useEffect(showWitList, [showWitList]);
 
   return (
-    <>{witList && <WitItem witList={witList} setWitList={showWitList} />}</>
+    <>
+      <div className="witStyle">
+        {witList && <WitItem witList={witList} showWitList={showWitList} />}
+      </div>    
+    </>
   );
 }
 

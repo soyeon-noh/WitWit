@@ -40,7 +40,7 @@ function WitContextProvider({ children }) {
   // wit list 불러오기
   const showWitList = useCallback(async () => {
     const list = await WitFetch();
-    // console.table(list)
+    console.table(list)
     await setWitList(list);
   }, []);
 
