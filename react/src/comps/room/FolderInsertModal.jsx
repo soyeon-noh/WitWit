@@ -5,7 +5,7 @@ import { FolderInsertFetch } from "../../functions/FolderFetch";
 
 const FolderInsertModal = ({ modalClose, showFolderList }) => {
 
-const user_id="@userID"
+const user_id="@c_a_y"
 
   // modal창 인풋, 버튼 제외하고 클릭하였을 때 modal창 닫히도록
   const onModalClose = (e) => {
@@ -40,6 +40,8 @@ const user_id="@userID"
       refName.current.focus()
       return
     }
+    
+    console.table(folder)
     await FolderInsertFetch(user_id,folder)
     modalClose();
     await showFolderList();

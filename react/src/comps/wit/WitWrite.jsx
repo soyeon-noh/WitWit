@@ -67,7 +67,7 @@ const WitWrite = () => {
               })}
           </div>
           <span className="insertImg">
-            <ImageIcon onClick={fileUp} />
+            <ImageIcon onClick={fileUp} fontSize="" />
             <input
               type="file"
               id="file"

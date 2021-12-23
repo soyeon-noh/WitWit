@@ -9,6 +9,8 @@ import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
+import {ReactComponent as IconHeart01 } from "../../static/icons/icon-heart.svg"
+
 import moment from "moment";
 import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
@@ -36,7 +38,6 @@ function WitItemContain({ propsList, wit, createAt }) {
     const wit_id = wit.id;
     navigate(`/wit/${wit_id}`);
   };
-
 
 
   return (
@@ -81,6 +82,8 @@ function WitItemContain({ propsList, wit, createAt }) {
           <span className="count">{wit.replyCount}</span>
         </span>
         <span>
+          {/* <span className="icon"><IconHeart01 style={iconStyle} onClick={() => like(user_id, wit)}/></span>
+          <span className="count">{wit.likeyCount}</span>  */}
           <FavoriteBorderRoundedIcon
             fontSize=""
             onClick={() => like(user_id, wit)}
