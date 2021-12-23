@@ -56,8 +56,8 @@ function WitReply({ parentWit, reply, data_id }) {
           </div>
 
           <div className="etcBox">
-            <span className="insertImg">
-              <ImageIcon />
+          <span className="insertImg">
+            <ImageIcon fontSize="" />
             </span>
             {replyModalFlag ? (
               <span>

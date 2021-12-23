@@ -22,7 +22,9 @@ export const FolderInsertFetch = async (user_id, folder) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(folder),
+    
   };
+  console.log(folder)
   await fetch(`http://localhost:5050/myroom/${user_id}/folder`, fetch_option);
 };
 
@@ -45,7 +47,6 @@ export const FolderUpdateFetch = async (user_id, folder) => {
     },
     body: JSON.stringify(folder),
   };
-  console.log(folder);
   await fetch(`http://localhost:5050/myroom/${user_id}/folder`, fetch_option);
 };
 

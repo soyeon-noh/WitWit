@@ -9,7 +9,7 @@ import {
 import "../../css/myroom/FolderUpdate.css";
 
 function FolderUpdate({}) {
-  const user_id = "@userID";
+  const user_id = "@c_a_y";
   const { id } = useParams("id");
   const { folderList, setFolderList, folder, setFolder } = useRoomContext();
   const navigate = useNavigate();
