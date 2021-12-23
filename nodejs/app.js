@@ -6,10 +6,11 @@
  */
 import createError from "http-errors";
 import express from "express";
-import path, { dirname } from "path";
+// import path, { dirname } from "path";
+import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import dotenv from "dotenv";
+
 import methodOverride from "method-override";
 
 import witRouter from "./routes/wit.js";
@@ -17,35 +18,17 @@ import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
 import likeyRouter from "./routes/likey.js";
 import cors from "cors";
+import exportMongooseConfig from "./modules/mongooseConfig.js";
+import exportCorsConfig from "./modules/corsConfig.js";
 
-// mongoose : DB관련
-import mongoose from "mongoose";
+/** mongoose : DB관련 */
+/** dotenv : .env 파일 관리 */
+exportMongooseConfig();
 
-const dbConn = mongoose.connection;
-dbConn.once("open", () => {
-  console.log("˚✧₊⁎( ˘ω˘ )⁎⁺˳✧༚ \n MongoDB Open !! \n ˚✧₊⁎⁺˳✧༚˚✧₊⁎⁺✧˳");
-});
-dbConn.on("error", () => {
-  console.error;
-});
+/** cors : 교차 출처 리소스 공유, 보안 관련 */
+exportCorsConfig();
 
-dotenv.config(path.join("./.env"));
-mongoose.connect(process.env.NODEJS_APP_MONGOURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// cors : 교차 출처 리소스 공유, 보안 관련
-const whiteURL = ["http://localhost:3000"];
-const corsOption = {
-  origin: (origin, callback) => {
-    const isWhiteURL = whiteURL.indexOf(origin) !== -1;
-    callback(null, isWhiteURL);
-  },
-  // 로그인 후 세션정보를 클라이언트에게 전달 허용
-  credentials: true,
-};
-
+/** session 설정 */
 const app = express();
 
 // view engine setup
