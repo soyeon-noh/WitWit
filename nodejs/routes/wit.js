@@ -76,7 +76,6 @@ const getWit = async (req, res, searchQuery) => {
         // originalWit: 1, // id값으로변경
 
         folder_id: 1,
-        // image_id: 1, // 임시삭제
 
         fileArray: "$fileArray",
 

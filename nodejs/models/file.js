@@ -9,7 +9,7 @@ const file = Schema({
   filename: String, // req.files.filename
   originalname: String, // req.files.originalname
   size: String, // req.files.size
-  wit_id: String,
+  wit_id: Number,
 });
 
 file.plugin(autoIncrement.plugin, {

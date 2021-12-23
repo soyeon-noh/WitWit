@@ -1327,24 +1327,13 @@
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
   "version" "2.29.1"
 
-"mongodb-connection-string-url@^2.1.0", "mongodb-connection-string-url@^2.2.0":
+"mongodb-connection-string-url@^2.1.0":
   "integrity" "sha512-U0cDxLUrQrl7DZA828CA+o69EuWPWEJTwdMPozyd7cy/dbtncUZczMw7wRHcwMD7oKOn0NM2tF9jdf5FFVW9CA=="
   "resolved" "https://registry.npmjs.org/mongodb-connection-string-url/-/mongodb-connection-string-url-2.2.0.tgz"
   "version" "2.2.0"
   dependencies:
     "@types/whatwg-url" "^8.2.1"
     "whatwg-url" "^11.0.0"
-
-"mongodb@^4.2.0":
-  "integrity" "sha512-lg3MJ9dAKxhogRnIB6/j63gfD7JryZwRC0nNzZ82RhENw4nCmscZVqRfOmNzTvSNndJx9ZhxZpm9JvnKuH/GTA=="
-  "resolved" "https://registry.npmjs.org/mongodb/-/mongodb-4.2.0.tgz"
-  "version" "4.2.0"
-  dependencies:
-    "bson" "^4.5.4"
-    "denque" "^2.0.1"
-    "mongodb-connection-string-url" "^2.2.0"
-  optionalDependencies:
-    "saslprep" "^1.0.3"
 
 "mongodb@4.1.4":
   "integrity" "sha512-Cv/sk8on/tpvvqbEvR1h03mdyNdyvvO+WhtFlL4jrZ+DSsN/oSQHVqmJQI/sBCqqbOArFcYCAYDfyzqFwV4GSQ=="
