@@ -43,7 +43,7 @@ const WitWrite = () => {
 
   return (
     <div>
-      <form className="wit_input_box" enctype="multipart/form-data">
+      <div className="wit_input_box">
         <div className="divBox">
           <textarea
             type="text"
@@ -56,8 +56,7 @@ const WitWrite = () => {
             className="write"
             placeholder="당신의 생각을 wit하세요"
           />
-          
-      {/* <button onClick={() => witInsert()}>위트하기</button> */}
+          <button onClick={() => witInsert()}>위트하기</button>
         </div>
 
         <div className="etcBox">
@@ -80,9 +79,7 @@ const WitWrite = () => {
             />
           </span>
         </div>
-      </form>
-
-      <button onClick={() => witInsert()}>위트하기</button>
+      </div>
 
     </div>
   );

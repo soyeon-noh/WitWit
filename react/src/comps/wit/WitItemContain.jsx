@@ -14,10 +14,15 @@ import "moment/locale/ko";
 import WitItemMenu from "./WitItemMenu";
 import { useModalContext } from "../../context/ModalContextProvider";
 import WitReply from "./WitReply";
+import { useNavigate } from "react-router-dom";
 
 function WitItemContain({ propsList, wit, createAt }) {
+
+  const { user_id, like, reply, witMark } = propsList;
+
   //모달창 plag변수
   const { modalFlag, modalControl, dataId } = useModalContext();
+  const navigate = useNavigate();
 
   // 햄버거 메뉴바 스타일 지정
   const MyHamburger = styled(MoreVertIcon)({
@@ -26,7 +31,13 @@ function WitItemContain({ propsList, wit, createAt }) {
     float: "right",
   });
 
-  const { user_id, like, reply, witMark } = propsList;
+  // 위트 눌렀을 때 위트의 디테일 화면으로 들어가기
+  const intoWitDetail = (wit) => {
+    const wit_id = wit.id;
+    navigate(`/wit/${wit_id}`);
+  };
+
+
 
   return (
     <>
@@ -47,7 +58,16 @@ function WitItemContain({ propsList, wit, createAt }) {
           data_id={wit.id}
         ></WitItemMenu>
       )}
-      <div className="wit_text">{wit.text}</div>
+      <div className="wit_text" onClick={()=>intoWitDetail(wit)}>{wit.text}</div>
+      <div>
+        {wit.fileArray && wit.fileArray.map((item)=>{
+          return( 
+            <>
+            <div>이미지</div>
+            </>
+          )})
+        }
+      </div>
       <div className="icon_box">
         <span>
           <BookmarkBorderRoundedIcon fontSize="" onClick={() => witMark(wit)} />

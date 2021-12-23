@@ -13,27 +13,21 @@ export const WitIdSearchFetch = async (user_id, wit_id) => {
   return list;
 };
 
+
+// 파일 정보 셋하기
 const dataInsert =(wit, files) =>{
-
   const fData = new FormData();
-
   if(files) {
-
     for(let i = 0 ; i < files.length ; i++) {
       fData.append("file",files[i])
     }
-
   }
   fData.append("wit",JSON.stringify(wit) )
-
-  
-  for (var value of fData.values()) {
-    console.log(value);
-  }
-
+  // for (var value of fData.values()) {
+  //   console.log(value);
+  // }
   return fData
 }
-
 
 //wit Insert
 export const WitInsertFetch = async (wit, files) => {
@@ -65,12 +59,14 @@ export const WitDelete = async (user_id, id) => {
   await fetch(`http://localhost:5050/wit/${user_id}/${id}`, fetch_option);
 };
 
+
 // wit search Fetch
 export const WitSearchFetch = async (keyword) => {
   const result = await fetch(`http://localhost:5050/wit/search?q=${keyword}`);
   const json = await result.json();
   return json;
 };
+
 
 // wit를 folder에 넣기
 export const WitInFolderFetch = async (id, folder_id, list) => {
@@ -85,9 +81,12 @@ export const WitInFolderFetch = async (id, folder_id, list) => {
   await fetch(`http://localhost:5050/wit/${id}/${folder_id}`, fetch_option);
 };
 
+
 //위마크하기
-export const WitMarkFetch = async (wit, _witId) => {
-  const wit_id = _witId;
+export const WitMarkFetch = async (wit, _wit) => {
+  
+  const wit_id = _wit.id;
+
   const fetch_option = {
     method: "POST",
     headers: {
@@ -95,6 +94,7 @@ export const WitMarkFetch = async (wit, _witId) => {
     },
     body: JSON.stringify(wit),
   };
+  console.log(wit)
   await fetch(`http://localhost:5050/wit/wimark/${wit_id}`, fetch_option);
 };
 
@@ -102,9 +102,6 @@ export const WitMarkFetch = async (wit, _witId) => {
 export const WitQuoteFetch = async (wit, wit_id) => {
   const fetch_option = {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(wit),
   };
   await fetch(`http://localhost:5050/wit/quote/${wit_id}`, fetch_option);
@@ -114,9 +111,6 @@ export const WitQuoteFetch = async (wit, wit_id) => {
 export const WitReplyFetch = async (wit, wit_id) => {
   const fetch_option = {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(wit),
   };
   await fetch(`http://localhost:5050/wit/${wit_id}`, fetch_option);
