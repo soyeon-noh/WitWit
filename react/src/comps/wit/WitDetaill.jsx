@@ -1,6 +1,5 @@
 import React from "react";
 import { useCallback } from "react";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useWitContext } from "../../context/WitContextProvider";
 import { WitIdSearchFetch } from "../../functions/WitFetch";
@@ -15,15 +14,13 @@ function WitDetaill() {
     const res = await WitIdSearchFetch(user_id, wit_id);
     await setWitList(res);
   }, []);
-  useEffect(showWitList, [showWitList]);
 
   return (
     <>
-      <div className="witStyle">
-        {witList && <WitItem witList={witList} showWitList={showWitList} />}
-      </div>    
+      {witList && <WitItem witList={witList} showWitList={showWitList} />}
     </>
   );
+
 }
 
 export default WitDetaill;

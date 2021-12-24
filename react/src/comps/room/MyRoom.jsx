@@ -6,23 +6,19 @@ import "../../css/myroom/MyRoom.css";
 import WitItem from "../wit/WitItem";
 import { useWitContext } from "../../context/WitContextProvider";
 import { WitFetch } from "../../functions/WitFetch";
-import { useEffect } from "react";
 
 function MyRoom() {
   const { setWitList, witList } = useWitContext();
-  const user_id = useParams("user_id")
+  const {user_id} = useParams()
 
-  // wit list 불러오기
+  // 유저가 쓴 wit list 불러오기
   const showWitList = useCallback(async () => {
     const list = await WitFetch();
-
-    list.map((wit) => {
-      if (wit.userId === user_id) {
-        setWitList((witList) => [...witList, wit]);
-      } return
-    });
+    const filter_witlist = list.filter(wit=>{
+      return wit.userId === user_id
+  })
+  setWitList(filter_witlist)
   }, []);
-  // useEffect(showWitList, [showWitList]);
 
   return (
     <div className="myRoomBox">

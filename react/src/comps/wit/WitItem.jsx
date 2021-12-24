@@ -45,7 +45,6 @@ const WitItem = ({showWitList, witList }) => {
 
   //위마크
   const witMark = async (_wit) => {
-    
     // 위마크할 위트 내용 재정립
     setWit({
       ...wit,
@@ -68,6 +67,8 @@ const WitItem = ({showWitList, witList }) => {
     witMark,
   };
 
+  console.log("WitItem",witList)
+
   return witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     var createAtO = null;
@@ -81,9 +82,12 @@ const WitItem = ({showWitList, witList }) => {
     return (
       <div className="wits">
 
-      {wit.text === "" && originCheck ? ( //위마크
-        <>
-          <span className="wemarkCheckingBox">
+    
+
+      {wit.text === "" && originCheck 
+      //위마크 
+      ? ( <>    
+          <span className="wemarkCheckingBox"> 
             <span>
               <LinkIcon fontSize="1rem" />
               &nbsp;<b>{user_id}</b>님이 위마크한 위트입니다
@@ -94,16 +98,15 @@ const WitItem = ({showWitList, witList }) => {
             wit={wit.originalWit}
             createAt={createAtO}
           ></WitItemContain>
-        </>
-      ) : !(wit.text === "") && originCheck ? ( // 인용하기
+        </> ) 
+      : wit.text !== "" && originCheck ? ( // 인용하기
         <WitQuote
           propsList={propsList}
           wit={wit}
           createAt={createAt}
           createAtO={createAtO}
-        />
-      ) : 
-      wit.parentWit ? ( //답글
+        /> ) 
+      : wit.parentWit ? ( //답글
         <>
           <span className="wemarkCheckingBox">
             <span>
@@ -115,8 +118,8 @@ const WitItem = ({showWitList, witList }) => {
             wit={wit}
             createAt={createAt}
           ></WitItemContain>
-        </>
-      ) : (
+        </> )
+      : (
         <WitItemContain
           propsList={propsList}
           wit={wit}

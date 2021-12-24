@@ -15,7 +15,6 @@ function FolderDetailWitBox() {
     const fWits = await FolderDetailFetch(user_id, id);
     _setWitList(fWits);
   }, []);
-  useEffect(folderDetailFetch, [folderDetailFetch]);
 
   return (
     <div className="detailWitBox">

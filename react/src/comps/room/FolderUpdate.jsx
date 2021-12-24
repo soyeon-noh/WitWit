@@ -51,11 +51,8 @@ function FolderUpdate({}) {
       body: JSON.stringify(folder),
     };
 
-    console.table(folder);
-
     if (window.confirm("폴더에 포함된 위트도 삭제하시겠습니까?")) {
       //폴더에 포함된 위트도 삭제하기
-      // /:user_id/folder/detail/:id"
       await fetch(
         `http://localhost:5050/myroom/${user_id}/folder/detail/${id}`,
         fetch_option

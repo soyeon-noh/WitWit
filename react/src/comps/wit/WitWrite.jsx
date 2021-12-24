@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useRef,  } from "react";
 import { useWitContext } from "../../context/WitContextProvider";
 import { useWitWriteContext } from "../../context/WitWriteContextProvider";
 import ImageIcon from "@mui/icons-material/Image";
@@ -7,23 +6,24 @@ import ImageIcon from "@mui/icons-material/Image";
 import "../../css/wit/WitWrite.css";
 
 const WitWrite = () => {
-  const navigate = useNavigate();
+  
   const { wit } = useWitContext();
   const { onChangeHandler, witInsert, textRef, resize,
-    imgBase, setImgBase,imgFile, setImgFile } = useWitWriteContext();
+    imgBase, setImgBase, setImgFile } = useWitWriteContext();
 
     
-  const fileRef = useRef();
   //아이콘 클릭하면 파일첨부하기 창이 뜨도록
+  const fileRef = useRef();
   const fileUp = () => {
     fileRef.current.click();
   };
 
 
-
+  //파일 첨부시 첨부된 파일 set하기
   const onChangeIMGFile = (e) => {
     setImgFile(e.target.files);
 
+    // 이미지 첨부시 미리보기 화면에 볼 수 있도록 set하기
     for (var i = 0; i < e.target.files.length; i++) {
       if (e.target.files[i]) {
         let reader = new FileReader();
@@ -38,6 +38,7 @@ const WitWrite = () => {
         };
       }
     }
+    
   };
 
 

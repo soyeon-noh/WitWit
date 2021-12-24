@@ -25,6 +25,7 @@ function BoardBox() {
       <section className="board_box">
         <section className="board">
           <Routes>
+
             <Route path="" element={<WitHome />}>
               <Route path="" element={<WitLayout />} />
               <Route path="/wit/:wit_id" element={<WitDetail />} />
@@ -40,6 +41,7 @@ function BoardBox() {
 
             <Route extract path="login" element={<Login goBackHome={goBackHome}/>} />
             <Route extract path="signup" element={<Join  goBackHome={goBackHome} />} />
+            
           </Routes>
         </section>
       </section>

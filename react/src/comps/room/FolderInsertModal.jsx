@@ -8,11 +8,11 @@ const FolderInsertModal = ({ modalClose, showFolderList }) => {
 const user_id="@c_a_y"
 
   // modal창 인풋, 버튼 제외하고 클릭하였을 때 modal창 닫히도록
-  const onModalClose = (e) => {
-    if (e.target === e.currentTarget) {
-      modalClose();
-    }
-  };
+  // const onModalClose = (e) => {
+  //   if (e.target === e.currentTarget) {
+  //     modalClose();
+  //   }
+  // };
 
   const { folder, setFolder } = useRoomContext();
   const [checked, setChecked] = useState(false);
@@ -40,15 +40,14 @@ const user_id="@c_a_y"
       refName.current.focus()
       return
     }
-    
-    console.table(folder)
+
     await FolderInsertFetch(user_id,folder)
     modalClose();
     await showFolderList();
   }
 
   return (
-    <div className="folderInsertMenu" onClick={onModalClose}>
+    <div className="folderInsertMenu" >
       <input
         placeholder="폴더명 입력하기"
         maxLength="10"

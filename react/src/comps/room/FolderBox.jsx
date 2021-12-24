@@ -17,16 +17,16 @@ const FolderBox = () => {
   const {user_id} = useParams();
   const navigate = useNavigate();
 
+
   // 유저의 folder 리스트 출력하기
   const showFolderList = useCallback(async () => {
-
     const folder = await FolderFetch(user_id);
     await setFolderList(folder);
   }, []);
   useEffect(showFolderList, [showFolderList]);
 
 
-  // 폴더 map으로 돌려서 출력하기
+  // 폴더정보 map으로 돌려서 출력하기
   const folderlistBox = folderList.map((folder) => {
     return (
       <div className="folder" onClick={() => folderDetail(folder.id)}>

@@ -17,7 +17,6 @@ function WitWriteContextProvider({ children }) {
   const [imgFile, setImgFile] = useState(null);
 
 
-
   // wit 내용 입력했을 때
   const onChangeHandler = (e) => {
     const wit_text = e.target.value;
@@ -57,8 +56,12 @@ function WitWriteContextProvider({ children }) {
     obj.style.height = obj.scrollHeight + "px";
   };
 
+
+
   const dataList = { onChangeHandler, textReset, witInsert, textRef, resize,
     imgBase, setImgBase,imgFile, setImgFile };
+  
+  
   return <AppContext.Provider value={dataList}>{children}</AppContext.Provider>;
 }
 
