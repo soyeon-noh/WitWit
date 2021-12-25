@@ -6,13 +6,10 @@
  */
 import createError from "http-errors";
 import express from "express";
-// import path, { dirname } from "path";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-
 import methodOverride from "method-override";
-
 import witRouter from "./routes/wit.js";
 import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
@@ -20,6 +17,10 @@ import likeyRouter from "./routes/likey.js";
 import cors from "cors";
 import exportMongooseConfig from "./modules/mongooseConfig.js";
 import exportCorsConfig from "./modules/corsConfig.js";
+import exportSession from "./modules/sessionConfig.js";
+import exportPassport from "./modules/passportConfig.js";
+
+const app = express();
 
 /** mongoose : DB관련 */
 /** dotenv : .env 파일 관리 */
@@ -29,7 +30,11 @@ exportMongooseConfig();
 exportCorsConfig();
 
 /** session 설정 */
-const app = express();
+exportSession(app);
+
+/** passport 설정 */
+// 위치가 router 밑이어야하나?
+exportPassport(app);
 
 // view engine setup
 app.set("views", path.join("./views"));

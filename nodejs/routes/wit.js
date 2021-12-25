@@ -5,12 +5,23 @@ import FILE from "../models/file.js";
 import { v4 } from "uuid";
 
 import multer from "multer";
+import { getWit } from "./wit.ctrl.js";
+import path from "path";
 
 const router = express.Router();
 
-const upload = multer({
-  dest: "uploads/",
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    const fileType = path.extname(file.originalname);
+    cb(null, v4() + fileType);
+  },
+});
 
+const multerUpload = multer({
+  storage: fileStorage,
   limits: {
     files: 4, // 최대 파일 업로드 수
     fileSize: 5 * 1024 * 1024, // 5MB 로 제한
@@ -19,83 +30,8 @@ const upload = multer({
 
 /* GET home page. */
 
-// wit 전체 불러오는 함수
-const getWit = async (req, res, searchQuery) => {
-  const result = await WIT.aggregate([
-    { $match: searchQuery },
-    {
-      $lookup: {
-        from: "likeys",
-        localField: "id",
-        foreignField: "wit_id",
-        as: "likeys",
-      },
-    },
-    {
-      $lookup: {
-        from: "wits",
-        localField: "id",
-        foreignField: "parentWit",
-        as: "replyArray",
-      },
-    },
-    {
-      $lookup: {
-        from: "wimarks",
-        localField: "id",
-        foreignField: "wit_id",
-        as: "wimarks",
-      },
-    },
-    // {
-    //   $lookup: {
-    //     from: "wits",
-    //     localField: "originalWit",
-    //     foreignField: "id",
-    //     as: "originalWit",
-    //   },
-    // },
-    {
-      $lookup: {
-        from: "files",
-        localField: "id",
-        foreignField: "wit_id",
-        as: "fileArray",
-      },
-    },
-    {
-      $project: {
-        id: 1,
-        text: 1,
-        createdDate: 1,
-        createdTime: 1,
-        userId: 1,
-        userName: 1,
-        profileUrl: 1,
-        parentWit: 1,
-        // originalWit: 1, // id값으로변경
-
-        folder_id: 1,
-
-        fileArray: "$fileArray",
-
-        originalWit: "$originalWit",
-        replyArray: "$replyArray",
-
-        likeyCount: { $size: "$likeys" },
-        replyCount: { $size: "$replyArray" },
-      },
-    },
-    { $sort: { createdDate: -1, createdTime: -1 } },
-  ]);
-  //   console.log("wit find: ", result);
-  return result;
-  //   res.json(result);
-};
-
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
-  /** db연동 기본코드 */
   const result = await getWit(req, res, { userId: { $regex: /^@/ } });
   //   console.log("result: ", result);
   res.json(result);
@@ -113,7 +49,6 @@ const createWit = async (req, res) => {
     createdDate: -1,
     createdTime: -1,
   });
-  console.log("괜찮아?: ", wit);
   if (req.files) {
     req.files.map((data) => {
       data.wit_id = wit.id;
@@ -128,7 +63,7 @@ const createWit = async (req, res) => {
 };
 
 // 단순 추가
-router.post("/", upload.array("file"), async (req, res) => {
+router.post("/", multerUpload.array("file"), async (req, res) => {
   createWit(req, res);
 });
 
@@ -183,14 +118,6 @@ router.get("/search", async (req, res) => {
     })
   );
 
-  //   const resultList = await Promise.all(
-  //     splitQuery.map(async (query) => {
-  //       return await WIT.find({
-  //         $or: [{ userId: { $regex: query } }, { text: { $regex: query } }],
-  //       }).sort({ createdDate: -1, createdTime: -1 });
-  //     })
-  //   );
-
   // 중복 삭제
   const uniqueResultList = resultList.filter((element, index, array) => {
     return array.findIndex((item) => item.id === element.id) === index;
@@ -202,19 +129,6 @@ router.get("/search", async (req, res) => {
 
 // wit 디테일
 router.get("/:user_id/:wit_id", async (req, res) => {
-  // const paramsWitId = req.params.wit_id;
-  // const witResult = await WIT.findOne({ id: paramsWitId });
-  // const commentsResult = await WIT.find({ parentWit: paramsWitId }).sort({
-  //   createdDate: -1,
-  //   createdTime: -1,
-  // });
-
-  // const sendData = {
-  //   wit: witResult,
-  //   replys: commentsResult,
-  // };
-  // res.json(sendData);
-
   /**
    * getWit의 searchQuery에 기존과 동일하게 paramsWitId 를 대입하면 결과가 나오지 않는다.
    * 이는 Type 문제로 Number로 강제 형변환을 시켜주면 해결된다.
@@ -232,6 +146,7 @@ router.delete("/:user_id/:wit_id", async (req, res) => {
   const paramsWitId = req.params.wit_id;
   await WIT.deleteOne({ id: paramsWitId });
 
+  await FILE.deleteMany({ wit_id: paramsWitId });
   res.send("Delete Success");
 });
 

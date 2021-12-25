@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
+// import path from "path/posix"; // 원래 이게 되어있었음
 
 const exportMongooseConfig = () => {
   const dbConn = mongoose.connection;
