@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
  *
  */
 const UserSchema = new Schema({
-  id: { type: Number, default: 0 },
+  // id: { type: Number, default: 0 },
   // 사용자의 고유한 아이디 번호..?
   userId: { type: String, trim: true }, // 사용자가 작성한 아이디
   password: { type: String, trim: true }, // 사용자 비밀번호
@@ -21,39 +21,39 @@ const UserSchema = new Schema({
   profileUrl: String, // 프로필사진 (optional)
 });
 
-UserSchema.methods.setPassword = async function (password) {
-  const hash = await bcrypt.hash(password, 10);
-  this.password = hash;
-};
+// UserSchema.methods.setPassword = async function (password) {
+//   const hash = await bcrypt.hash(password, 10);
+//   this.password = hash;
+// };
 
-UserSchema.methods.checkedPassword = async function (password) {
-  const result = await bcrypt.compare(password, this.password);
-  return result;
-};
+// UserSchema.methods.checkedPassword = async function (password) {
+//   const result = await bcrypt.compare(password, this.password);
+//   return result;
+// };
 
-UserSchema.methods.serialize = function () {
-  const data = this.toJSON();
-  delete data.password;
-  return data;
-};
+// UserSchema.methods.serialize = function () {
+//   const data = this.toJSON();
+//   delete data.password;
+//   return data;
+// };
 
-UserSchema.methods.getToken = function () {
-  const token = jwt.sign(
-    {
-      _id: this.id,
-      username: this.userId,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "7d", //7d일
-    }
-  );
-  return token;
-};
+// UserSchema.methods.getToken = function () {
+//   const token = jwt.sign(
+//     {
+//       _id: this.id,
+//       username: this.userId,
+//     },
+//     process.env.JWT_SECRET,
+//     {
+//       expiresIn: "7d", //7d일
+//     }
+//   );
+//   return token;
+// };
 
-UserSchema.statics.findByUserId = function (userId) {
-  return this.findOne({ userId });
-};
+// UserSchema.statics.findByUserId = function (userId) {
+//   return this.findOne({ userId });
+// };
 
 const User = mongoose.model("user", UserSchema);
 export default User;
