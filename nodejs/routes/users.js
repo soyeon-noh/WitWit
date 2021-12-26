@@ -9,10 +9,9 @@ import * as userCtrl from "./user.ctrl.js";
  */
 
 /* GET users listing. */
-// router.post("/login", userCtrl.login);
 router.post("/login", passport.authenticate("local"), userCtrl.login);
 router.post("/join", userCtrl.join);
 router.post("/logout", userCtrl.logout);
-router.post("/check", userCtrl.userCheck);
+// router.post("/check", userCtrl.userCheck);
 
 export default router;
