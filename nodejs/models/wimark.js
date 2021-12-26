@@ -5,7 +5,7 @@ autoIncrement.initialize(mongoose.connection);
 
 const Schema = mongoose.Schema;
 
-const wimark = Schema({
+const wimarkSchema = Schema({
   id: { type: Number, default: 0 },
   createdDate: String,
   createdTime: String,
@@ -16,11 +16,11 @@ const wimark = Schema({
   wit_id: Number,
 });
 
-wimark.plugin(autoIncrement.plugin, {
+wimarkSchema.plugin(autoIncrement.plugin, {
   model: "wimarkModel",
   field: "id",
   startAt: 1,
   increment: 1,
 });
 
-export default mongoose.model("wimark", wimark);
+export default mongoose.model("wimark", wimarkSchema);
