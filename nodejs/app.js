@@ -19,6 +19,7 @@ import exportMongooseConfig from "./modules/mongooseConfig.js";
 import exportCorsConfig from "./modules/corsConfig.js";
 import exportSession from "./modules/sessionConfig.js";
 import exportPassport from "./modules/passportConfig.js";
+import passport from "passport";
 
 const app = express();
 
@@ -33,7 +34,7 @@ exportCorsConfig();
 exportSession(app);
 
 /** passport 설정 */
-// 위치가 router 밑이어야하나?
+// 위치가 session 아래여야함
 exportPassport(app);
 
 // view engine setup

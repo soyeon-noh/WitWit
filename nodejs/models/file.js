@@ -4,7 +4,7 @@ autoIncrement.initialize(mongoose.connection);
 
 const Schema = mongoose.Schema;
 
-const file = Schema({
+const fileSchema = Schema({
   id: { type: Number, default: 0 },
   filename: String, // req.files.filename
   originalname: String, // req.files.originalname
@@ -12,11 +12,11 @@ const file = Schema({
   wit_id: Number,
 });
 
-file.plugin(autoIncrement.plugin, {
+fileSchema.plugin(autoIncrement.plugin, {
   model: "fileModel",
   field: "id",
   startAt: 1,
   increment: 1,
 });
 
-export default mongoose.model("file", file);
+export default mongoose.model("file", fileSchema);

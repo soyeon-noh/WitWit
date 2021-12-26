@@ -1,10 +1,13 @@
 import passport from "passport";
 import passportLocal from "passport-local";
+import USER from "../models/user.js";
 
 export const exportPassport = (app) => {
+  /** 이 app.use는 app.js에서 router 위에 있어야한다.. */
   app.use(passport.initialize()); // passprot start
   app.use(passport.session()); // passport와 session을 연결
 
+  /** 이 아래는 router 아래여도 상관없다 */
   /**
    * Serialize
    * 로그인에 성공했을 때 호출
@@ -23,7 +26,7 @@ export const exportPassport = (app) => {
    */
   passport.deserializeUser((user, done) => {
     // done의 두번째 인자로 user를 전달하게되면
-    //req.usre로 user의 값을 접글할 수 있게된다.
+    // req.usre로 user의 값을 접글할 수 있게된다.
     console.log("user info : ", user);
     done(null, user);
   });
@@ -42,6 +45,24 @@ export const exportPassport = (app) => {
         session: true, // 세션 저장여부
       },
       (userId, password, done) => {
+        // DB 연동
+        const result = USER.findOne({ userId: userId }, (err, user) => {
+          console.log("DB의 user info: ", user);
+          if (err) {
+            return done(err);
+          }
+          if (!user) {
+            return done(null, null, { message: "userId does not exist" });
+          }
+          const valid = user.checkedPassword(password);
+          if (!valid) {
+            return done(null, null, { message: "password does not match" });
+          }
+
+          console.log("userId, password 일치");
+          return done(null, { userId, password });
+        });
+
         /**
          * login이 성공했을 경우
          * done() 함수의 2번째 매개변수에
@@ -49,7 +70,11 @@ export const exportPassport = (app) => {
          * router 에서 req.user 객체가 생성되고
          * 로그인한 정보를 추출할 수 있다.
          */
-        return done(null, { userId: "test", password: "1234567" });
+
+        if (!result) {
+          console.log("DB에서 user info 가져오기 실패");
+          return done(null, null, { message: "login fail" });
+        }
       }
     )
   );
