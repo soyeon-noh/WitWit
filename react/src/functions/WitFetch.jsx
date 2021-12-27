@@ -94,7 +94,6 @@ export const WitMarkFetch = async (wit, _wit) => {
     },
     body: JSON.stringify(wit),
   };
-  console.log(wit)
   await fetch(`http://localhost:5050/wit/wimark/${wit_id}`, fetch_option);
 };
 

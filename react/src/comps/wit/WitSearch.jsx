@@ -6,12 +6,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { WitSearchFetch } from "../../functions/WitFetch";
 import { useWitContext } from "../../context/WitContextProvider";
 
-
-
 function WitSearch() {
-  const MyIcon = styled(SearchIcon)({
-    color: "#ccc",
-  });
+
+  const MyIcon = styled(SearchIcon)({ color: "#ccc", });
 
   const {setWitList} = useWitContext();
 
@@ -37,6 +34,7 @@ function WitSearch() {
       return;
     } else {
       const json = await WitSearchFetch(keyword);
+      console.log(json)
       await setWitList(json);
       searchReset();
     }

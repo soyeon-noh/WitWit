@@ -8,10 +8,12 @@ import { Outlet } from "react-router-dom";
 import { useModalContext } from "../../context/ModalContextProvider";
 
 const WitHome = () => {
-  const { showWitList } = useWitContext();
   const { modalFlag } = useModalContext();
 
-  useEffect(showWitList, [showWitList]);
+
+
+
+  
   return (
     <>
       {modalFlag.reply ? (
@@ -21,7 +23,10 @@ const WitHome = () => {
       )}
       <WitSearch />
       <WitWrite />
-      <Outlet />
+
+      <div className="witStyle">
+        <Outlet />
+      </div>
     </>
   );
 };
