@@ -19,7 +19,6 @@ import exportMongooseConfig from "./modules/mongooseConfig.js";
 import exportCorsConfig from "./modules/corsConfig.js";
 import exportSession from "./modules/sessionConfig.js";
 import exportPassport from "./modules/passportConfig.js";
-import passport from "passport";
 
 const app = express();
 

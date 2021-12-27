@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-const router = express.Router();
+const users = express.Router();
 import * as userCtrl from "./user.ctrl.js";
 /**
  * passport를 사용하여 Login을 수행할 때
@@ -9,9 +9,13 @@ import * as userCtrl from "./user.ctrl.js";
  */
 
 /* GET users listing. */
-router.post("/login", passport.authenticate("local"), userCtrl.login);
-router.post("/join", userCtrl.join);
-router.post("/logout", userCtrl.logout);
+users.post("/login", passport.authenticate("local"), userCtrl.login);
+users.post("/join", userCtrl.join);
+// users.post("/logout", (req, res) => {
+//   console.log("뭐야");
+//   res.send("진짜개빡쳐");
+// });
+users.post("/logout", userCtrl.logout);
 // router.post("/check", userCtrl.userCheck);
 
-export default router;
+export default users;

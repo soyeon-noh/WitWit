@@ -17,7 +17,7 @@ export const exportPassport = (app) => {
   passport.serializeUser((user, done) => {
     // done 을 호출하게되면 session에 사용자 정보가 저장되고
     // 두번째 인자로 전달한 user가 deserializeUser로 전달된다
-    console.log("login success");
+    console.log("passport serializeUser 완료");
     done(null, user);
   });
 
@@ -44,25 +44,23 @@ export const exportPassport = (app) => {
         passwordField: "password",
         session: true, // 세션 저장여부
       },
-      (userId, password, done) => {
+      async (userId, password, done) => {
         // DB 연동
-        const result = USER.findOne({ userId: userId }, (err, user) => {
-          console.log("DB의 user info: ", user);
-          if (err) {
-            return done(err);
-          }
-          if (!user) {
-            return done(null, null, { message: "userId does not exist" });
-          }
-          const valid = user.checkedPassword(password);
-          if (!valid) {
-            return done(null, null, { message: "password does not match" });
-          }
+        // @가 붙었는지 확인하라
+        // console.log("userID값: ", userId);
+        const user = await USER.findOne({ userId });
+        // console.log("user값: ", user);
+        if (!user) {
+          console.log("존재하지 않는 아이디 입니다");
+          return done(null, false, { message: "Incorrect userId" });
+        }
+        if (user.password != password) {
+          console.log("비밀번호가 일치하지 않습니다");
+          return done(null, false, { message: "Incorrect password" });
+        }
 
-          console.log("userId, password 일치");
-          return done(null, { userId, password });
-        });
-
+        console.log("userId, password 일치");
+        return done(null, user);
         /**
          * login이 성공했을 경우
          * done() 함수의 2번째 매개변수에
@@ -70,11 +68,6 @@ export const exportPassport = (app) => {
          * router 에서 req.user 객체가 생성되고
          * 로그인한 정보를 추출할 수 있다.
          */
-
-        if (!result) {
-          console.log("DB에서 user info 가져오기 실패");
-          return done(null, null, { message: "login fail" });
-        }
       }
     )
   );
