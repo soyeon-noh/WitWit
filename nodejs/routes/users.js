@@ -18,4 +18,6 @@ users.post("/join", userCtrl.join);
 users.post("/logout", userCtrl.logout);
 // router.post("/check", userCtrl.userCheck);
 
+users.post("/:user_id/follow", userCtrl.follow);
+
 export default users;
