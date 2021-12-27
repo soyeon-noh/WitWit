@@ -4,7 +4,7 @@ autoIncrement.initialize(mongoose.connection);
 
 const Schema = mongoose.Schema;
 
-const wit = Schema({
+const witSchema = Schema({
   id: { type: Number, default: 0 }, // 위트 아이디
   //   text: { type: String, required: true }, // 위트 텍스트 (512자 제한)
   text: String, // 위트 텍스트 (512자 제한)
@@ -18,14 +18,13 @@ const wit = Schema({
   originalWit: Number, // 인용,리마크당한 오리지널위트 id값
 
   folder_id: String, // 폴더 seq (외래키)
-  image_id: String, // 이미지 seq (외래키)
 });
 
-wit.plugin(autoIncrement.plugin, {
+witSchema.plugin(autoIncrement.plugin, {
   model: "witModel",
   field: "id",
   startAt: 1,
   increment: 1,
 });
 
-export default mongoose.model("wit", wit);
+export default mongoose.model("wit", witSchema);
