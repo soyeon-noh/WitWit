@@ -48,13 +48,29 @@ export const exportPassport = (app) => {
         // DB 연동
         // @가 붙었는지 확인하라
         // console.log("userID값: ", userId);
-        const user = await USER.findOne({ userId });
+        const firstChar = userId.charAt(0);
+        if (firstChar !== "@") {
+          userId = "@" + userId;
+        }
+
+        // const user = await USER.findOne({ userId });
         // console.log("user값: ", user);
+        // if (!user) {
+        //   console.log("존재하지 않는 아이디 입니다");
+        //   return done(null, false, { message: "Incorrect userId" });
+        // }
+        // if (user.password != password) {
+        //   console.log("비밀번호가 일치하지 않습니다");
+        //   return done(null, false, { message: "Incorrect password" });
+        // }
+
+        const user = await USER.findByUserId(userId);
         if (!user) {
           console.log("존재하지 않는 아이디 입니다");
           return done(null, false, { message: "Incorrect userId" });
         }
-        if (user.password != password) {
+        const valid = await user.checkedPassword(password);
+        if (!valid) {
           console.log("비밀번호가 일치하지 않습니다");
           return done(null, false, { message: "Incorrect password" });
         }

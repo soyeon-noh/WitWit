@@ -1,7 +1,9 @@
 // user.ctrl.js;
 
 import USER from "../models/user.js";
+import FOLLOW from "../models/follow.js";
 import Joi from "joi";
+import { v4 } from "uuid";
 
 // url :  users/login
 // 테스트용 유저 정보  userId : @test password : 1234567
@@ -11,12 +13,22 @@ export const login = async (req, res, next) => {
   if (!userId || !password) {
     return res.sendStatus(401);
   }
-  const user = await USER.findOne({ userId });
+
+  /**
+   * passportCOnfig에서도 같은 검사를 하고 있는데
+   * message값을 어떻게 활용해야할지 모르겠다
+   * status 가 아무 영향이없다... 어떻게 해야하지.
+   */
+  const user = await USER.findByUserId(userId);
   if (!user) {
-    return res.send("Incorrect userId");
+    return res.status(401).send("Incorrect userId");
+    // return res.sendStatus(401);
   }
-  if (user.password != password) {
-    return res.send("Incorrect password");
+  const valid = await user.checkedPassword(password);
+  console.log("valid: ", valid);
+  if (!valid) {
+    return res.status(401).send("Incorrect password");
+    // return res.sendStatus(401);
   }
 
   console.log("로그인성공");
@@ -49,21 +61,47 @@ export const join = async (req, res, next) => {
   }
   const user = new USER({
     userId,
-    password,
     userName,
     email,
     profileUrl,
   });
-  // await user.setPassword(password);
+  await user.setPassword(password);
   await user.save();
 
   res.json(user);
 };
 
-// user :  /user/logout
+// url :  /users/logout
 export const logout = async (req, res, next) => {
   req.session.destroy((err) => {
     req.logout();
     res.redirect("/");
   });
+};
+
+// url : /users/:user_id/follow
+export const follow = async (req, res, next) => {
+  const user_id = req.user.userId;
+  const target_id = req.params.user_id;
+
+  if (user_id) {
+    const findedFollow = await FOLLOW.find({
+      user_id,
+      target_id,
+    });
+
+    if (!findedFollow) {
+      const follow = new FOLLOW({
+        id: v4(),
+        user_id,
+        target_id,
+      });
+      await follow.create(follow);
+    } else {
+      await FOLLOW.deleteOne({ id: findedFollow.id });
+    }
+  } else {
+    /** 유저가없는경우 어떻게 처리해야할지 고민필요 */
+    res.status(404).send("no user");
+  }
 };

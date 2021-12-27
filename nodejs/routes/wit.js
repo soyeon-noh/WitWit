@@ -32,8 +32,18 @@ const multerUpload = multer({
 
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
-  const result = await getWit(req, res, { userId: { $regex: /^@/ } });
-  //   console.log("result: ", result);
+  const user = req.user;
+  console.log("user정보 넘어오나?: ", user);
+  let result;
+  if (user) {
+    // 유저가 로그인하고 있을 때 팔로우하고있는 사람들만 보이게하기
+    // query 를 수정할 필요가 있다
+    result = await getWit(req, res, { userId: { $regex: /^@/ } });
+  } else {
+    // 이건 모두 다 보이게 하기
+    result = await getWit(req, res, { userId: { $regex: /^@/ } });
+  }
+
   res.json(result);
 });
 
