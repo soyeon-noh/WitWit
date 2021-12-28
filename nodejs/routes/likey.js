@@ -5,19 +5,30 @@ import { v4 } from "uuid";
 const router = express.Router();
 
 // 테스트코드
-router.get("/", async (req, res) => {
-  const result = await LIKEY.find({});
-  console.log("result: ", result);
-  res.json(result);
+router.get("/:user_id/:wit_id", async (req, res) => {
+  const userId = req.params.user_id;
+  //   const user = req.user;
+  const witId = req.params.wit_id;
+  const result = await LIKEY.findOne({
+    user_id: userId,
+    wit_id: witId,
+  });
+  if (result) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
 });
 
 // 좋아요
-router.post("/:user_id/:witId", async (req, res) => {
-  const paramsUserId = req.params.user_id;
-  const paramsWitId = req.params.witId;
+router.post("/:user_id/:wit_id", async (req, res) => {
+  const userId = req.params.user_id;
+  //   const user = req.user;
+  const witId = req.params.wit_id;
   const findedLikey = await LIKEY.findOne({
-    user_id: paramsUserId,
-    wit_id: paramsWitId,
+    user_id: userId,
+    // user_id: user.userId,
+    wit_id: witId,
   });
   console.log("likey: ", findedLikey);
   if (!findedLikey) {

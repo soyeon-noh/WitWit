@@ -18,16 +18,18 @@ export const login = async (req, res, next) => {
    * status 가 아무 영향이없다... 어떻게 해야하지.
    */
   const user = await USER.findByUserId(userId);
-  if (!user) {
-    return res.status(401).send("Incorrect userId");
-    // return res.sendStatus(401);
-  }
-  const valid = await user.checkedPassword(password);
-  console.log("valid: ", valid);
-  if (!valid) {
-    return res.status(401).send("Incorrect password");
-    // return res.sendStatus(401);
-  }
+  //   if (!user) {
+  //     return res.status(401).send("Incorrect userId");
+  //     // return res.sendStatus(401);
+  //   }
+  //   const valid = await user.checkedPassword(password);
+  //   console.log("valid: ", valid);
+  //   if (!valid) {
+  //     return res.status(401).send("Incorrect password");
+  //     // return res.sendStatus(401);
+  //   }
+
+  //   console.log("message: ", err.message);
 
   console.log("로그인성공");
   res.json(user);
@@ -75,4 +77,60 @@ export const logout = async (req, res, next) => {
     req.logout();
     res.redirect("/");
   });
+};
+
+export const loginUserInfo = async (req, res, next) => {
+  //   const result = await getUser(req, res, { userId: "@test" });
+  const result = await getUser(req, res, { userId: req.user.userId });
+  //   console.log("user result:", result);
+  res.json(result);
+};
+
+export const userInfo = async (req, res, next) => {
+  const user_id = req.params.user_id;
+  const result = await getUser(req, res, { userId: user_id });
+  //   console.log("user result:", result);
+  res.json(result);
+};
+
+export const userCheck = async (req, res, next) => {
+  req.user;
+};
+
+const getUser = async (req, res, searchQuery) => {
+  const result = await USER.aggregate([
+    { $match: searchQuery },
+    {
+      $lookup: {
+        from: "follows",
+        localField: "userId",
+        foreignField: "user_id",
+        as: "following",
+      },
+    },
+    {
+      $lookup: {
+        from: "follows",
+        localField: "userId",
+        foreignField: "target_id",
+        as: "follower",
+      },
+    },
+    {
+      $project: {
+        id: 1,
+        userId: 1,
+        password: 1,
+        userName: 1,
+        email: 1,
+        profileUrl: 1,
+
+        following: "$following",
+        follower: "$follower",
+        followingCount: { $size: "$following" },
+        followerCount: { $size: "$follower" },
+      },
+    },
+  ]);
+  return result;
 };

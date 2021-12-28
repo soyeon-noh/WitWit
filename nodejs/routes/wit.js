@@ -7,6 +7,8 @@ import { v4 } from "uuid";
 import multer from "multer";
 import { getWit } from "./wit.ctrl.js";
 import path from "path";
+import LIKEY from "../models/likey.js";
+import USER from "../models/user.js";
 
 const router = express.Router();
 
@@ -33,7 +35,10 @@ const multerUpload = multer({
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
   const user = req.user;
-  console.log("user정보 넘어오나?: ", user);
+  // 유저테스트 코드
+  //   const user = await USER.findOne({ userId: "@test" });
+  console.log("로그인한 user 정보: ", user);
+
   let result;
   if (user) {
     // 유저가 로그인하고 있을 때 팔로우하고있는 사람들만 보이게하기
@@ -63,6 +68,7 @@ const createWit = async (req, res) => {
     req.files.map((data) => {
       data.wit_id = wit.id;
       FILE.create(data);
+
       console.log("file insert: ", data);
     });
   }

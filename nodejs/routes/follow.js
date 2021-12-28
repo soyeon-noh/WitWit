@@ -7,7 +7,7 @@ const follow = express.Router();
 // 테스트 코드
 follow.get("/", async (req, res) => {
   const result = await FOLLOW.find({});
-  console.log("result: ", result);
+  //   console.log("result: ", result);
   res.json(result);
 });
 
