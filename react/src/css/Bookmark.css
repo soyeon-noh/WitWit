@@ -23,13 +23,6 @@ a.btn_bookmark {
   position: relative;
   z-index: 5;
 }
-
-a.active {
-  background-color: white;
-  border-right: 2px solid transparent;
-  z-index: 20;
-}
-
 a.active {
   background-color: white;
   border-right: 2px solid transparent;

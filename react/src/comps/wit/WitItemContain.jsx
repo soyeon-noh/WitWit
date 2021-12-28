@@ -62,9 +62,10 @@ function WitItemContain({ propsList, wit, createAt }) {
       <div className="wit_text" onClick={()=>intoWitDetail(wit)}>{wit.text}</div>
       <div>
         {wit.fileArray && wit.fileArray.map((item)=>{
+          const fData = new FormData();
           return( 
             <>
-            <div>이미지</div>
+            <div><img src={item.filename}/></div>
             </>
           )})
         }

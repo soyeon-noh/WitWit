@@ -67,9 +67,7 @@ const WitItem = ({showWitList, witList }) => {
     witMark,
   };
 
-  console.log("WitItem",witList)
-
-  return witList.map((wit) => {
+  return witList && witList.map((wit) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     var createAtO = null;
     var originCheck = false;
