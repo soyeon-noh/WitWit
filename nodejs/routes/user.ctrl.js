@@ -91,9 +91,13 @@ export const userInfo = async (req, res, next) => {
   res.json(result);
 };
 
-export const userCheck = async (req, res, next) => {
-  if (req.user) {
-    res.send(req.user.userId);
+export const userCheck = (req, res, next) => {
+  //   const user = req.user;
+  const user = "냠냠";
+  console.log("왜?");
+  console.log("쩝쩝", !user);
+  if (user) {
+    res.send(user);
   } else {
     res.send(false);
   }

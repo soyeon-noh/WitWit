@@ -11,6 +11,7 @@ import * as userCtrl from "./user.ctrl.js";
 /* GET users listing. */
 users.get("/", userCtrl.loginUserInfo);
 users.get("/:user_id", userCtrl.userInfo);
+users.get("/check", userCtrl.userCheck);
 
 users.post("/login", passport.authenticate("local"), userCtrl.login);
 users.post("/join", userCtrl.join);
@@ -19,6 +20,5 @@ users.post("/join", userCtrl.join);
 //   res.send("진짜개빡쳐");
 // });
 users.post("/logout", userCtrl.logout);
-// router.post("/check", userCtrl.userCheck);
 
 export default users;
