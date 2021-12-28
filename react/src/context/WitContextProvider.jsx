@@ -17,8 +17,8 @@ function WitContextProvider({ children }) {
     text: "", // 위트 텍스트 (150자 제한)
     createdDate: "", // 위트 생성 날짜
     createdTime: "", // 위트 생성 시간
-    userId: "@c_a_y", // 작성자 ID
-    userName: "ay", // 작성자 이름
+    userId: "", // 작성자 ID
+    userName: "", // 작성자 이름
     profileUrl: "", // 작성자 프로필 이미지링크
 
     parentWit: "", // 이전 위트 id값
@@ -40,7 +40,7 @@ function WitContextProvider({ children }) {
   // wit list 불러오기
   const showWitList = useCallback(async () => {
     const list = await WitFetch();
-    console.table(list)
+    console.log(list)
     await setWitList(list);
   }, []);
 

@@ -8,15 +8,20 @@ import ModalContextProvider from "./context/ModalContextProvider";
 import WitContextProvider from "./context/WitContextProvider";
 import RoomContextProvider from "./context/RoomContextProvider";
 import WitWriteContextProvider from "./context/WitWriteContextProvider";
+import UserContextProvider from "./context/UserContextProvider";
 
 ReactDOM.render(
   <React.StrictMode>
+    
     <BrowserRouter>
+    
       <WitContextProvider>
         <RoomContextProvider>
           <ModalContextProvider>
             <WitWriteContextProvider>
+            <UserContextProvider>
               <App />
+    </UserContextProvider>
             </WitWriteContextProvider>
           </ModalContextProvider>
         </RoomContextProvider>
