@@ -9,6 +9,9 @@ import * as userCtrl from "./user.ctrl.js";
  */
 
 /* GET users listing. */
+users.get("/", userCtrl.loginUserInfo);
+users.get("/:user_id", userCtrl.userInfo);
+
 users.post("/login", passport.authenticate("local"), userCtrl.login);
 users.post("/join", userCtrl.join);
 // users.post("/logout", (req, res) => {
