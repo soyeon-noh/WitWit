@@ -28,20 +28,21 @@
 
 .joinForm div{
     margin: 3%;
+    margin-left: 10%;
+    text-align: left;
 }
 
 .joinForm div p{
     font-family: "DungGeunMo";
     text-align: left;
-    width: 30%;
     margin: 1%;
 }
 
 .joinForm div input{
     background-color:  white;
-    width: 70%;
-    padding: 1%;
     text-align: left;
+    width: 60%;
+    padding: 1%;
 }
 .joinForm div input::placeholder{
     color: mediumvioletred;
@@ -53,7 +54,8 @@
     font-size: larger;
     background-color: mediumvioletred;
     padding: 1%;
-    width: 80%;
+    width: 50%;
+    margin-top: 2%;
     margin-bottom: 2%;
     cursor: pointer;
 }

@@ -9,13 +9,8 @@ import { LoginFetch } from '../functions/UserFetch';
 function Login({goBackHome}) {
 
     const navigate = useNavigate();
-    const {user, setUser} = useUserContext();
+    const {user,onChangeHandler} = useUserContext();
 
-    const onChangeHandler = (e) => {
-        const name = e.target.id
-        setUser({...user, [name] : e.target.value})
-    }
-    
     const onLoginEventHandler = async() =>{
         const res = await LoginFetch(user)
         console.log("아 장난해요?",user)
@@ -24,7 +19,6 @@ function Login({goBackHome}) {
             return
         }
         if(res.status === 400) {
-            window.alert(toString(res.status.send))
             window.alert("아이디를 확인해주세요")
             return
         } 
