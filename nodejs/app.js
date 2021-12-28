@@ -14,6 +14,7 @@ import witRouter from "./routes/wit.js";
 import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
 import likeyRouter from "./routes/likey.js";
+import followRouter from "./routes/follow.js";
 import cors from "cors";
 import exportMongooseConfig from "./modules/mongooseConfig.js";
 import exportCorsConfig from "./modules/corsConfig.js";
@@ -58,6 +59,7 @@ app.use((req, res, next) => {
 app.use("/wit", witRouter);
 app.use("/myroom", myroomRouter);
 app.use("/likey", likeyRouter);
+app.use("/follow", followRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler

@@ -1,9 +1,7 @@
 // user.ctrl.js;
 
 import USER from "../models/user.js";
-import FOLLOW from "../models/follow.js";
 import Joi from "joi";
-import { v4 } from "uuid";
 
 // url :  users/login
 // 테스트용 유저 정보  userId : @test password : 1234567
@@ -77,31 +75,4 @@ export const logout = async (req, res, next) => {
     req.logout();
     res.redirect("/");
   });
-};
-
-// url : /users/:user_id/follow
-export const follow = async (req, res, next) => {
-  const user_id = req.user.userId;
-  const target_id = req.params.user_id;
-
-  if (user_id) {
-    const findedFollow = await FOLLOW.find({
-      user_id,
-      target_id,
-    });
-
-    if (!findedFollow) {
-      const follow = new FOLLOW({
-        id: v4(),
-        user_id,
-        target_id,
-      });
-      await follow.create(follow);
-    } else {
-      await FOLLOW.deleteOne({ id: findedFollow.id });
-    }
-  } else {
-    /** 유저가없는경우 어떻게 처리해야할지 고민필요 */
-    res.status(404).send("no user");
-  }
 };
