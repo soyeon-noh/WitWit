@@ -29,8 +29,6 @@ export const login = async (req, res, next) => {
   //     // return res.sendStatus(401);
   //   }
 
-  //   console.log("message: ", err.message);
-
   console.log("로그인성공");
   res.json(user);
 };
@@ -94,7 +92,11 @@ export const userInfo = async (req, res, next) => {
 };
 
 export const userCheck = async (req, res, next) => {
-  req.user;
+  if (req.user) {
+    res.send(req.user.userId);
+  } else {
+    res.send(false);
+  }
 };
 
 const getUser = async (req, res, searchQuery) => {
