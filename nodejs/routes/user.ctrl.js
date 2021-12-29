@@ -78,10 +78,14 @@ export const logout = async (req, res, next) => {
 };
 
 export const loginUserInfo = async (req, res, next) => {
-  //   const result = await getUser(req, res, { userId: "@test" });
-  const result = await getUser(req, res, { userId: req.user.userId });
-  //   console.log("user result:", result);
-  res.json(result);
+  if (req.user) {
+    //   const result = await getUser(req, res, { userId: "@test" });
+    const result = await getUser(req, res, { userId: req.user.userId });
+    //   console.log("user result:", result);
+    res.json(result);
+  } else {
+    res.send(false);
+  }
 };
 
 export const userInfo = async (req, res, next) => {
@@ -92,10 +96,7 @@ export const userInfo = async (req, res, next) => {
 };
 
 export const userCheck = (req, res, next) => {
-  //   const user = req.user;
-  const user = "냠냠";
-  console.log("왜?");
-  console.log("쩝쩝", !user);
+  const user = req.user;
   if (user) {
     res.send(user);
   } else {
