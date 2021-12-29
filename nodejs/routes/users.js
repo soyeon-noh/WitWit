@@ -9,7 +9,7 @@ import * as userCtrl from "./user.ctrl.js";
  */
 
 /* GET users listing. */
-users.get("/info", userCtrl.loginUserInfo);
+// users.get("/info", userCtrl.loginUserInfo);
 users.get("/info/:user_id", userCtrl.userInfo);
 users.get("/check", userCtrl.userCheck);
 

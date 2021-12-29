@@ -81,7 +81,6 @@ export const loginUserInfo = async (req, res, next) => {
   if (req.user) {
     //   const result = await getUser(req, res, { userId: "@test" });
     const result = await getUser(req, res, { userId: req.user.userId });
-    //   console.log("user result:", result);
     res.json(result);
   } else {
     res.json(false);
@@ -91,7 +90,7 @@ export const loginUserInfo = async (req, res, next) => {
 export const userInfo = async (req, res, next) => {
   const user_id = req.params.user_id;
   const result = await getUser(req, res, { userId: user_id });
-  //   console.log("user result:", result);
+
   res.json(result);
 };
 
