@@ -77,15 +77,15 @@ export const logout = async (req, res, next) => {
   });
 };
 
-export const loginUserInfo = async (req, res, next) => {
-  if (req.user) {
-    //   const result = await getUser(req, res, { userId: "@test" });
-    const result = await getUser(req, res, { userId: req.user.userId });
-    res.json(result);
-  } else {
-    res.json(false);
-  }
-};
+// export const loginUserInfo = async (req, res, next) => {
+//   if (req.user) {
+//     //   const result = await getUser(req, res, { userId: "@test" });
+//     const result = await getUser(req, res, { userId: req.user.userId });
+//     res.json(result);
+//   } else {
+//     res.json(false);
+//   }
+// };
 
 export const userInfo = async (req, res, next) => {
   const user_id = req.params.user_id;
@@ -94,8 +94,8 @@ export const userInfo = async (req, res, next) => {
   res.json(result);
 };
 
-export const userCheck = (req, res, next) => {
-  const user = req.user;
+export const userCheck = async (req, res, next) => {
+  const user = await req.user;
   if (user) {
     res.json(user);
   } else {

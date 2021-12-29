@@ -3,10 +3,6 @@ import passportLocal from "passport-local";
 import USER from "../models/user.js";
 
 export const exportPassport = (app) => {
-  /** 이 app.use는 app.js에서 router 위에 있어야한다.. */
-  app.use(passport.initialize()); // passprot start
-  app.use(passport.session()); // passport와 session을 연결
-
   /** 이 아래는 router 아래여도 상관없다 */
   /**
    * Serialize
@@ -26,7 +22,7 @@ export const exportPassport = (app) => {
    */
   passport.deserializeUser((user, done) => {
     // done의 두번째 인자로 user를 전달하게되면
-    // req.usre로 user의 값을 접글할 수 있게된다.
+    // req.usre로 user의 값을 접근할 수 있게된다.
     console.log("user info : ", user);
     done(null, user);
   });
@@ -76,6 +72,7 @@ export const exportPassport = (app) => {
         }
 
         console.log("userId, password 일치");
+        console.log("user정보: ", user);
         return done(null, user);
         /**
          * login이 성공했을 경우
@@ -87,6 +84,10 @@ export const exportPassport = (app) => {
       }
     )
   );
+
+  /** 이 app.use는 app.js에서 router 위에 있어야한다.. */
+  app.use(passport.initialize()); // passprot start
+  app.use(passport.session()); // passport와 session을 연결
 };
 
 export default exportPassport;
