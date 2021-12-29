@@ -28,14 +28,7 @@ const app = express();
 exportMongooseConfig();
 
 /** cors : 교차 출처 리소스 공유, 보안 관련 */
-exportCorsConfig();
-
-/** session 설정 */
-exportSession(app);
-
-/** passport 설정 */
-// 위치가 session 아래여야함
-exportPassport(app);
+const corsOption = exportCorsConfig();
 
 // view engine setup
 app.set("views", path.join("./views"));
@@ -43,18 +36,26 @@ app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
 app.use(methodOverride("_method"));
 
 // cors : 외부 도메인 요청을 선별적으로 허용
-app.use((req, res, next) => {
-  // cors로 허용해준 protocol + host + port번호 넣어주기
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  next();
-});
+// app.use((req, res, next) => {
+//   // cors로 허용해준 protocol + host + port번호 넣어주기
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+
+//   next();
+// });
+
+/** session 설정 */
+exportSession(app);
+
+/** passport 설정 */
+// 위치가 session 아래여야함
+exportPassport(app);
 
 app.use("/wit", witRouter);
 app.use("/myroom", myroomRouter);

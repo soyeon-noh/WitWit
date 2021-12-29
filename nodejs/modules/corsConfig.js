@@ -9,6 +9,7 @@ const exportCorsConfig = () => {
     // 인증정보를 포함하겠다
     credentials: true,
   };
+  return corsOption;
 };
 
 export default exportCorsConfig;
