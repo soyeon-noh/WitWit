@@ -98,7 +98,7 @@ export const userInfo = async (req, res, next) => {
 export const userCheck = (req, res, next) => {
   const user = req.user;
   if (user) {
-    res.send(user);
+    res.json(user);
   } else {
     res.send(false);
   }
