@@ -84,7 +84,7 @@ export const loginUserInfo = async (req, res, next) => {
     //   console.log("user result:", result);
     res.json(result);
   } else {
-    res.send(false);
+    res.json(false);
   }
 };
 
@@ -100,7 +100,7 @@ export const userCheck = (req, res, next) => {
   if (user) {
     res.json(user);
   } else {
-    res.send(false);
+    res.json(false);
   }
 };
 
