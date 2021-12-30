@@ -15,20 +15,20 @@ import myroomRouter from "./routes/myroom/myroom.js";
 import usersRouter from "./routes/users.js";
 import likeyRouter from "./routes/likey.js";
 import followRouter from "./routes/follow.js";
-import cors from "cors";
-import exportMongooseConfig from "./modules/mongooseConfig.js";
-import exportCorsConfig from "./modules/corsConfig.js";
-import exportSession from "./modules/sessionConfig.js";
-import exportPassport from "./modules/passportConfig.js";
+import mongooseConfig from "./modules/mongooseConfig.js";
+import corsConfig from "./modules/corsConfig.js";
+import sessionConfig from "./modules/sessionConfig.js";
+import passportConfog from "./modules/passportConfig.js";
 
 const app = express();
 
 /** mongoose : DB관련 */
 /** dotenv : .env 파일 관리 */
-exportMongooseConfig();
+mongooseConfig();
 
 /** cors : 교차 출처 리소스 공유, 보안 관련 */
-const corsOption = exportCorsConfig();
+// const corsOption = exportCorsConfig(app);
+corsConfig(app);
 
 // view engine setup
 app.set("views", path.join("./views"));
@@ -36,7 +36,7 @@ app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors(corsOption));
+// app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("./public")));
@@ -51,11 +51,11 @@ app.use(methodOverride("_method"));
 // });
 
 /** session 설정 */
-exportSession(app);
+sessionConfig(app);
 
 /** passport 설정 */
 // 위치가 session 아래여야함
-exportPassport(app);
+passportConfog(app);
 
 app.use("/wit", witRouter);
 app.use("/myroom", myroomRouter);

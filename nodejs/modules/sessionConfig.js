@@ -1,6 +1,6 @@
 import session from "express-session";
 
-export const exportSession = (app) => {
+const sessionConfig = (app) => {
   // 세션 만료 기간 : 1일
   // 1시간 = 60 * 60 * 1000
   const oneDay = 1000 * 60 * 60 * 24;
@@ -17,4 +17,4 @@ export const exportSession = (app) => {
   );
 };
 
-export default exportSession;
+export default sessionConfig;
