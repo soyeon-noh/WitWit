@@ -63,7 +63,6 @@ const createWit = async (req, res) => {
   //     userName: "테스트",
   //     profileUrl: "",
   //   };
-  console.log("위트제이슨:", witJson);
   console.log("로그인한 유저 정보!!: ", req.user);
   if (user) {
     witJson.userId = user.userId;
@@ -95,7 +94,7 @@ const createWit = async (req, res) => {
 
 // 단순 추가
 router.post("/", multerUpload.array("file"), async (req, res) => {
-  console.log(req.user);
+  console.log("Wit Post", req.user);
   createWit(req, res);
 });
 

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 // import path from "path/posix"; // 원래 이게 되어있었음
 
-const exportMongooseConfig = () => {
+export const mongooseConfig = () => {
   const dbConn = mongoose.connection;
   dbConn.once("open", () => {
     console.log("˚✧₊⁎( ˘ω˘ )⁎⁺˳✧༚ \n MongoDB Open !! \n ˚✧₊⁎⁺˳✧༚˚✧₊⁎⁺✧˳");
@@ -19,4 +19,4 @@ const exportMongooseConfig = () => {
     useUnifiedTopology: true,
   });
 };
-export default exportMongooseConfig;
+export default mongooseConfig;
