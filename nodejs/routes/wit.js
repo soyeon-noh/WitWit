@@ -7,8 +7,6 @@ import { v4 } from "uuid";
 import multer from "multer";
 import { getWit } from "./wit.ctrl.js";
 import path from "path";
-import LIKEY from "../models/likey.js";
-import USER from "../models/user.js";
 
 const router = express.Router();
 
@@ -34,10 +32,11 @@ const multerUpload = multer({
 
 // wit 전체 불러오기
 router.get("/", async (req, res, next) => {
+  // passport는 get에서 사용할수없음
   const user = req.user;
   // 유저테스트 코드
   //   const user = await USER.findOne({ userId: "@test" });
-  console.log("로그인한 user 정보: ", user);
+  //   console.log("로그인한 user 정보: ", user);
 
   let result;
   if (user) {
@@ -57,29 +56,45 @@ const createWit = async (req, res) => {
   const witJson = JSON.parse(req.body.wit); // string으로 넘어온 값은 json으로 변환
   witJson.createdDate = moment().format("YYYY[-]MM[-]DD");
   witJson.createdTime = moment().format("HH:mm:ss");
-  await WIT.create(witJson);
-  console.log("wit insert: ", witJson);
 
-  const wit = await WIT.findOne({ userId: witJson.userId }).sort({
-    createdDate: -1,
-    createdTime: -1,
-  });
-  if (req.files) {
-    req.files.map((data) => {
-      data.wit_id = wit.id;
-      FILE.create(data);
+  const user = await req.user;
+  //   const user = {
+  //     userId: "@test",
+  //     userName: "테스트",
+  //     profileUrl: "",
+  //   };
+  console.log("로그인한 유저 정보!!: ", req.user);
+  if (user) {
+    witJson.userId = user.userId;
+    witJson.userName = user.userName;
+    witJson.profileUrl = user.profileUrl;
+    await WIT.create(witJson);
+    console.log("wit insert: ", witJson);
 
-      console.log("file insert: ", data);
+    const wit = await WIT.findOne({ userId: witJson.userId }).sort({
+      createdDate: -1,
+      createdTime: -1,
     });
-  }
+    if (req.files) {
+      req.files.map((data) => {
+        data.wit_id = wit.id;
+        FILE.create(data);
 
-  // wit 추가와 함께 리스트 갱신
-  const result = await getWit(req, res, { userId: { $regex: /^@/ } });
-  res.json(result);
+        console.log("file insert: ", data);
+      });
+    }
+
+    // wit 추가와 함께 리스트 갱신
+    const result = await getWit(req, res, { userId: { $regex: /^@/ } });
+    res.json(result);
+  } else {
+    res.json("로그인필요");
+  }
 };
 
 // 단순 추가
 router.post("/", multerUpload.array("file"), async (req, res) => {
+  console.log("Wit Post", req.user);
   createWit(req, res);
 });
 
@@ -93,8 +108,7 @@ router.post("/:wit_id", async (req, res) => {
 // 위마크하기
 router.post("/wimark/:wit_id", async (req, res) => {
   const paramsWitId = req.params.wit_id;
-  //유저아이디도 필요
-  const userId = "@bob";
+  const userId = req.user.userId;
 
   const findedWit = await WIT.findOne({
     user_id: userId,

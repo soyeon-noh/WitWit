@@ -1,4 +1,6 @@
-const exportCorsConfig = () => {
+import cors from "cors";
+
+const corsConfig = (app) => {
   const whiteURL = ["http://localhost:3000"];
   const corsOption = {
     origin: (origin, callback) => {
@@ -9,6 +11,9 @@ const exportCorsConfig = () => {
     // 인증정보를 포함하겠다
     credentials: true,
   };
+
+  app.use(cors(corsOption));
+  //   return corsOption;
 };
 
-export default exportCorsConfig;
+export default corsConfig;

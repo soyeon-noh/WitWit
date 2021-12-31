@@ -30,7 +30,7 @@ userSchema.methods.setPassword = async function (password) {
 };
 
 userSchema.methods.checkedPassword = async function (password) {
-  console.log("password: ", password, ", this.password: ", this.password);
+  //   console.log("password: ", password, ", this.password: ", this.password);
   const result = await bcrypt.compare(password, this.password);
   return result;
 };
