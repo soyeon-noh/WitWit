@@ -8,16 +8,23 @@ const fetch_option = (user)=> {
     }
 }
 
+
 export const LoginFetch =async(user) =>{
     const option = fetch_option(user);
-    const res = await fetch(`http://localhost:5050/users/login`, option);
-    
+    const res = await fetch(`/users/login`, option);
     return res
 }
 
+
 export const JoginFetch =async(user) =>{
     const option = fetch_option(user);
-    await fetch(`http://localhost:5050/users/join`, option);
+    await fetch(`/users/join`, option);
 }
 
+
+export const UserCheck = async() =>{
+    const res = await fetch(`/users/check`)
+    const user = await res.json()
+    return user
+}
 

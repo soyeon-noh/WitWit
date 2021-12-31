@@ -13,7 +13,7 @@ function Login({goBackHome}) {
 
     const onLoginEventHandler = async() =>{
         const res = await LoginFetch(user)
-        console.log("아 장난해요?",user)
+        
         if(res.status === 404 ) {
             window.alert("404 극혐!!")
             return

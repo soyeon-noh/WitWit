@@ -19,6 +19,11 @@ div.wits {
   line-height: 100%;
 }
 
+.userProBox {
+  cursor: pointer;
+}
+
+
 img.wit_profile {
   width: 20px;
   transform: translateY(5px);

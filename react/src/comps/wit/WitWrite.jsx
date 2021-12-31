@@ -1,9 +1,11 @@
-import React, { useRef,  } from "react";
+import React, { useEffect, useRef,  } from "react";
 import { useWitContext } from "../../context/WitContextProvider";
 import { useWitWriteContext } from "../../context/WitWriteContextProvider";
 import ImageIcon from "@mui/icons-material/Image";
 
 import "../../css/wit/WitWrite.css";
+import { useUserCheckContext } from "../../context/UserCheckContextProvider";
+import { useUserContext } from "../../context/UserContextProvider";
 
 const WitWrite = () => {
   
@@ -11,7 +13,10 @@ const WitWrite = () => {
   const { onChangeHandler, witInsert, textRef, resize,
     imgBase, setImgBase, setImgFile } = useWitWriteContext();
 
-    
+    const {userC} = useUserCheckContext();
+
+    // useEffect(userC, [userC]);
+
   //아이콘 클릭하면 파일첨부하기 창이 뜨도록
   const fileRef = useRef();
   const fileUp = () => {
