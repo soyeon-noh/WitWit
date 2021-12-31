@@ -1,6 +1,6 @@
 //folder 정보 호출하는 Fetch
 export const FolderFetch = async (user_id) => {
-  const res = await fetch(`http://localhost:5050/myroom/${user_id}`);
+  const res = await fetch(`/myroom/${user_id}`);
   const folder = await res.json();
   return folder;
 };
@@ -8,7 +8,7 @@ export const FolderFetch = async (user_id) => {
 // foder 속 wit들을 호출하는 Fetch
 export const FolderDetailFetch = async (user_id, id) => {
   const res = await fetch(
-    `http://localhost:5050/myroom/${user_id}/folder/${id}`
+    `/myroom/${user_id}/folder/${id}`
   );
   const fWits = await res.json();
   return fWits;
@@ -24,16 +24,14 @@ export const FolderInsertFetch = async (user_id, folder) => {
     body: JSON.stringify(folder),
     
   };
-  console.log(folder)
-  await fetch(`http://localhost:5050/myroom/${user_id}/folder`, fetch_option);
+  await fetch(`/myroom/${user_id}/folder`, fetch_option);
 };
 
 // 폴더 정보 검색하기
 export const FolderFindFetch = async (id) => {
   // myroom.get("/folderFind/:id", folderCtrl.fFind);
-  const res = await fetch(`http://localhost:5050/myroom/folderFind/${id}`);
+  const res = await fetch(`/myroom/folderFind/${id}`);
   const info = await res.json();
-
   return info;
 };
 
@@ -47,7 +45,7 @@ export const FolderUpdateFetch = async (user_id, folder) => {
     },
     body: JSON.stringify(folder),
   };
-  await fetch(`http://localhost:5050/myroom/${user_id}/folder`, fetch_option);
+  await fetch(`/myroom/${user_id}/folder`, fetch_option);
 };
 
 //폴더 삭제하기
@@ -61,7 +59,7 @@ export const FolderDeleteFetch = async (user_id, folder) => {
     body: JSON.stringify(folder),
   };
   await fetch(
-    `http://localhost:5050/myroom/${user_id}/folder/${id}`,
+    `/myroom/${user_id}/folder/${id}`,
     fetch_option
   );
 };

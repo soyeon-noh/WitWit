@@ -14,9 +14,8 @@ import {
 import { useWitWriteContext } from "../../context/WitWriteContextProvider";
 import WitQuote from "./WitQuote";
 
-
-
 const WitItem = ({showWitList, witList }) => {
+
   const user_id = "@c_a_y";
   const { wit, setWit} = useWitContext();
   const { textReset } = useWitWriteContext();
@@ -71,7 +70,7 @@ const WitItem = ({showWitList, witList }) => {
     const createAt = wit.createdDate + " " + wit.createdTime;
     var createAtO = null;
     var originCheck = false;
-    // console.log("왜 오리지널위트가 안나오죠",wit.originalWit)
+   
     if (wit.originalWit) {
       originCheck =true
       createAtO =
@@ -79,10 +78,7 @@ const WitItem = ({showWitList, witList }) => {
     }
     return (
       <div className="wits">
-
-    
-
-      {wit.text === "" && originCheck 
+    {wit.text === "" && originCheck 
       //위마크 
       ? ( <>    
           <span className="wemarkCheckingBox"> 
@@ -108,7 +104,8 @@ const WitItem = ({showWitList, witList }) => {
         <>
           <span className="wemarkCheckingBox">
             <span>
-              &nbsp;<b>{wit.parentWit.userId}</b>님께 보내는 답글입니다
+              &nbsp;<b>{wit.parentWit}</b>님께 보내는 답글입니다
+              {/* &nbsp;<b>{UserPa}</b>님께 보내는 답글입니다 */}
             </span>
           </span>
           <WitItemContain

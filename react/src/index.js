@@ -9,10 +9,12 @@ import WitContextProvider from "./context/WitContextProvider";
 import RoomContextProvider from "./context/RoomContextProvider";
 import WitWriteContextProvider from "./context/WitWriteContextProvider";
 import UserContextProvider from "./context/UserContextProvider";
+import UserCheckContextProvider from "./context/UserCheckContextProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    
+    <UserCheckContextProvider>
+      
     <BrowserRouter>
     
       <WitContextProvider>
@@ -21,12 +23,14 @@ ReactDOM.render(
             <WitWriteContextProvider>
             <UserContextProvider>
               <App />
-    </UserContextProvider>
+            </UserContextProvider>
             </WitWriteContextProvider>
           </ModalContextProvider>
         </RoomContextProvider>
       </WitContextProvider>
     </BrowserRouter>
+
+    </UserCheckContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

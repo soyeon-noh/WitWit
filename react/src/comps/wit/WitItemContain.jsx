@@ -39,14 +39,21 @@ function WitItemContain({ propsList, wit, createAt }) {
     navigate(`/wit/${wit_id}`);
   };
 
+  // 위트 프로필 눌렀을 때 유저의 room으로 들어가기
+  const intoUserRoom = (userId) =>{
+    navigate(`/${userId}`);
+  }
+
 
   return (
     <>
+      <span className ="userProBox" onClick={()=>intoUserRoom(wit.userId)}>
       <span className="wit_profile">
         <img src={profile} className="wit_profile" />
       </span>
       <span className="wit_userNick">{wit.userName}</span>
       <span className="wit_userid">{wit.userId}</span>
+      </span>
       <span className="wit_fromNow">
         {moment(Date.parse(createAt)).fromNow()}
       </span>
@@ -60,16 +67,19 @@ function WitItemContain({ propsList, wit, createAt }) {
         ></WitItemMenu>
       )}
       <div className="wit_text" onClick={()=>intoWitDetail(wit)}>{wit.text}</div>
+
       <div>
         {wit.fileArray && wit.fileArray.map((item)=>{
           const fData = new FormData();
           return( 
             <>
-            <div><img src={item.filename}/></div>
+            <div><img src={`/upload/${item.filename}`}/></div>
             </>
           )})
         }
       </div>
+
+
       <div className="icon_box">
         <span>
           <BookmarkBorderRoundedIcon fontSize="" onClick={() => witMark(wit)} />

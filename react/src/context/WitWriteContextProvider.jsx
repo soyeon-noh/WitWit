@@ -9,12 +9,15 @@ export const useWitWriteContext = () => {
 };
 
 function WitWriteContextProvider({ children }) {
+
   const { wit, setWit, showWitList } = useWitContext();
 
   // 이미지 미리보기를 위해 받을  state
   const [imgBase, setImgBase] = useState([]);
   //이미지 파일 그 자체를 받을 state
   const [imgFile, setImgFile] = useState(null);
+
+  
 
 
   // wit 내용 입력했을 때

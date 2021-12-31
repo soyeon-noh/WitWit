@@ -19,7 +19,6 @@ function BoardBox() {
   const goBackHome =() =>{
     navigate(`/`)
   }
-
   return (
     <>
       <section className="board_box">

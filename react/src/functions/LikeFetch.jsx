@@ -1,5 +1,5 @@
 export const LikeListFetch = async () => {
-  const res = await fetch(`http://localhost:5050/likey`);
+  const res = await fetch(`/likey`);
   const list = await res.json();
   return list;
 };
@@ -13,8 +13,11 @@ export const WitLikeFetch = async (user_id, wit) => {
       "Content-Type": "application/json",
     },
   };
+
   const res = await fetch(
-    `http://localhost:5050/likey/${user_id}/${witId}`,
+    `/likey/${user_id}/${witId}`,
     fetch_option
   );
+
+  
 };

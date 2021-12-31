@@ -85,7 +85,7 @@ function Join({goBackHome}) {
 
                 <div>
                   <p>e-mail</p>
-                  <input ref={refMail} id="email" onChange={onChangeHandler} type="text" placeholder='이메일을 넣을까말까' />
+                  <input ref={refMail} id="email" onChange={onChangeHandler} type="email" placeholder='이메일을 넣을까말까' />
                   {user.email ===""
                     ? <span style={incorrect}>e-mail을 입력하세요</span>
                     : <></>}
