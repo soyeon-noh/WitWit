@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 
 const router = express.Router();
 
-// 테스트코드
+// 좋아요 여부
 router.get("/:user_id/:wit_id", async (req, res) => {
   const userId = req.params.user_id;
   //   const user = req.user;
