@@ -13,11 +13,11 @@ export const User_id = "@c_a_y";
 
 function WitContextProvider({ children }) {
   const [wit, setWit] = useState({
-    id: "@c_a_y", // 위트 아이디
+    id: "", // 위트 아이디
     text: "", // 위트 텍스트 (150자 제한)
     createdDate: "", // 위트 생성 날짜
     createdTime: "", // 위트 생성 시간
-    userId: "ay", // 작성자 ID
+    userId: "", // 작성자 ID
     userName: "", // 작성자 이름
     profileUrl: "", // 작성자 프로필 이미지링크
 
@@ -36,14 +36,12 @@ function WitContextProvider({ children }) {
 
   const [witList, setWitList] = useState([]);
 
-
   // wit list 불러오기
   const showWitList = useCallback(async () => {
     const list = await WitFetch();
-    console.log(list)
+    console.log(list);
     await setWitList(list);
   }, []);
-
 
   const providerData = {
     wit,
