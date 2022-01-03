@@ -96,6 +96,7 @@ export const userInfo = async (req, res, next) => {
 
 export const userCheck = async (req, res, next) => {
   const user = await req.user;
+  console.log("userCheck user: ", user);
   if (user) {
     res.json(user);
   } else {

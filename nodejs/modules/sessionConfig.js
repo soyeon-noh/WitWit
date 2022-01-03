@@ -8,6 +8,7 @@ const sessionConfig = (app) => {
   // secret은 .env 에서 가져온다
   app.use(
     session({
+      //   key: "soyeon",
       secret: process.env["SESSION_SECRET"],
       cookie: { secure: false, httpOnly: false, maxAge: oneDay },
       // 세션을 (변경되지 않아도) 언제나 저장할 것인가? false 권장

@@ -34,15 +34,15 @@ const multerUpload = multer({
 router.get("/", async (req, res, next) => {
   // passport는 get에서 사용할수없음
   const user = req.user;
+
   // 유저테스트 코드
   //   const user = await USER.findOne({ userId: "@test" });
-  //   console.log("로그인한 user 정보: ", user);
-
+  //   console.log("/wit user: ", req.user);
   let result;
   if (user) {
     // 유저가 로그인하고 있을 때 팔로우하고있는 사람들만 보이게하기
     // query 를 수정할 필요가 있다
-    result = await getWit(req, res, { userId: { $regex: /^@/ } });
+    result = await getWit(req, res, { userId: user.userId });
   } else {
     // 이건 모두 다 보이게 하기
     result = await getWit(req, res, { userId: { $regex: /^@/ } });
@@ -63,7 +63,7 @@ const createWit = async (req, res) => {
   //     userName: "테스트",
   //     profileUrl: "",
   //   };
-  console.log("로그인한 유저 정보!!: ", req.user);
+  //   console.log("createWit user: ", req.user);
   if (user) {
     witJson.userId = user.userId;
     witJson.userName = user.userName;
