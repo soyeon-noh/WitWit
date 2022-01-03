@@ -19,16 +19,9 @@ import mongooseConfig from "./modules/mongooseConfig.js";
 import corsConfig from "./modules/corsConfig.js";
 import sessionConfig from "./modules/sessionConfig.js";
 import passportConfog from "./modules/passportConfig.js";
+import passport from "passport";
 
 const app = express();
-
-/** mongoose : DB관련 */
-/** dotenv : .env 파일 관리 */
-mongooseConfig();
-
-/** cors : 교차 출처 리소스 공유, 보안 관련 */
-// const corsOption = exportCorsConfig(app);
-corsConfig(app);
 
 // view engine setup
 app.set("views", path.join("./views"));
@@ -50,10 +43,20 @@ app.use(methodOverride("_method"));
 //   next();
 // });
 
+/** mongoose : DB관련 */
+/** dotenv : .env 파일 관리 */
+mongooseConfig();
+
+/** cors : 교차 출처 리소스 공유, 보안 관련 */
+// const corsOption = exportCorsConfig(app);
+corsConfig(app);
+
 /** session 설정 */
 sessionConfig(app);
 
 /** passport 설정 */
+// app.use(passport.initialize()); // passprot start
+// app.use(passport.session()); // passport와 session을 연결
 // 위치가 session 아래여야함
 passportConfog(app);
 
