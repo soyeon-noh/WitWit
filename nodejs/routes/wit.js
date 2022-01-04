@@ -2,6 +2,7 @@ import express from "express";
 import moment from "moment";
 import WIT from "../models/wit.js";
 import FILE from "../models/file.js";
+import FOLLOW from "../models/follow.js";
 import { v4 } from "uuid";
 
 import multer from "multer";
@@ -42,7 +43,21 @@ router.get("/", async (req, res, next) => {
   if (user) {
     // 유저가 로그인하고 있을 때 팔로우하고있는 사람들만 보이게하기
     // query 를 수정할 필요가 있다
-    result = await getWit(req, res, { userId: user.userId });
+    const follow = await FOLLOW.find({ user_id: user.userId });
+
+    // console.log("follow: ", follow);
+    // console.log("follow.target_id", follow.target_id); // 이거 findOne이 아니라서 이렇게 못뺴옴
+
+    let userArr = follow.map((data) => {
+      return data.target_id;
+    });
+
+    userArr = [...userArr, user.userId];
+
+    console.log("userArr : ", userArr);
+    result = await getWit(req, res, {
+      userId: { $in: userArr },
+    });
   } else {
     // 이건 모두 다 보이게 하기
     result = await getWit(req, res, { userId: { $regex: /^@/ } });
