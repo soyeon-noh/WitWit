@@ -34,8 +34,8 @@ router.post("/:user_id/:wit_id", async (req, res) => {
   if (!findedLikey) {
     const likey = new LIKEY({
       id: v4(),
-      user_id: paramsUserId,
-      wit_id: paramsWitId,
+      user_id: userId,
+      wit_id: witId,
     });
     await LIKEY.create(likey);
   } else {

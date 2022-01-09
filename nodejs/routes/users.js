@@ -9,16 +9,17 @@ import * as userCtrl from "./user.ctrl.js";
  */
 
 /* GET users listing. */
-// users.get("/info", userCtrl.loginUserInfo);
 users.get("/info/:user_id", userCtrl.userInfo);
 users.get("/check", userCtrl.userCheck);
 
-users.post("/login", passport.authenticate("local"), userCtrl.login);
+// users.post("/login", passport.authenticate("local"), userCtrl.login);
+users.post("/login", userCtrl.login);
 users.post("/join", userCtrl.join);
-// users.post("/logout", (req, res) => {
-//   console.log("뭐야");
-//   res.send("진짜개빡쳐");
-// });
 users.post("/logout", userCtrl.logout);
+
+users.post("/test", (req, res, next) => {
+  next();
+});
+users.post("/test1", (req, res, next) => {});
 
 export default users;

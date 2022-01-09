@@ -27,7 +27,8 @@ const passportConfog = (app) => {
   passport.deserializeUser((user, done) => {
     // done의 두번째 인자로 user를 전달하게되면
     // req.usre로 user의 값을 접근할 수 있게된다.
-    console.log("passport deserializeUser : ", user);
+    // console.log("passport deserializeUser : ", user);
+    console.log("passport deserializeUser 완료");
     done(null, user);
   });
 
@@ -52,18 +53,6 @@ const passportConfog = (app) => {
         if (firstChar !== "@") {
           userId = "@" + userId;
         }
-
-        // const user = await USER.findOne({ userId });
-        // console.log("user값: ", user);
-        // if (!user) {
-        //   console.log("존재하지 않는 아이디 입니다");
-        //   return done(null, false, { message: "Incorrect userId" });
-        // }
-        // if (user.password != password) {
-        //   console.log("비밀번호가 일치하지 않습니다");
-        //   return done(null, false, { message: "Incorrect password" });
-        // }
-
         const user = await USER.findByUserId(userId);
         if (!user) {
           console.log("존재하지 않는 아이디 입니다");
@@ -77,7 +66,7 @@ const passportConfog = (app) => {
 
         console.log("userId, password 일치");
         console.log("user정보: ", user);
-        return done(null, user);
+        return done(null, user, { message: "login success" });
         /**
          * login이 성공했을 경우
          * done() 함수의 2번째 매개변수에

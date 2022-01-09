@@ -2,39 +2,54 @@
 
 import USER from "../models/user.js";
 import Joi from "joi";
+import createError from "http-errors";
+
+import passport from "passport";
 
 // url :  users/login
-// 테스트용 유저 정보  userId : @test password : 1234567
+// https://www.passportjs.org/docs/authenticate/
 export const login = async (req, res, next) => {
-  const { userId, password } = req.body;
+  console.log("아니이거왜안됨?");
+  passport?.authenticate(
+    "local",
+    { failureFlash: true },
+    async (err, user, info) => {
+      console.log("authenticate...");
+      console.log("info message: ", info?.message);
 
-  if (!userId || !password) {
-    return res.sendStatus(401);
-  }
+      if (err) {
+        return res.json(err);
+      }
+      if (!user) return next(createError(401)());
+      if (info?.message === "login success") {
+        console.log("req.logIn: ", req.logIn);
+        req.logIn(user, (err) => {
+          if (err) return res.json(err);
 
-  /**
-   * passportCOnfig에서도 같은 검사를 하고 있는데
-   * message값을 어떻게 활용해야할지 모르겠다
-   * status 가 아무 영향이없다... 어떻게 해야하지.
-   */
-  const user = await USER.findByUserId(userId);
-  //   if (!user) {
-  //     return res.status(401).send("Incorrect userId");
-  //     // return res.sendStatus(401);
-  //   }
-  //   const valid = await user.checkedPassword(password);
-  //   console.log("valid: ", valid);
-  //   if (!valid) {
-  //     return res.status(401).send("Incorrect password");
-  //     // return res.sendStatus(401);
-  //   }
+          console.log("로그인성공");
+          return res.json({
+            message: "login success",
+            user: user,
+          });
+        });
+      }
+    }
+  )(req, res, next);
 
-  console.log("로그인성공");
-  res.json(user);
+  // const { userId, password } = req.body;
+
+  // if (!userId || !password) {
+  //   return res.sendStatus(401);
+  // }
+
+  // const user = await USER.findByUserId(userId);
+
+  // console.log("로그인성공");
+  // res.json(user);
 };
 
 // url :  users/join
-export const join = async (req, res, next) => {
+export const join = async (req, res) => {
   const schema = Joi.object().keys({
     userId: Joi.string().min(4).max(30).required(),
     password: Joi.string().min(5).max(20).required(),
@@ -70,7 +85,7 @@ export const join = async (req, res, next) => {
 };
 
 // url :  /users/logout
-export const logout = async (req, res, next) => {
+export const logout = async (req, res) => {
   req.session.destroy((err) => {
     req.logout();
     res.redirect("/");
@@ -87,14 +102,14 @@ export const logout = async (req, res, next) => {
 //   }
 // };
 
-export const userInfo = async (req, res, next) => {
+export const userInfo = async (req, res) => {
   const user_id = req.params.user_id;
   const result = await getUser(req, res, { userId: user_id });
 
   res.json(result);
 };
 
-export const userCheck = async (req, res, next) => {
+export const userCheck = async (req, res) => {
   const user = await req.user;
   console.log("userCheck user: ", user);
   if (user) {

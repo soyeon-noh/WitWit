@@ -28,14 +28,6 @@ export const getWit = async (req, res, searchQuery) => {
         as: "wimarks",
       },
     },
-    // {
-    //   $lookup: {
-    //     from: "wits",
-    //     localField: "originalWit",
-    //     foreignField: "id",
-    //     as: "originalWit",
-    //   },
-    // },
     {
       $lookup: {
         from: "files",
@@ -71,5 +63,4 @@ export const getWit = async (req, res, searchQuery) => {
   ]);
   //   console.log("wit find: ", result);
   return result;
-  //   res.json(result);
 };
