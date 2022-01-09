@@ -3,50 +3,26 @@ import moment from "moment";
 import WIT from "../models/wit.js";
 import FILE from "../models/file.js";
 import FOLLOW from "../models/follow.js";
-import { v4 } from "uuid";
 
-import multer from "multer";
 import { getWit } from "./wit.ctrl.js";
-import path from "path";
+import multerUpload from "../modules/fileuploadConfig.js";
+
+import * as witCtrl from "./wit.ctrl.js";
 
 const router = express.Router();
-
-const fileStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/uploads/");
-  },
-  filename: (req, file, cb) => {
-    const fileType = path.extname(file.originalname);
-    cb(null, v4() + fileType);
-  },
-});
-
-const multerUpload = multer({
-  storage: fileStorage,
-  limits: {
-    files: 4, // 최대 파일 업로드 수
-    fileSize: 5 * 1024 * 1024, // 5MB 로 제한
-  },
-});
 
 /* GET home page. */
 
 // wit 전체 불러오기
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res) => {
   // passport는 get에서 사용할수없음
   const user = req.user;
 
-  // 유저테스트 코드
-  //   const user = await USER.findOne({ userId: "@test" });
-  //   console.log("/wit user: ", req.user);
   let result;
   if (user) {
     // 유저가 로그인하고 있을 때 팔로우하고있는 사람들만 보이게하기
     // query 를 수정할 필요가 있다
     const follow = await FOLLOW.find({ user_id: user.userId });
-
-    // console.log("follow: ", follow);
-    // console.log("follow.target_id", follow.target_id); // 이거 findOne이 아니라서 이렇게 못뺴옴
 
     let userArr = follow.map((data) => {
       return data.target_id;
@@ -54,7 +30,7 @@ router.get("/", async (req, res, next) => {
 
     userArr = [...userArr, user.userId];
 
-    console.log("userArr : ", userArr);
+    // console.log("userArr : ", userArr);
     result = await getWit(req, res, {
       userId: { $in: userArr },
     });
@@ -73,12 +49,7 @@ const createWit = async (req, res) => {
   witJson.createdTime = moment().format("HH:mm:ss");
 
   const user = await req.user;
-  //   const user = {
-  //     userId: "@test",
-  //     userName: "테스트",
-  //     profileUrl: "",
-  //   };
-  //   console.log("createWit user: ", req.user);
+
   if (user) {
     witJson.userId = user.userId;
     witJson.userName = user.userName;
@@ -98,23 +69,23 @@ const createWit = async (req, res) => {
         console.log("file insert: ", data);
       });
     }
-
-    // wit 추가와 함께 리스트 갱신
-    const result = await getWit(req, res, { userId: { $regex: /^@/ } });
-    res.json(result);
+    res.json({
+      success: true,
+    });
   } else {
-    res.json("로그인필요");
+    res.json({ error: "로그인필요" });
   }
 };
 
 // 단순 추가
 router.post("/", multerUpload.array("file"), async (req, res) => {
-  console.log("Wit Post", req.user);
+  // console.log("wit 추가");
   createWit(req, res);
 });
 
 // 답글 추가
 router.post("/:wit_id", async (req, res) => {
+  // console.log("wit 답글 추가")
   const paramsWitId = req.params.wit_id;
   req.body.parentWit = paramsWitId;
   createWit(req, res);
