@@ -1,4 +1,3 @@
-import express from "express";
 import WIT from "../models/wit.js";
 import FILE from "../models/file.js";
 import FOLLOW from "../models/follow.js";
