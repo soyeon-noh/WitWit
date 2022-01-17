@@ -132,6 +132,13 @@ export const getAllWit = async (req, res) => {
   res.json(result);
 };
 
+export const getUserWit = async (req, res) => {
+  const userId = req.params.user_id;
+
+  const result = await getWit(req, res, { userId: userId });
+  res.json(result);
+};
+
 export const insertWit = async (req, res) => {
   createWit(req, res);
 };
@@ -213,7 +220,7 @@ export const deleteWit = async (req, res) => {
   res.send("Delete Success");
 };
 
-export const putFolderIntoWit = async (req, res) => {
+export const putWitIntoFolder = async (req, res) => {
   const paramsWitId = req.params.wit_id;
   const paramsFolderId = req.params.folder_id;
 
