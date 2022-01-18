@@ -4,10 +4,13 @@ import "../css/Login.css";
 
 import { useUserContext } from "../context/UserContextProvider";
 import { LoginFetch } from "../functions/UserFetch";
+import { useUserCheckContext } from "../context/UserCheckContextProvider";
 
 function Login({ goBackHome }) {
   const navigate = useNavigate();
   const { user, onChangeHandler } = useUserContext();
+  // 테스트중입니다
+  const { userCheck } = useUserCheckContext();
 
   const onLoginEventHandler = async () => {
     const res = await LoginFetch(user);
@@ -26,6 +29,10 @@ function Login({ goBackHome }) {
     }
 
     window.alert("로그인성공");
+
+    // 테스트중입니다
+    // 로그아웃일때도 해줘야하나
+    userCheck();
     navigate(`/`);
   };
 

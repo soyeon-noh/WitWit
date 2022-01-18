@@ -16,6 +16,21 @@ export const WitFetch = async () => {
   return list;
 };
 
+/** 이거 아래 두개 필요없나? 이미 기능이 구현되어 있는데 어디서 어떻게 한 건지 모르겠다. */
+// 로그인한 유저의 wit List 호출하는 Fetch
+export const WitLoginUserFetch = async () => {
+  const res = await fetch(`/wit/user`);
+  const list = await res.json();
+  return list;
+};
+
+// 특정 유저의 wit List 호출하는 Fetch
+export const WitUserFetch = async (user_id) => {
+  const res = await fetch(`/wit/user/${user_id}`);
+  const list = await res.json();
+  return list;
+};
+
 // wit id로 wit 검색하기
 export const WitIdSearchFetch = async (user_id, wit_id) => {
   const res = await fetch(`/wit/detail/${wit_id}`);
