@@ -7,8 +7,12 @@ const router = express.Router();
 /* GET home page. */
 // wit 전체 불러오기
 router.get("/", witCtrl.getAllWit);
+
+// 로그인한 유저의 wit 전체 불러오기
+router.get("/user", witCtrl.getLoginUserWit);
 // 특정 유저의 wit 전체 불러오기
 router.get("/user/:user_id", witCtrl.getUserWit);
+
 // wit 검색
 router.get("/search", witCtrl.search);
 // wit 디테일
