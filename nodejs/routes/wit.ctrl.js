@@ -133,9 +133,16 @@ export const getAllWit = async (req, res) => {
 };
 
 export const getUserWit = async (req, res) => {
+  // 존재하는 아이디인지 에러처리 필요
   const userId = req.params.user_id;
-
   const result = await getWit(req, res, { userId: userId });
+  res.json(result);
+};
+
+export const getLoginUserWit = async (req, res) => {
+  // 로그인했는지 에러처리 필요
+  const loginUserId = req.user.userId;
+  const result = await getWit(req, res, { userId: loginUserId });
   res.json(result);
 };
 
