@@ -40,7 +40,7 @@ function WitContextProvider({ children }) {
   const showWitList = useCallback(async () => {
     const list = await WitFetch();
     console.log(list);
-    await setWitList(list);
+    setWitList(list);
   }, []);
 
   const providerData = {

@@ -9,7 +9,7 @@ import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
-import {ReactComponent as IconHeart01 } from "../../static/icons/icon-heart.svg"
+import { ReactComponent as IconHeart01 } from "../../static/icons/icon-heart.svg";
 
 import moment from "moment";
 import "moment/locale/ko";
@@ -19,7 +19,6 @@ import WitReply from "./WitReply";
 import { useNavigate } from "react-router-dom";
 
 function WitItemContain({ propsList, wit, createAt }) {
-
   const { user_id, like, reply, witMark } = propsList;
 
   //모달창 plag변수
@@ -40,19 +39,18 @@ function WitItemContain({ propsList, wit, createAt }) {
   };
 
   // 위트 프로필 눌렀을 때 유저의 room으로 들어가기
-  const intoUserRoom = (userId) =>{
+  const intoUserRoom = (userId) => {
     navigate(`/${userId}`);
-  }
-
+  };
 
   return (
     <>
-      <span className ="userProBox" onClick={()=>intoUserRoom(wit.userId)}>
-      <span className="wit_profile">
-        <img src={profile} className="wit_profile" />
-      </span>
-      <span className="wit_userNick">{wit.userName}</span>
-      <span className="wit_userid">{wit.userId}</span>
+      <span className="userProBox" onClick={() => intoUserRoom(wit.userId)}>
+        <span className="wit_profile">
+          <img src={profile} className="wit_profile" />
+        </span>
+        <span className="wit_userNick">{wit.userName}</span>
+        <span className="wit_userid">{wit.userId}</span>
       </span>
       <span className="wit_fromNow">
         {moment(Date.parse(createAt)).fromNow()}
@@ -66,19 +64,23 @@ function WitItemContain({ propsList, wit, createAt }) {
           data_id={wit.id}
         ></WitItemMenu>
       )}
-      <div className="wit_text" onClick={()=>intoWitDetail(wit)}>{wit.text}</div>
-
-      <div>
-        {wit.fileArray && wit.fileArray.map((item)=>{
-          const fData = new FormData();
-          return( 
-            <>
-            <div><img src={`/upload/${item.filename}`}/></div>
-            </>
-          )})
-        }
+      <div className="wit_text" onClick={() => intoWitDetail(wit)}>
+        {wit.text}
       </div>
 
+      <div>
+        {wit.fileArray &&
+          wit.fileArray.map((item) => {
+            const fData = new FormData();
+            return (
+              <>
+                <div>
+                  <img src={`http://localhost:5050/uploads/${item.filename}`} />
+                </div>
+              </>
+            );
+          })}
+      </div>
 
       <div className="icon_box">
         <span>

@@ -22,6 +22,6 @@ export const JoginFetch = async (user) => {
 
 export const UserCheck = async () => {
   const res = await fetch(`/users/check`);
-  const user = await res.json();
+  const user = res.json();
   return user;
 };
