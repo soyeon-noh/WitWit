@@ -1,16 +1,14 @@
 //folder 정보 호출하는 Fetch
 export const FolderFetch = async (user_id) => {
   const res = await fetch(`/myroom/${user_id}`);
-  const folder = await res.json();
+  const folder = res.json();
   return folder;
 };
 
 // foder 속 wit들을 호출하는 Fetch
 export const FolderDetailFetch = async (user_id, id) => {
-  const res = await fetch(
-    `/myroom/${user_id}/folder/${id}`
-  );
-  const fWits = await res.json();
+  const res = await fetch(`/myroom/${user_id}/folder/${id}`);
+  const fWits = res.json();
   return fWits;
 };
 
@@ -22,7 +20,6 @@ export const FolderInsertFetch = async (user_id, folder) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(folder),
-    
   };
   await fetch(`/myroom/${user_id}/folder`, fetch_option);
 };
@@ -31,7 +28,7 @@ export const FolderInsertFetch = async (user_id, folder) => {
 export const FolderFindFetch = async (id) => {
   // myroom.get("/folderFind/:id", folderCtrl.fFind);
   const res = await fetch(`/myroom/folderFind/${id}`);
-  const info = await res.json();
+  const info = res.json();
   return info;
 };
 
@@ -58,8 +55,5 @@ export const FolderDeleteFetch = async (user_id, folder) => {
     },
     body: JSON.stringify(folder),
   };
-  await fetch(
-    `/myroom/${user_id}/folder/${id}`,
-    fetch_option
-  );
+  await fetch(`/myroom/${user_id}/folder/${id}`, fetch_option);
 };

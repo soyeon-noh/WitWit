@@ -12,7 +12,7 @@ const fetchPostOption = (list) => {
 // 수정 필요 로그인에 따라 다르게
 export const WitFetch = async () => {
   const res = await fetch("/wit");
-  const list = await res.json();
+  const list = res.json();
   return list;
 };
 
@@ -20,21 +20,21 @@ export const WitFetch = async () => {
 // 로그인한 유저의 wit List 호출하는 Fetch
 export const WitLoginUserFetch = async () => {
   const res = await fetch(`/wit/user`);
-  const list = await res.json();
+  const list = res.json();
   return list;
 };
 
 // 특정 유저의 wit List 호출하는 Fetch
 export const WitUserFetch = async (user_id) => {
   const res = await fetch(`/wit/user/${user_id}`);
-  const list = await res.json();
+  const list = res.json();
   return list;
 };
 
 // wit id로 wit 검색하기
 export const WitIdSearchFetch = async (user_id, wit_id) => {
   const res = await fetch(`/wit/detail/${wit_id}`);
-  const list = await res.json();
+  const list = res.json();
   return list;
 };
 
@@ -76,7 +76,7 @@ export const WitDelete = async (user_id, id) => {
 // wit search Fetch
 export const WitSearchFetch = async (keyword) => {
   const result = await fetch(`/wit/search?q=${keyword}`);
-  const json = await result.json();
+  const json = result.json();
   return json;
 };
 
