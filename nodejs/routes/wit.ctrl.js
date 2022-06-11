@@ -161,17 +161,17 @@ export const wimark = async (req, res) => {
   const paramsWitId = req.params.wit_id;
   const userId = req.user.userId;
 
-  const findedWit = await WIT.findOne({
+  const foundWit = await WIT.findOne({
     user_id: userId,
     originalWit: paramsWitId,
   });
-  console.log("findedWit: ", findedWit);
+  console.log("foundWit: ", foundWit);
 
-  if (!findedWit) {
+  if (!foundWit) {
     req.body.originalWit = paramsWitId;
     createWit(req, res);
   } else {
-    await WIT.deleteOne({ id: findedWit.id });
+    await WIT.deleteOne({ id: foundWit.id });
 
     const result = await getWit(req, res, { userId: { $regex: /^@/ } });
     res.json(result);
