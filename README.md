@@ -16,27 +16,29 @@
 - wit CURD
 
 - `wit` Schema
-  ```json
-  {
-  id: { type: Number, default: 0 }, // 위트 아이디
-    text: String, // 위트 텍스트 (글자수 제한)
-    createdDate: String, // 위트 생성 날짜
-    createdTime: String, // 위트 생성 시간
-    userId: String, // 작성자 ID
-    userName: String, // 작성자 이름
-    profileUrl: String, // 작성자 프로필 이미지링크
-    parentWit: String, // 이전 위트 id값
 
-    folder_id: String, // 폴더 seq (외래키)
-    image_id: String, // 이미지 seq (외래키)
+  ```jsx
+  {
+    "id": { type: Number, default: 0 }, // 위트 아이디
+    "text": String, // 위트 텍스트 (글자수 제한)
+    "createdDate": "String", // 위트 생성 날짜
+    "createdTime": String, // 위트 생성 시간
+    "userId": String, // 작성자 ID
+    "userName": String, // 작성자 이름
+    "profileUrl": String, // 작성자 프로필 이미지링크
+    "parentWit": String, // 이전 위트 id값
+
+    "folder_id": String, // 폴더 seq (외래키)
+    "image_id": String, // 이미지 seq (외래키)
   }
   ```
+
 - `wit_like` Schema
-  ```json
+  ```jsx
   {
-  	id: string,
-  	wit_id: string, // (외래키)
-  	user_id: string // (외래키)
+  	"id": string,
+  	"wit_id": string, // (외래키)
+  	"user_id": string // (외래키)
   }
   ```
 
@@ -78,7 +80,7 @@
     "replyCount": 0
   }
   ```
-  ```json
+  ```jsx
   {
   	[wit, wit, wit, ...]
   }
@@ -87,9 +89,9 @@
 `GET`/search?q=${검색어}
 
 - 검색어가 작성된 wit를 최신순으로 보여준다.
-  ```json
+  ```jsx
   {
-  	wit
+    wit;
   }
   ```
 
@@ -98,10 +100,10 @@
 - wit를 클릭했을 때 세부내용을 보여준다
   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d70bb706-c1d6-4b3f-bf75-a3cf93b67e88/Untitled.png)
   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5ff224ef-a2bc-40e5-be60-907bcb5f4cd5/Untitled.png)
-  ```json
+  ```jsx
   {
   	wit,
-  	replies : [wit, wit, wit ... ]
+  	"replies" : [wit, wit, wit ... ]
   }
   ```
 
@@ -109,16 +111,14 @@
 
 - wit 를 작성한다
   - Request
-    ```json
+    ```jsx
     {
-    	text,
-    	imageUrl,
-    	userId // 유저 id(임시값),
-    				// 로그인을 구현하면 지우고 session에서 값 가져오기
+      text, imageUrl, userId; // 유저 id(임시값),
+      // 로그인을 구현하면 지우고 session에서 값 가져오기
     }
     ```
   - Response
-    ```json
+    ```jsx
     {
     	[wit, wit, wit ... ]
     }
@@ -128,14 +128,13 @@
 
 - 답글 wit 를 작성한다
   - Request
-    ```json
+    ```jsx
     {
-    	text,
-    	imageUrl
+      text, imageUrl;
     }
     ```
   - Response
-    ```json
+    ```jsx
     {
     	[wit, wit, wit ... ]
     }
@@ -149,7 +148,7 @@
     {}
     ```
   - Response
-    ```json
+    ```jsx
     {
     	[wit, wit, wit ... ]
     }
@@ -159,13 +158,13 @@
 
 - 선택한 wit를 quote한다
   - Request
-    ```json
+    ```jsx
     {
-    	text
+      text;
     }
     ```
   - Response
-    ```json
+    ```jsx
     {
     	[wit, wit, wit ... ]
     }
@@ -175,10 +174,9 @@
 
 - wit를 folder에 담는다
   - Request
-    ```json
+    ```jsx
     {
-    	id,
-    	folder_id
+      id, folder_id;
     }
     ```
   - Response
@@ -238,6 +236,7 @@
 # Users
 
 - `user` Schema
+
   ```json
   {
   		id: v4(), // 사용자의 고유한 아이디
@@ -259,7 +258,9 @@
 `GET` /check
 
 - 로그인 되어있는 유저를 확인합니다
+
   - response
+
   ```json
   // 로그인
   {
