@@ -4,6 +4,31 @@
 
 - tool setting: 2021.11.22
 
+# 화면 구성
+![image](https://user-images.githubusercontent.com/71615938/190648239-953e820f-81cb-44bc-8942-32b1c2957b96.png)
+![image](https://user-images.githubusercontent.com/71615938/190648298-d4c7a0d7-14ef-424e-9272-25143de0b616.png)
+![image](https://user-images.githubusercontent.com/71615938/190648412-0b1d5d00-59b4-4ec8-bad7-3cd0d2568a72.png)
+![image](https://user-images.githubusercontent.com/71615938/190648444-7cfc7923-9c05-46c8-a157-a14a0a1615f1.png)
+![image](https://user-images.githubusercontent.com/71615938/190648479-6f27c9e1-5cc0-40d4-8c26-cecabc9a781f.png)
+![image](https://user-images.githubusercontent.com/71615938/190648601-a4ff423e-beb2-4f48-b90e-01282637299c.png)
+![image](https://user-images.githubusercontent.com/71615938/190648636-aec23e9d-9041-4719-874a-f9fdd4a6aab8.png)
+![image](https://user-images.githubusercontent.com/71615938/190648696-d7090b60-6308-446f-ab96-99d99a9ee5da.png)
+![image](https://user-images.githubusercontent.com/71615938/190648736-a2fa6a05-e632-4a7a-90de-59522c38393f.png)
+![image](https://user-images.githubusercontent.com/71615938/190648769-9e2d3b8e-066d-4fe9-bea0-31bea379df28.png)
+![image](https://user-images.githubusercontent.com/71615938/190648800-d12c0e98-f153-4deb-b4d7-2169509618db.png)
+![image](https://user-images.githubusercontent.com/71615938/190648844-1bb3f964-7b0f-4638-bfc9-c64de4e54d21.png)
+![image](https://user-images.githubusercontent.com/71615938/190648886-969b2c24-2e28-43b8-8e17-465af008af67.png)
+![image](https://user-images.githubusercontent.com/71615938/190648911-d195be8d-d5f7-45d4-8ff2-28167fb40459.png)
+![image](https://user-images.githubusercontent.com/71615938/190648933-21ce8660-1229-41d8-af23-7b99beaa269f.png)
+![image](https://user-images.githubusercontent.com/71615938/190648972-967a0c0f-be26-496b-ae05-5d52b1725713.png)
+![image](https://user-images.githubusercontent.com/71615938/190649020-36c4b66b-8f05-4f63-82e9-a21639a9c772.png)
+![image](https://user-images.githubusercontent.com/71615938/190649055-d8027882-fde1-42e6-be88-05be5256702a.png)
+![image](https://user-images.githubusercontent.com/71615938/190649096-bb087228-1715-41be-bba2-970a261b6bfe.png)
+![image](https://user-images.githubusercontent.com/71615938/190649121-94b6da18-ffcd-4722-8ee8-5dd8d723fbe7.png)
+![image](https://user-images.githubusercontent.com/71615938/190649146-d954c8b1-1278-49b0-aec8-40d55fd41be9.png)
+![image](https://user-images.githubusercontent.com/71615938/190649194-61269524-3735-46fc-a72b-c0a79d4c6265.png)
+
+
 # API 가이드
 
 ### port 번호
